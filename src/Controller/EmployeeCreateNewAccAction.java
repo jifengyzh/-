@@ -12,18 +12,18 @@ import Model.CustomerDAO;
 import Model.Model;
 import databean.CustomerBean;
 
-public class CreateNewAccAction extends Action{
+public class EmployeeCreateNewAccAction extends Action{
 	private FormBeanFactory<CreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(CreateNewAccForm.class);
 	private CustomerDAO customerDAO;
 	
-	public CreateNewAccAction(Model model) {
+	public EmployeeCreateNewAccAction(Model model) {
 		customerDAO = model.getCustomerDAO();
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "newaccount.do";
+		return "admin_new_account.do";
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CreateNewAccAction extends Action{
 			
 			CustomerBean customer = customerDAO.read(form.getUserName());
 			if  (customer != null) errors.add("User already exists");
-			return "newaccount.jsp";
+			return "admin_new_account.jsp";
 			
 			synchronized(this) {
 				customer = new CustomerBean();
@@ -58,7 +58,7 @@ public class CreateNewAccAction extends Action{
 			
 			request.setAttribute("message", form.getUserName() + " successfully create the account");
 			//need to wait for confirmation?
-			return "employee-confirmation.jsp";
+			return "admin_new_account_confirmation.jsp";
 		}catch (Exception e) {
 			errors.add(e.getMessage());
 			return "errors.jsp";

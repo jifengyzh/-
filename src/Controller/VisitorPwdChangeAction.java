@@ -14,7 +14,7 @@ import Model.Model;
 import databean.CustomerBean;
 import formbean.ChangePasswordForm;
 
-public class CustomerPwdChangeAction extends Action{
+public class VisitorPwdChangeAction extends Action{
 
 
 
@@ -24,14 +24,14 @@ public class CustomerPwdChangeAction extends Action{
 	private CustomerDAO customerDAO;
 
 
-	public CustomerPwdChangeAction(Model model) {
+	public VisitorPwdChangeAction(Model model) {
 		customerDAO = model.getCustomerDAO();
 	}
 	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "customer_changepwd.do";
+		return "visitor_changepwd.do";
 	}
 
 
@@ -45,12 +45,12 @@ public class CustomerPwdChangeAction extends Action{
 		try {
 			ChangePasswordForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "customer_changepwd.jsp";
+				return "visitor_changepwd.jsp";
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "customer_changepwd.jsp";
+				return "visitor_changepwd.jsp";
 			}
 			
 			synchronized(this) {
@@ -58,7 +58,7 @@ public class CustomerPwdChangeAction extends Action{
 				
 				if(!customer.checkPassword(form.getOldPassword())){
 					errors.add("Incorrect Password!! Please re-enter your current password.");
-					return "customer_changepwd.jsp";
+					return "visitor_changepwd.jsp";
 				}
 				
 				customerDAO.changePassword(customer.getCustomerId(), form.getNewPassword());
@@ -66,7 +66,7 @@ public class CustomerPwdChangeAction extends Action{
 				
 			}
 			request.setAttribute("message", "Password changed!!!!");
-			return "customer-confirmation.jsp";
+			return "visitor-confirmation.jsp";
 			
 		} catch (MyDAOException e) {
 			errors.add(e.toString());

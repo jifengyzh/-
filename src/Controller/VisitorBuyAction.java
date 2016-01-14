@@ -16,7 +16,7 @@ import Model.TransactionDAO;
 import databean.CustomerBean;
 import model.Model;
 
-public class CustomerBuyAction extends Action{
+public class VisitorBuyAction extends Action{
 	
 	private FormBeanFactory<BuyFundForm> formBeanFactory = FormBeanFactory<FormBean>.getInstance(BuyFundForm.class);
 	
@@ -26,7 +26,7 @@ public class CustomerBuyAction extends Action{
 	private TransactionDAO transactionDAO;
 	DecimalFormat formatter;
 	
-	public CustomerBuyFundAction(Model model) {
+	public VisitorBuyAction(Model model) {
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 		customerDAO = model.getCustomerDAO();
@@ -34,7 +34,7 @@ public class CustomerBuyAction extends Action{
 	}
 	
 	@Override
-	public String getName() {return "customerbyaction.do";}
+	public String getName() {return "visitorbuyaction.do";}
 
 	@Override
 	public String perform(HttpServletRequest request) {
@@ -58,11 +58,11 @@ public class CustomerBuyAction extends Action{
 			
 			BuyFundForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "customerbuyfund.jsp";
+				return "visitorbuyaction.jsp";
 			}
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "customerbuyfund.jsp";
+				return "visitorbuyaction.jsp";
 			}
 			
 			request.setAttribute("form", form);
@@ -70,7 +70,7 @@ public class CustomerBuyAction extends Action{
 			FunBean fund = fundDAO.read(form.getFundName());
 			if (fund == null) {
 				errors.add("Fund does not exist!");
-				return "customerbuyfund.jsp";
+				return "visitorbuyaction.jsp";
 			}
 			
 			double amount = form.getAmountAsDouble();
@@ -81,7 +81,7 @@ public class CustomerBuyAction extends Action{
 			request.setAttribute("message", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			
-			return "customercomfirmation.jsp";
+			return "visitorcomfirmation.jsp";
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
