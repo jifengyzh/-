@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import FormBean.CreateNewAccForm;
-import Model.CustomerDAO;
+import Model.VisitorDAO;
 import Model.Model;
-import databean.CustomerBean;
+import databean.VisitorBean;
 
 public class EmployeeCreateNewAccAction extends Action{
 	private FormBeanFactory<CreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(CreateNewAccForm.class);
-	private CustomerDAO customerDAO;
+	private VisitorDAO customerDAO;
 	
 	public EmployeeCreateNewAccAction(Model model) {
 		customerDAO = model.getCustomerDAO();
@@ -38,12 +38,12 @@ public class EmployeeCreateNewAccAction extends Action{
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return "newaccount.jsp";
 			
-			CustomerBean customer = customerDAO.read(form.getUserName());
+			VisitorBean customer = customerDAO.read(form.getUserName());
 			if  (customer != null) errors.add("User already exists");
 			return "admin_new_account.jsp";
 			
 			synchronized(this) {
-				customer = new CustomerBean();
+				customer = new VisitorBean();
 				customer.setUserName(form.getUserName());
 				customer.setFirstName(form.getFirstName());
 				customer.setLastName(form.getLastName());

@@ -5,8 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Random;
 
-public class CustomerBean {
-	private int customerId;
+public class VisitorBean {
+	private int visitorId;
 	private String userName;
 	private String firstName;
 	private String lastName;
@@ -59,8 +59,8 @@ public class CustomerBean {
 		return salt;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getVisitorId() {
+		return visitorId;
 	}
 
 	public String getUserName() {
@@ -101,8 +101,8 @@ public class CustomerBean {
 
 	
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setVisitorId(int visitorId) {
+		this.visitorId = visitorId;
 	}
 
 	public void setUserName(String userName) {
