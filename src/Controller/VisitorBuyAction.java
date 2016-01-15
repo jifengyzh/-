@@ -9,27 +9,30 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import Model.CustomerDAO;
+import FormBean.VisitorBuyFundForm;
+import Model.visitorDAO;
+import databean.FundBean;
+import databean.VisitorBean;
 import Model.FundDAO;
 import Model.FundPriceHistoryDAO;
 import Model.TransactionDAO;
-import databean.CustomerBean;
+import Model.VisitorDAO;
 import model.Model;
 
 public class VisitorBuyAction extends Action{
 	
-	private FormBeanFactory<BuyFundForm> formBeanFactory = FormBeanFactory<FormBean>.getInstance(BuyFundForm.class);
+	private FormBeanFactory<VisitorBuyFundForm> formBeanFactory = FormBeanFactory<FormBean>.getInstance(BuyFundForm.class);
 	
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
-	private CustomerDAO customerDAO;
+	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	DecimalFormat formatter;
 	
 	public VisitorBuyAction(Model model) {
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
-		customerDAO = model.getCustomerDAO();
+		visitorDAO = model.getvisitorDAO();
 		transactionDAO = model.getTransactionDAO();
 	}
 	
@@ -51,34 +54,33 @@ public class VisitorBuyAction extends Action{
 			request.setAttribute("fundGeneralList", fundGeneralList);
 			
 			int customerId = (Integer)session.getAttribute("customerId");
-			CustomerBean customer = customerDAO.read(customerId);
+			VisitorBean visitor = visitorDAO.read(customerId);
 			formatter = new DecimalFormat("#,##0.00");
-			String cash = formatter.format(customer.getCash());
+			String cash = formatter.format(visitor.getCash());
 			request.setAttribute("cash", cash);		
 			
-			BuyFundForm form = formBeanFactory.create(request);
+			VisitorBuyFundForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "visitorbuyaction.jsp";
+				return "visitor_buy_action.jsp";
 			}
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "visitorbuyaction.jsp";
+				return "visitor_buy_action.jsp";
 			}
 			
 			request.setAttribute("form", form);
 			
-			FunBean fund = fundDAO.read(form.getFundName());
+			FundBean fund = fundDAO.read(form.getFundName());
 			if (fund == null) {
 				errors.add("Fund does not exist!");
-				return "visitorbuyaction.jsp";
+				return "visitor_buy_action.jsp";
 			}
 			
 			double amount = form.getAmountAsDouble();
-			double cash = customer.getCash();
 			
 			transactionDAO.buyFund(customerId, fund.getFundId(), amount);
 			
-			request.setAttribute("message", "Thank you! your request to buy " + form.getFundName() + 
+			request.setAttribute("alert", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			
 			return "visitorcomfirmation.jsp";

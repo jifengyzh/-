@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanFactory;
 
 import FormBean.DepositCheckForm;
+import Model.Model;
+import Model.TransactionDAO;
 import Model.VisitorDAO;
 import databean.VisitorBean;
 
@@ -19,9 +21,9 @@ public class VisitorDepositCheckAction extends Action {
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	
-	public VisitorDepositCheckAction(Mode model) {
+	public VisitorDepositCheckAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
-		customerDAO = model.getCustomerDAO();
+		visitorDAO = model.getvisitorDAO();
 	}
 	@Override
 	public String getName() {

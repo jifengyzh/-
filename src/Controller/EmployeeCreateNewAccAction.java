@@ -7,17 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mybeans.form.FormBeanFactory;
 
+import FormBean.AdminCreateNewAccForm;
 import FormBean.CreateNewAccForm;
 import Model.VisitorDAO;
 import Model.Model;
 import databean.VisitorBean;
 
 public class EmployeeCreateNewAccAction extends Action{
-	private FormBeanFactory<CreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(CreateNewAccForm.class);
-	private VisitorDAO customerDAO;
+	private FormBeanFactory<AdminCreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateNewAccForm.class);
+	private VisitorDAO visitorDAO;
 	
 	public EmployeeCreateNewAccAction(Model model) {
-		customerDAO = model.getCustomerDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 
 	@Override
@@ -33,12 +34,12 @@ public class EmployeeCreateNewAccAction extends Action{
 		request.setAttribute("errors", errors);
 		
 		try {
-			CreateNewAccForm form = createAccFormFactory.create(request);
+			AdminCreateNewAccForm form = createAccFormFactory.create(request);
 			if (!form.isPresent()) return "newaccount.jsp";
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return "newaccount.jsp";
 			
-			VisitorBean customer = customerDAO.read(form.getUserName());
+			VisitorBean customer = visitorDAO.read(form.getUserName());
 			if  (customer != null) errors.add("User already exists");
 			return "admin_new_account.jsp";
 			
@@ -53,10 +54,10 @@ public class EmployeeCreateNewAccAction extends Action{
 		       	customer.setCity(form.getCity());
 		       	customer.setState(form.getState());
 		       	customer.setZip(form.getZipAsInt());
-		       	customerDAO.create(customer);
+		       	visitorDAO.create(customer);
 			}
 			
-			request.setAttribute("message", form.getUserName() + " successfully create the account");
+			request.setAttribute("alert", form.getUserName() + " successfully create the account");
 			//need to wait for confirmation?
 			return "admin_new_account_confirmation.jsp";
 		}catch (Exception e) {

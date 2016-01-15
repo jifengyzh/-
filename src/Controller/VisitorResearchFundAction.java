@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import FormBean.FundInfoBean;
+import databean.FundInfoBean;
 import Model.FundDAO;
 import Model.FundPriceHistoryDAO;
 import Model.Model;

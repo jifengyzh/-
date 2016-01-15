@@ -2,7 +2,7 @@ package databean;
 
 import java.util.Date;
 
-public class FundGeneralInfoBean {
+public class FundInfoBean {
 	private int fundId;
 	private String name;
 	private String symbol;

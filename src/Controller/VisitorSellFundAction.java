@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanFactory;
 
 import FormBean.VisitorSellFundForm;
+import Model.FundDAO;
+import Model.Model;
+import Model.PositionDAO;
+import Model.TransactionDAO;
 import databean.FundBean;
 import databean.PositionBean;
 
@@ -18,7 +23,7 @@ public class VisitorSellFundAction extends Action{
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
 	
-	public VisitorSellFundAction(Mode model) {
+	public VisitorSellFundAction(Model model) {
 		fundDAO = model.getFundDAO();
 		positionDAO =model.getPositionDAO();
 		transactionDAO = model.getTransactionDAO();
@@ -41,7 +46,7 @@ public class VisitorSellFundAction extends Action{
 			String fundName = request.getParameter("FundName");
 			if (fundName != null) request.setAttribute("FundName", fundName);
 			
-			int customerId = session.getAttribute("customerId");
+			int customerId = (Integer)session.getAttribute("visitorId");
 			PositionBean[] positionList = positionDAO.getCustomerPortfolio(customerId);
 			request.setAttribute("positionList", positionList);
 			

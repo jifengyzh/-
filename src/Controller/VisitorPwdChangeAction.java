@@ -9,29 +9,28 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import Model.CustomerDAO;
+import FormBean.VisitorChangePwdForm;
+import Model.VisitorDAO;
+import databean.VisitorBean;
 import Model.Model;
-import databean.CustomerBean;
-import formbean.ChangePasswordForm;
 
 public class VisitorPwdChangeAction extends Action{
 
 
 
-	private FormBeanFactory<ChangePasswordForm> formBeanFactory = 
 			FormBeanFactory<FormBean>.getInstance(ChangePasswordForm.class);
 	
-	private CustomerDAO customerDAO;
+	private VisitorDAO visitorDAO;
 
 
 	public VisitorPwdChangeAction(Model model) {
-		customerDAO = model.getCustomerDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_changepwd.do";
+		return "visitor_change_pwd.do";
 	}
 
 
@@ -43,29 +42,29 @@ public class VisitorPwdChangeAction extends Action{
 		request.setAttribute("errors", errors);
 		
 		try {
-			ChangePasswordForm form = formBeanFactory.create(request);
+			VisitorChangePwdForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "visitor_changepwd.jsp";
+				return "visitor_change_pwd.jsp";
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "visitor_changepwd.jsp";
+				return "visitor_change_pwd.jsp";
 			}
 			
 			synchronized(this) {
-				CustomerBean customer = customerDAO.read((Integer) session.getAttribute("customerId"));
+				VisitorBean visitor = VisitorDAO.read((Integer) session.getAttribute("customerId"));
 				
-				if(!customer.checkPassword(form.getOldPassword())){
+				if(!visitor.checkPassword(form.getOldPassword())){
 					errors.add("Incorrect Password!! Please re-enter your current password.");
 					return "visitor_changepwd.jsp";
 				}
 				
-				customerDAO.changePassword(customer.getCustomerId(), form.getNewPassword());
+				VisitorDAO.changePassword(visitor.getCustomerId(), form.getNewPassword());
 				
 				
 			}
-			request.setAttribute("message", "Password changed!!!!");
+			request.setAttribute("alert", "Password changed!!!!");
 			return "visitor-confirmation.jsp";
 			
 		} catch (MyDAOException e) {

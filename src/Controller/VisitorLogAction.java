@@ -10,21 +10,23 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import Model.CustomerDAO;
+import Model.VisitorDAO;
+import databean.VisitorBean;
 import Model.Model;
 import Model.TransactionDAO;
-import databean.CustomerBean;
+import Model.VisitorDAO;
+
 
 public class VisitorLogAction extends Action{
 	private FormBeanFactory<LoginForm> formBeanFactory 
 		= FormBeanFactory<FormBean>.getInstance(LoginForm.class);
 	
-	private CustomerDAO customerDAO;
+	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	private PositionDAO positionDAO;
 	
 	public VisitorLogAction(Model model) {
-		customerDAO = model.getCustormerDAO();
+		visitorDAO = model.getCustormerDAO();
 		transactionDAO = model.getTransactionDAO();
 		positionDAO = model.getPositionDAO();
 	}
@@ -46,8 +48,8 @@ public class VisitorLogAction extends Action{
 			return "visitor_view_account.do";
 		}
 		
-		if (session.getAttribute("employeeUserName") != null) {
-        	return "employee-mainpanel.jsp";
+		if (session.getAttribute("employeeId") != null) {
+        	return "employee_mainpanel.jsp";
         }
 		
 		try {
@@ -63,7 +65,7 @@ public class VisitorLogAction extends Action{
 	            return "index.jsp";
 	        }
 	        
-	        CustomerBean customer = customerDAO.read(form.getUserName());
+	        VisitorBean visitor = visitorDAO.read(form.getUserName());
 	        
 	        if (customer == null) {
 	            errors.add("Incorrect/Invalid Customer Username");
@@ -75,12 +77,12 @@ public class VisitorLogAction extends Action{
 	            return "index.jsp";
 	        }
 	        
-	        int customerId = customer.getCustomerId();
-	        session.setAttribute("customerId", customerId);
-	        Date lastTradeDate = transactionDAO.getCustomerLastTradeDate(customerId);
+	        int visitorId = visitor.getVisitorId();
+	        session.setAttribute("visitorId", visitorId);
+	        Date lastTradeDate = transactionDAO.getCustomerLastTradeDate(visitorId);
 			customer.setLastTradeDate(lastTradeDate);
-			session.setAttribute("firstname", customer.getFirstName());
-			session.setAttribute("lastname", customer.getLastName());
+			session.setAttribute("firstname", visitor.getFirstName());
+			session.setAttribute("lastname", visitor.getLastName());
 			
 			return "visitor_view_account.do";
 		} catch (FormBeanException e) {

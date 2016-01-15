@@ -6,7 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import Model.Model;
+import Model.TransactionHistoryDAO;
 import Model.VisitorDAO;
+import databean.TransactionHistoryBean;
 import databean.VisitorBean;
 
 public class VisitorTransactionReviewAction extends Action {
@@ -32,7 +35,7 @@ public class VisitorTransactionReviewAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		try {
-		int visitorId = session.getAttribute("visitorId");
+		int visitorId = (Integer) session.getAttribute("visitorId");
 		VisitorBean visitor = visitorDAO.read(visitorId);
 		TransactionHistoryBean[] historyList = transactionHistoryDAO.getTransactions(visitor.getVisitorId());
 		
