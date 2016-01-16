@@ -11,7 +11,7 @@ public class Controller extends HttpServlet {
 		 }
 		 
 		 public void doPost(HttpServletRequest request, HttpServletResponse response) {
-			 
+			 doGet(request, response);
 		 }
 		 
 		 public void doGet(HttpServletRequest request, HttpServletResponse response) {
