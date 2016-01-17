@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import FormBean.VisitorChangePwdForm;
 import Model.VisitorDAO;
 import databean.VisitorBean;
@@ -30,7 +31,7 @@ public class VisitorPwdChangeAction extends Action{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_change_pwd.do";
+		return Constants.visitorChangePwdAction;
 	}
 
 
@@ -44,12 +45,12 @@ public class VisitorPwdChangeAction extends Action{
 		try {
 			VisitorChangePwdForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "visitor_change_pwd.jsp";
+				return Constants.visitorChangePwdJsp;
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "visitor_change_pwd.jsp";
+				return  Constants.visitorChangePwdJsp;
 			}
 			
 			synchronized(this) {
@@ -57,7 +58,7 @@ public class VisitorPwdChangeAction extends Action{
 				
 				if(!visitor.checkPassword(form.getOldPassword())){
 					errors.add("Incorrect Password!! Please re-enter your current password.");
-					return "visitor_changepwd.jsp";
+					return Constants.visitorChangePwdJsp;
 				}
 				
 				VisitorDAO.changePassword(visitor.getCustomerId(), form.getNewPassword());
@@ -65,7 +66,7 @@ public class VisitorPwdChangeAction extends Action{
 				
 			}
 			request.setAttribute("alert", "Password changed!!!!");
-			return "visitor-confirmation.jsp";
+			return Constants.visitorChangePwdConfirmJsp;
 			
 		} catch (MyDAOException e) {
 			errors.add(e.toString());

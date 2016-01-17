@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import FormBean.DepositCheckForm;
 import Model.Model;
 import Model.TransactionDAO;
@@ -28,7 +29,7 @@ public class VisitorDepositCheckAction extends Action {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_deposit_check.do";
+		return Constants.visitorDepositAction;
 	}
 
 	@Override
@@ -52,13 +53,13 @@ public class VisitorDepositCheckAction extends Action {
 			request.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
-				return "visitor_deposit_check.jsp";
+				return Constants.visitorDepositeJsp;
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			
 			if (errors.size() != 0) {
-				return "visitor_deposit_check.jsp";
+				return Constants.visitorDepositeJsp;
 			}
 			
 			double amount = form.getAmountAsDouble();
@@ -67,11 +68,11 @@ public class VisitorDepositCheckAction extends Action {
 			request.setAttribute("alert", "Your deposit request for $ " + 
 										formatter.format(amount) + " has been waited for transaction");
 			
-			return "visitor_deposit_check_success.jsp";
+			return Constants.visitorDepositConfirm;
 			
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.errorJsp;
 		}
 	}
 }

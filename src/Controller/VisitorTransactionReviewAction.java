@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import FilterAndConstant.Constants;
 import Model.Model;
 import Model.TransactionHistoryDAO;
 import Model.VisitorDAO;
@@ -24,7 +25,7 @@ public class VisitorTransactionReviewAction extends Action {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_view_transaction_history.do";
+		return Constants.visitorViewTransHistoryAction;
 	}
 
 	@Override
@@ -40,10 +41,10 @@ public class VisitorTransactionReviewAction extends Action {
 		TransactionHistoryBean[] historyList = transactionHistoryDAO.getTransactions(visitor.getVisitorId());
 		
 		request.setAttribute("transactionHistory", historyList);
-		return "visitor_view_transaction_history.jsp";
+		return Constants.visitorViewTransHistoryJsp;
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.errorJsp;
 		}
 	}
 	

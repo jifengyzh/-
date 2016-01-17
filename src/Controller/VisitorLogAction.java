@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import Model.VisitorDAO;
 import databean.VisitorBean;
 import Model.Model;
@@ -34,7 +35,7 @@ public class VisitorLogAction extends Action{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_login.do";
+		return Constants.visitorLogAction;
 	}
 
 	@Override
@@ -45,11 +46,11 @@ public class VisitorLogAction extends Action{
         request.setAttribute("errors",errors);
 		
 		if (session.getAttribute("cusomerId") != null) {
-			return "visitor_view_account.do";
+			return Constants.visitorViewAccountAction;
 		}
 		
 		if (session.getAttribute("employeeId") != null) {
-        	return "employee_mainpanel.jsp";
+        	return Constants.adminMainPanel;
         }
 		
 		try {
@@ -57,24 +58,24 @@ public class VisitorLogAction extends Action{
 	        request.setAttribute("errors",errors);
 	        
 	        if (!form.isPresent()) {
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 	        
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 	        
 	        VisitorBean visitor = visitorDAO.read(form.getUserName());
 	        
 	        if (customer == null) {
 	            errors.add("Incorrect/Invalid Customer Username");
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 	        
 	        if (!customer.checkPassword(form.getPassword())) {
 	            errors.add("Incorrect/Invalid Password");
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 	        
 	        int visitorId = visitor.getVisitorId();
@@ -84,7 +85,7 @@ public class VisitorLogAction extends Action{
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());
 			
-			return "visitor_view_account.do";
+			return Constants.visitorViewAccountJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "errors.jsp";

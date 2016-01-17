@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import FormBean.VisitorSellFundForm;
 import Model.FundDAO;
 import Model.Model;
@@ -32,7 +33,7 @@ public class VisitorSellFundAction extends Action{
 			
 	@Override
 	public String getName() {
-		return "visitor_sell_fund.do";
+		return Constants.visitorSellAction;
 	}
 
 	@Override
@@ -54,13 +55,13 @@ public class VisitorSellFundAction extends Action{
 			request.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
-				return "visitor_sell_fund.jsp";
+				return Constants.visitorSellJsp;
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			
 			if(errors.size() > 0) {
-				return "visitor_seell_fund.jsp";
+				return Constants.visitorSellJsp;
 			}
 			
 			String fundNameInput = form.getFundName();
@@ -68,7 +69,7 @@ public class VisitorSellFundAction extends Action{
 			
 			if (fundBean == null) {
 				errors.add("No such fund in the inventory!");
-				return "visitor_sell_fund.jsp";
+				return Constants.visitorSellJsp;
 			}
 			
 			double shares = form.getSharesAsDouble();
@@ -80,10 +81,10 @@ public class VisitorSellFundAction extends Action{
 			
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
-			return "visitor_sell_fund.jsp";
+			return Constants.visitorSellJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "visitor_sell_fund.jsp";
+			return Constants.visitorSellJsp;
 		}
 				
 				

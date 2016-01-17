@@ -2,10 +2,12 @@ package Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import FilterAndConstant.Constants;
+
 public class VisitorFundPriceHistoryAction extends Action {
 	@Override
 	public String getName() {
-		return "visitor_view_fund_price_history.do";
+		return Constants.visitorViewFundAction;
 	}
 
 	@Override

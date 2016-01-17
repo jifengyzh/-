@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import FormBean.VisitorBuyFundForm;
 import Model.visitorDAO;
 import databean.FundBean;
@@ -37,7 +38,7 @@ public class VisitorBuyAction extends Action{
 	}
 	
 	@Override
-	public String getName() {return "visitorbuyaction.do";}
+	public String getName() {return Constants.visitorBuyAction;}
 
 	@Override
 	public String perform(HttpServletRequest request) {
@@ -61,11 +62,11 @@ public class VisitorBuyAction extends Action{
 			
 			VisitorBuyFundForm form = formBeanFactory.create(request);
 			if (!form.isPresent()) {
-				return "visitor_buy_action.jsp";
+				return Constants.visitorBuyJsp;
 			}
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "visitor_buy_action.jsp";
+				return Constants.visitorBuyJsp;
 			}
 			
 			request.setAttribute("form", form);
@@ -73,7 +74,7 @@ public class VisitorBuyAction extends Action{
 			FundBean fund = fundDAO.read(form.getFundName());
 			if (fund == null) {
 				errors.add("Fund does not exist!");
-				return "visitor_buy_action.jsp";
+				return Constants.visitorBuyJsp;
 			}
 			
 			double amount = form.getAmountAsDouble();
@@ -83,13 +84,13 @@ public class VisitorBuyAction extends Action{
 			request.setAttribute("alert", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			
-			return "visitorcomfirmation.jsp";
+			return Constants.visitorBuyConfirmJsp;
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.errorJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.errorJsp;
 		}
 	}
 }

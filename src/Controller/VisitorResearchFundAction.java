@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import FilterAndConstant.Constants;
 import databean.FundInfoBean;
 import Model.FundDAO;
 import Model.FundPriceHistoryDAO;
@@ -24,7 +25,7 @@ public class VisitorResearchFundAction extends Action {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "visitor_research_fund.do";
+		return Constants.visitorResearchFundAction;
 	}
 
 	@Override
@@ -49,10 +50,10 @@ public class VisitorResearchFundAction extends Action {
 			}
 			
 			
-			return "visitor_research_fund.jsp";
+			return Constants.visitorResearchFundJsp;
 		} catch(MyDAOException e) {
 			errors.add(e.getMessage());
-			return "errors.jsp";
+			return Constants.errorJsp;
 					
 		}
 	}

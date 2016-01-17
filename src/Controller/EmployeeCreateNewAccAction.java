@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import FormBean.AdminCreateNewAccForm;
 import FormBean.CreateNewAccForm;
 import Model.VisitorDAO;
@@ -24,7 +25,7 @@ public class EmployeeCreateNewAccAction extends Action{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "admin_new_account.do";
+		return Constants.adminNewAccAction;
 	}
 
 	@Override
@@ -35,13 +36,13 @@ public class EmployeeCreateNewAccAction extends Action{
 		
 		try {
 			AdminCreateNewAccForm form = createAccFormFactory.create(request);
-			if (!form.isPresent()) return "newaccount.jsp";
+			if (!form.isPresent()) return Constants.adminNewAccJsp;
 			errors.addAll(form.getValidationErrors());
-			if (!errors.isEmpty()) return "newaccount.jsp";
+			if (!errors.isEmpty()) return Constants.adminNewAccJsp;
 			
 			VisitorBean customer = visitorDAO.read(form.getUserName());
 			if  (customer != null) errors.add("User already exists");
-			return "admin_new_account.jsp";
+			return Constants.adminNewAccJsp;
 			
 			synchronized(this) {
 				customer = new VisitorBean();
@@ -59,7 +60,7 @@ public class EmployeeCreateNewAccAction extends Action{
 			
 			request.setAttribute("alert", form.getUserName() + " successfully create the account");
 			//need to wait for confirmation?
-			return "admin_new_account_confirmation.jsp";
+			return Constants.adminNewAccConfirmJsp;
 		}catch (Exception e) {
 			errors.add(e.getMessage());
 			return "errors.jsp";

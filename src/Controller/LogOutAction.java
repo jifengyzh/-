@@ -3,12 +3,14 @@ package Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import FilterAndConstant.Constants;
+
 public class LogOutAction extends Action{
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "logout.do";
+		return Constants.logoutDo;
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class LogOutAction extends Action{
 			session.removeAttribute("employeeId");
 		}
 			
-		return "index.jsp";	
+		return Constants.mainPage;	
 	}
 
 }
