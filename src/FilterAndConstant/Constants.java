@@ -11,13 +11,13 @@ public class Constants {
 			"visitor_research_fund.do",
 			"visitor_sell_fund.do",
 			"visitor_view_transaction_history.do",
-			"logout.do",
+			"logout.do"
 			
-	}
+	};
 	public static final String[] employeeActions = new String[] {
 			"admin_new_account.do",
-			"logout.do",
-	}
+			"logout.do"
+	};
 	
 	public static final String[] visitorJSP  = new String[] {
 			"visitor_buy_action.jsp",
@@ -28,16 +28,14 @@ public class Constants {
 			"visitor_change_pwd.jsp",
 			"visitor-confirmation.jsp",
 			"visitor_research_fund.jsp",
-			"visitor_sell_fund.jsp"
-			
-			
-	}
+			"visitor_sell_fund.jsp"	
+	};
 	
 	public static final String[] employeeJSP = new String[] {
 			"admin_new_account.jsp",
 			"admin_new_account_confirmation.jsp",
 			"admin_main_panel.jsp"
-	}
+	};
 	
 	public static final String logoutDo = new String("logout.do");
 	public static final String mainPage = new String("index.jsp");
