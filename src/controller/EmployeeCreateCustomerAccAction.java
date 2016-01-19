@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import formbean.AdminCreateCustomerAccForm;
+import formbean.EmployeeCreateCustomerAccForm;
 import model.VisitorDAO;
 import model.Model;
 import databean.VisitorBean;
 
 public class EmployeeCreateCustomerAccAction extends Action{
-	private FormBeanFactory<AdminCreateCustomerAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateCustomerAccForm.class);
+	private FormBeanFactory<EmployeeCreateCustomerAccForm> createAccFormFactory = FormBeanFactory.getInstance(EmployeeCreateCustomerAccForm.class);
 	private VisitorDAO visitorDAO;
 	
 	public EmployeeCreateCustomerAccAction(Model model) {
@@ -34,7 +34,7 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		request.setAttribute("errors", errors);
 		
 		try {
-			AdminCreateCustomerAccForm form = createAccFormFactory.create(request);
+			EmployeeCreateCustomerAccForm form = createAccFormFactory.create(request);
 			if (!form.isPresent()) return Constants.adminNewAccJsp;
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return Constants.adminNewAccJsp;

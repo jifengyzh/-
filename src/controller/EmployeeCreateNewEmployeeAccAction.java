@@ -13,12 +13,12 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.EmployeeBean;
-import formbean.AdminCreateNewEmployeeAccForm;
+import formbean.EmployeeCreateNewEmployeeAccForm;
 
 
 public class EmployeeCreateNewEmployeeAccAction extends Action{
 
-	private FormBeanFactory<AdminCreateNewEmployeeAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(AdminCreateNewEmployeeAccForm.class);
+	private FormBeanFactory<EmployeeCreateNewEmployeeAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(EmployeeCreateNewEmployeeAccForm.class);
 	private EmployeeDAO employeeDAO;
 	
 	public EmployeeCreateNewEmployeeAccAction(Model model){
@@ -35,7 +35,7 @@ public class EmployeeCreateNewEmployeeAccAction extends Action{
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         try {
-        	AdminCreateNewEmployeeAccForm form = createEmployeeAccountFormFactory.create(request);
+        	EmployeeCreateNewEmployeeAccForm form = createEmployeeAccountFormFactory.create(request);
 	        request.setAttribute("form",form);
 
 	        if (!form.isPresent()) {
