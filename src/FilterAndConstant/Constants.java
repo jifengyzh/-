@@ -75,5 +75,7 @@ public class Constants {
 	public static final String adminNewAccAction = new String("admin_new_account.do");
 	public static final String adminNewAccJsp = new String("admin_new_account.jsp");
 	public static final String adminNewAccConfirmJsp = new String("admin_new_account_confirmation.jsp");
+	public static final String adminNewAdminAccAction = new String("admin_new_admin_account.do");
+	public static final String adminNewAdminAccJsp = new String("admin_new_admin_account.jsp");
 	
 }

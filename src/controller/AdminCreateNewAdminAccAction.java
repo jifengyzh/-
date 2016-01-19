@@ -22,7 +22,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 	private AdminDAO adminDAO;
 	
 	public AdminCreateNewAdminAccAction(Model model){
-		adminDAO = model.getEmployeeDAO();
+		adminDAO = model.getAdminDAO();
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         try {
-        	CreateEmployeeAccountForm form = createEmployeeAccountFormFactory.create(request);
+        	AdminCreateNewAdminAccForm form = createEmployeeAccountFormFactory.create(request);
 	        request.setAttribute("form",form);
 
 	        if (!form.isPresent()) {
