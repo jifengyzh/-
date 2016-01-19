@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import FormBean.AdminCreateNewAccForm;
-import FormBean.CreateNewAccForm;
 import databean.VisitorBean;
+import formbean.AdminCreateNewAccForm;
+import formbean.CreateNewAccForm;
 import model.Model;
 import model.VisitorDAO;
 

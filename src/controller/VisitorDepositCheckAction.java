@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import FormBean.DepositCheckForm;
 import databean.VisitorBean;
+import formbean.DepositCheckForm;
 import model.Model;
 import model.TransactionDAO;
 import model.VisitorDAO;
