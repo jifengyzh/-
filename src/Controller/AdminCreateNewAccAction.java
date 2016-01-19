@@ -14,11 +14,11 @@ import Model.VisitorDAO;
 import Model.Model;
 import databean.VisitorBean;
 
-public class EmployeeCreateNewAccAction extends Action{
+public class AdminCreateNewAccAction extends Action{
 	private FormBeanFactory<AdminCreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateNewAccForm.class);
 	private VisitorDAO visitorDAO;
 	
-	public EmployeeCreateNewAccAction(Model model) {
+	public AdminCreateNewAccAction(Model model) {
 		visitorDAO = model.getVisitorDAO();
 	}
 
