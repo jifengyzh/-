@@ -15,24 +15,37 @@
 
 </head>
 <body>
+ <!-- nav bar-->
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/">
-            </div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Carnegie Financial Service</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Fund <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Buy Fund</a></li>
+            <li><a href="#">Sell Fund</a></li>
+            <li><a href="#">Request Check</a></li>
+            <li><a href="#">View History</a></li>
+            <li><a href="#">Reserach Fund</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">View Account</a></li>
+            <li><a href="#">Change Password</a></li>
+          </ul>
+        </li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
     </div>
-    <div class="col-md-3">
-                <ul class="nav nav-pills btn pull-right">
-                    <li class="active">
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Profile</a>
-                    </li>
-                    <li class="disabled">
-                        <a href="#">Messages</a>
-                    </li>
-    </div>
+  </nav>
+    
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
