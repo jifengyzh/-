@@ -24,7 +24,7 @@ public class EmployeeCreateCustomerAccAction extends Action{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return Constants.adminNewAccAction;
+		return Constants.employeeCreateCustomerAccAction;
 	}
 
 	@Override
@@ -35,13 +35,13 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		
 		try {
 			EmployeeCreateCustomerAccForm form = createAccFormFactory.create(request);
-			if (!form.isPresent()) return Constants.adminNewAccJsp;
+			if (!form.isPresent()) return Constants.employeeCreateCustomerAccJsp;
 			errors.addAll(form.getValidationErrors());
-			if (!errors.isEmpty()) return Constants.adminNewAccJsp;
+			if (!errors.isEmpty()) return Constants.employeeCreateCustomerAccJsp;
 			
 			VisitorBean customer = visitorDAO.read(form.getUserName());
 			if  (customer != null) errors.add("User already exists");
-			return Constants.adminNewAccJsp;
+			return Constants.employeeCreateCustomerAccJsp;
 			
 			synchronized(this) {
 				customer = new VisitorBean();
@@ -59,7 +59,7 @@ public class EmployeeCreateCustomerAccAction extends Action{
 			
 			request.setAttribute("alert", form.getUserName() + " successfully create the account");
 			//need to wait for confirmation?
-			return Constants.adminNewAccConfirmJsp;
+			return Constants.employeeCreateAccConfirmJsp;
 		}catch (Exception e) {
 			errors.add(e.getMessage());
 			return "errors.jsp";

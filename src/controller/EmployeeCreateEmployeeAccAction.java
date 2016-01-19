@@ -12,22 +12,23 @@ import model.Model;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import databean.EmployeeBean;
 import formbean.EmployeeCreateNewEmployeeAccForm;
 
 
-public class EmployeeCreateNewEmployeeAccAction extends Action{
+public class EmployeeCreateEmployeeAccAction extends Action{
 
 	private FormBeanFactory<EmployeeCreateNewEmployeeAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(EmployeeCreateNewEmployeeAccForm.class);
 	private EmployeeDAO employeeDAO;
 	
-	public EmployeeCreateNewEmployeeAccAction(Model model){
+	public EmployeeCreateEmployeeAccAction(Model model){
 		employeeDAO = model.getAdminDAO();
 	}
 	
 	@Override
 	public String getName() {
-		return "create-employee-account.do";
+		return Constants.employeeCreateEmployeeAccAction;
 	}
 
 	@Override
@@ -39,12 +40,12 @@ public class EmployeeCreateNewEmployeeAccAction extends Action{
 	        request.setAttribute("form",form);
 
 	        if (!form.isPresent()) {
-	            return "create-account-employee.jsp";
+	            return Constants.employeeCreateEmployeeAccJsp;
 	        }
 	
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	            return "create-account-employee.jsp";
+	            return Constants.employeeCreateEmployeeAccJsp;
 	        }
 	
 	        
@@ -52,7 +53,7 @@ public class EmployeeCreateNewEmployeeAccAction extends Action{
 	        	EmployeeBean employee = employeeDAO.lookup(form.getUserName());
 		       	if (employee != null) {
 		       		errors.add("Existing Username");
-	                return "create-account-employee.jsp";
+	                return Constants.employeeCreateEmployeeAccJsp;
 		       	}
 		       	
 		       	employee = new EmployeeBean();
@@ -65,7 +66,7 @@ public class EmployeeCreateNewEmployeeAccAction extends Action{
         
 	        request.setAttribute("message","Account successfully created for " + "<b>" + form.getUserName() + "</b>");
 	       	
-			return "employee-confirmation.jsp";
+			return Constants.employeeCreateAccConfirmJsp;
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
