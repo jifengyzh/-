@@ -8,25 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.VisitorBean;
 import formbean.AdminCreateNewAccForm;
-import formbean.CreateNewAccForm;
-import model.AdminDAO;
-import model.Model;
 import model.VisitorDAO;
+import model.Model;
+import databean.VisitorBean;
 
 public class AdminCreateNewAccAction extends Action{
 	private FormBeanFactory<AdminCreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateNewAccForm.class);
-	private AdminDAO adminDAO;
+	private VisitorDAO visitorDAO;
 	
 	public AdminCreateNewAccAction(Model model) {
-		adminDAO = model.getAdminDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return Constants.adminNewAdminAccAction;
+		return Constants.adminNewAccAction;
 	}
 
 	@Override
@@ -37,21 +35,26 @@ public class AdminCreateNewAccAction extends Action{
 		
 		try {
 			AdminCreateNewAccForm form = createAccFormFactory.create(request);
-			if (!form.isPresent()) return Constants.adminNewAdminAccJsp;
+			if (!form.isPresent()) return Constants.adminNewAccJsp;
 			errors.addAll(form.getValidationErrors());
-			if (!errors.isEmpty()) return Constants.adminNewAdminAccJsp;
+			if (!errors.isEmpty()) return Constants.adminNewAccJsp;
 			
-			VisitorBean admin = adminDAO.read(form.getUserName());
-			if  (admin != null) errors.add("User already exists");
+			VisitorBean customer = visitorDAO.read(form.getUserName());
+			if  (customer != null) errors.add("User already exists");
 			return Constants.adminNewAccJsp;
 			
 			synchronized(this) {
-				admin = new VisitorBean();
-				admin.setUserName(form.getUserName());
-				admin.setFirstName(form.getFirstName());
-				admin.setLastName(form.getLastName());
-		       	admin.setPassword(form.getPassword());
-		       	adminDAO.create(admin);
+				customer = new VisitorBean();
+				customer.setUserName(form.getUserName());
+				customer.setFirstName(form.getFirstName());
+				customer.setLastName(form.getLastName());
+		       	customer.setPassword(form.getPassword());
+		       	customer.setAddrLine1(form.getAddrLine1());
+		       	customer.setAddrLine2(form.getAddrLine2());
+		       	customer.setCity(form.getCity());
+		       	customer.setState(form.getState());
+		       	customer.setZip(form.getZipAsInt());
+		       	visitorDAO.create(customer);
 			}
 			
 			request.setAttribute("alert", form.getUserName() + " successfully create the account");

@@ -60,7 +60,6 @@ public class AdminCreateNewAdminAccAction extends Action{
 		       	employee.setPassword(form.getPassword());
 		       	employee.setFirstName(form.getFirstName());
 		       	employee.setLastName(form.getLastName());
-		        
 		       	adminDAO.create(employee);
 	        }
         
