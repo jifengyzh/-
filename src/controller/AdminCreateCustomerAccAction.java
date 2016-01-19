@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import formbean.AdminCreateNewAccForm;
+import formbean.AdminCreateCustomerAccForm;
 import model.VisitorDAO;
 import model.Model;
 import databean.VisitorBean;
 
-public class AdminCreateNewAccAction extends Action{
-	private FormBeanFactory<AdminCreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateNewAccForm.class);
+public class AdminCreateCustomerAccAction extends Action{
+	private FormBeanFactory<AdminCreateCustomerAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateCustomerAccForm.class);
 	private VisitorDAO visitorDAO;
 	
-	public AdminCreateNewAccAction(Model model) {
+	public AdminCreateCustomerAccAction(Model model) {
 		visitorDAO = model.getVisitorDAO();
 	}
 
@@ -34,7 +34,7 @@ public class AdminCreateNewAccAction extends Action{
 		request.setAttribute("errors", errors);
 		
 		try {
-			AdminCreateNewAccForm form = createAccFormFactory.create(request);
+			AdminCreateCustomerAccForm form = createAccFormFactory.create(request);
 			if (!form.isPresent()) return Constants.adminNewAccJsp;
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return Constants.adminNewAccJsp;
