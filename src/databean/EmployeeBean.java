@@ -12,7 +12,7 @@ import java.util.Random;
 public class EmployeeBean {
 
 	private String userName;
-	private String password;
+	private String passWord;
 	private String firstName;
 	private String lastName;
 	private int salt = 0;
@@ -20,16 +20,16 @@ public class EmployeeBean {
 	public boolean checkPassword(String password) {
 		//System.out.println("Original password is " + this.password);
 		//System.out.println("hashed password is " + hash(password));
-		return this.password.equals(hash(password));
+		return this.passWord.equals(hash(password));
 	}
 	
 	public void setDirectPassword(String password) {
-		this.password = password;
+		this.passWord = password;
 	}
 	
 	public void setPassword(String password) {
 		salt = newSalt();
-		this.password = hash(password);
+		this.passWord = hash(password);
 	}
 
 	public int getSalt() {
@@ -49,7 +49,7 @@ public class EmployeeBean {
 	}
 
 	public String getPassword() {
-		return password;
+		return passWord;
 	}
 
 	

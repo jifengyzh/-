@@ -1,6 +1,5 @@
 /**
- * @author Team Snipers (Team 1)
- * Jan 20, 2013
+ * @author Team 7
  */
 
 package databean;
