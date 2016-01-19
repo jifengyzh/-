@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
 import FormBean.DepositCheckForm;
-import Model.Model;
-import Model.TransactionDAO;
-import Model.VisitorDAO;
 import databean.VisitorBean;
+import model.Model;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 public class VisitorDepositCheckAction extends Action {
 	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(RequestCheckFormBean.class);

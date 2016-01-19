@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import FilterAndConstant.Constants;
 import databean.FundInfoBean;
-import Model.FundDAO;
-import Model.FundPriceHistoryDAO;
-import Model.Model;
 import databean.FundPriceHistoryBean;
+import model.FundDAO;
+import model.FundPriceHistoryDAO;
+import model.Model;
 
 public class VisitorResearchFundAction extends Action {
 	

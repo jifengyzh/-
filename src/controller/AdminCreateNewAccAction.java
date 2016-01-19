@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.mybeans.form.FormBeanFactory;
 import FilterAndConstant.Constants;
 import FormBean.AdminCreateNewAccForm;
 import FormBean.CreateNewAccForm;
-import Model.VisitorDAO;
-import Model.Model;
 import databean.VisitorBean;
+import model.Model;
+import model.VisitorDAO;
 
 public class AdminCreateNewAccAction extends Action{
 	private FormBeanFactory<AdminCreateNewAccForm> createAccFormFactory = FormBeanFactory.getInstance(AdminCreateNewAccForm.class);

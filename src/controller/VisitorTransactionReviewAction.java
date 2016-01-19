@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import FilterAndConstant.Constants;
-import Model.Model;
-import Model.TransactionHistoryDAO;
-import Model.VisitorDAO;
 import databean.TransactionHistoryBean;
 import databean.VisitorBean;
+import model.Model;
+import model.TransactionHistoryDAO;
+import model.VisitorDAO;
 
 public class VisitorTransactionReviewAction extends Action {
 	private TransactionHistoryDAO transactionHistoryDAO;

@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.AdminDAO;
 import model.EmployeeDAO;
 import model.Model;
 
@@ -22,10 +23,10 @@ import formbean.CreateEmployeeAccountForm;
 public class AdminCreateNewAdminAccAction extends Action{
 
 	private FormBeanFactory<AdminCreateNewAdminAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(AdminCreateNewAdminAccForm.class);
-	private EmployeeDAO employeeDAO;
+	private AdminDAO adminDAO;
 	
 	public AdminCreateNewAdminAccAction(Model model){
-		employeeDAO = model.getEmployeeDAO();
+		adminDAO = model.getEmployeeDAO();
 	}
 	
 	@Override
@@ -52,7 +53,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 	
 	        
 	        synchronized (this) {
-	        	EmployeeBean employee = employeeDAO.lookup(form.getUserName());
+	        	EmployeeBean employee = adminDAO.lookup(form.getUserName());
 		       	if (employee != null) {
 		       		errors.add("Existing Username");
 	                return "create-account-employee.jsp";
@@ -64,7 +65,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 		       	employee.setFirstName(form.getFirstName());
 		       	employee.setLastName(form.getLastName());
 		        
-		       	employeeDAO.create(employee);
+		       	adminDAO.create(employee);
 	        }
         
 	        request.setAttribute("message","Account successfully created for " + "<b>" + form.getUserName() + "</b>");
