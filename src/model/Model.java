@@ -2,11 +2,11 @@ package model;
 
 public class Model {
 	private VisitorDAO visitorDAO;
-	private AdminDAO adminDAO;
+	private EmployeeDAO adminDAO;
 	public VisitorDAO getVisitorDAO() {
 		return visitorDAO;
 	}
-	public AdminDAO getAdminDAO() {
+	public EmployeeDAO getAdminDAO() {
 		return adminDAO;
 	}
 }

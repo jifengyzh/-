@@ -6,23 +6,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.AdminDAO;
+import model.EmployeeDAO;
 import model.Model;
 
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.EmployeeBean;
-import formbean.AdminCreateNewAdminAccForm;
+import formbean.AdminCreateNewEmployeeAccForm;
 
 
-public class AdminCreateNewAdminAccAction extends Action{
+public class EmployeeCreateNewEmployeeAccAction extends Action{
 
-	private FormBeanFactory<AdminCreateNewAdminAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(AdminCreateNewAdminAccForm.class);
-	private AdminDAO adminDAO;
+	private FormBeanFactory<AdminCreateNewEmployeeAccForm> createEmployeeAccountFormFactory = FormBeanFactory.getInstance(AdminCreateNewEmployeeAccForm.class);
+	private EmployeeDAO employeeDAO;
 	
-	public AdminCreateNewAdminAccAction(Model model){
-		adminDAO = model.getAdminDAO();
+	public EmployeeCreateNewEmployeeAccAction(Model model){
+		employeeDAO = model.getAdminDAO();
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         try {
-        	AdminCreateNewAdminAccForm form = createEmployeeAccountFormFactory.create(request);
+        	AdminCreateNewEmployeeAccForm form = createEmployeeAccountFormFactory.create(request);
 	        request.setAttribute("form",form);
 
 	        if (!form.isPresent()) {
@@ -49,7 +49,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 	
 	        
 	        synchronized (this) {
-	        	EmployeeBean employee = adminDAO.lookup(form.getUserName());
+	        	EmployeeBean employee = employeeDAO.lookup(form.getUserName());
 		       	if (employee != null) {
 		       		errors.add("Existing Username");
 	                return "create-account-employee.jsp";
@@ -60,7 +60,7 @@ public class AdminCreateNewAdminAccAction extends Action{
 		       	employee.setPassword(form.getPassword());
 		       	employee.setFirstName(form.getFirstName());
 		       	employee.setLastName(form.getLastName());
-		       	adminDAO.create(employee);
+		       	employeeDAO.create(employee);
 	        }
         
 	        request.setAttribute("message","Account successfully created for " + "<b>" + form.getUserName() + "</b>");
