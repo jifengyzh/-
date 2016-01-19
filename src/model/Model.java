@@ -9,4 +9,8 @@ public class Model {
 	public EmployeeDAO getAdminDAO() {
 		return adminDAO;
 	}
+	public EmployeeDAO getEmployeeDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
