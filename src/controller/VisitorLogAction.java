@@ -15,6 +15,8 @@ import model.VisitorDAO;
 import databean.VisitorBean;
 import formbean.LoginForm;
 import model.Model;
+import model.MyDAOException;
+import model.PositionDAO;
 import model.TransactionDAO;
 import model.VisitorDAO;
 
@@ -55,9 +57,8 @@ public class VisitorLogAction extends Action{
         }
 		
 		try {
-			List<String> errors = new ArrayList<String>();
-	        request.setAttribute("errors",errors);
-	        
+			LoginForm form = formBeanFactory.create(request);
+			
 	        if (!form.isPresent()) {
 	            return Constants.mainPage;
 	        }

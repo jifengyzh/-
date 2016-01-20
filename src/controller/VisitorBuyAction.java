@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,15 +11,16 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import FormBean.VisitorBuyFundForm;
-import Model.visitorDAO;
+import formbean.VisitorBuyFundForm;
+import model.VisitorDAO;;
 import databean.FundBean;
 import databean.VisitorBean;
-import Model.FundDAO;
-import Model.FundPriceHistoryDAO;
-import Model.TransactionDAO;
-import Model.VisitorDAO;
+import model.FundDAO;
+import model.FundPriceHistoryDAO;
+import model.TransactionDAO;
+import model.VisitorDAO;
 import model.Model;
+import model.MyDAOException;
 
 public class VisitorBuyAction extends Action{
 	

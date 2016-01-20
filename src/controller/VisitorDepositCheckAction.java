@@ -13,6 +13,7 @@ import FilterAndConstant.Constants;
 import databean.VisitorBean;
 import formbean.DepositCheckForm;
 import model.Model;
+import model.MyDAOException;
 import model.TransactionDAO;
 import model.VisitorDAO;
 
@@ -68,7 +69,7 @@ public class VisitorDepositCheckAction extends Action {
 			request.setAttribute("alert", "Your deposit request for $ " + 
 										formatter.format(amount) + " has been waited for transaction");
 			
-			return Constants.visitorDepositConfirm;
+			return Constants.visitorDepositConfirmJsp;
 			
 		} catch (MyDAOException e) {
 			errors.add(e.getMessage());
