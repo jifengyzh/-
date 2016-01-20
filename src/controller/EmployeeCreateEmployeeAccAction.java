@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import model.EmployeeDAO;
 import model.Model;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -66,12 +67,12 @@ public class EmployeeCreateEmployeeAccAction extends Action{
         
 	        request.setAttribute("message","Account successfully created for " + "<b>" + form.getUserName() + "</b>");
 	       	
-			return Constants.employeeCreateAccConfirmJsp;
+			return Constants.employeeConfirmJsp;
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
-        } catch (Exception e) {
+        } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

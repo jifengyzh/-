@@ -90,6 +90,6 @@ public class EmployeeLoginAction extends Action {
 		} catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
+		}
 	}
-
 }

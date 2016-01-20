@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
@@ -59,10 +61,14 @@ public class EmployeeCreateCustomerAccAction extends Action{
 			
 			request.setAttribute("alert", form.getUserName() + " successfully create the account");
 			//need to wait for confirmation?
-			return Constants.employeeCreateAccConfirmJsp;
-		}catch (Exception e) {
+			return Constants.employeeConfirmJsp;
+		}catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "errors.jsp";
+		}catch (FormBeanException e) {
+			errors.add(e.getMessage());
+			return "errors.jsp";
+			
 		}
 	}
 }

@@ -64,7 +64,7 @@ public class EmployeeChangePwdAction extends Action {
 				// check old password
 				if (!employee.checkPassword(form.getOldPassword())) {
 					errors.add("Incorrect Password!! Please re-enter your current password");
-					return "changepwd-customer.jsp";
+					return Constants.employeeChangePasswordJsp;
 				}
 				
 				// change password
@@ -73,7 +73,7 @@ public class EmployeeChangePwdAction extends Action {
 
 			// success
 			request.setAttribute("message", "Password changed successfully!");
-			return "employee-confirmation.jsp";
+			return Constants.employeeConfirmJsp;
 		} catch (RollbackException e) {
 			errors.add(e.toString());
 			return "error.jsp";
