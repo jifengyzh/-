@@ -48,4 +48,25 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+		
+	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
+		// Calls GenericDAO's match() method.
+        	try {
+			Transaction.begin();
+			
+			VisitorBean[] a = match(MatchArg.equals("visitorId", visitorId));
+			VisitorBean visitorBean;
+			if (a.length == 0) {
+				visitorBean = null;
+			} else {
+				visitorBean = a[0];
+				visitorBean.setCash(visitorBean.getCash() + cash);
+				update(visitorBean);
+			}
+    			Transaction.commit();
+    			return visitorBean;
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
+	}
 }
