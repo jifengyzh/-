@@ -1,10 +1,12 @@
-/**
- * @author Team Snipers (Team 1)
- * Jan 18, 2013
- */
-
 package databean;
 
+import org.genericdao.PrimaryKey;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+
+@PrimaryKey("fundId")
 public class FundBean {
 	private int fundId;
 	private String name;
