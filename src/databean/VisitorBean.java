@@ -6,7 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-@PrimaryKey("VisitorId")
+@PrimaryKey("visitorId")
+@ForeignKey("")
 public class VisitorBean {
 	private long      visitorId;
 	private String    userName;
