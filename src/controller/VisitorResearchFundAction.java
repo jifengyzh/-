@@ -11,6 +11,7 @@ import databean.FundPriceHistoryBean;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
+import model.MyDAOException;
 
 public class VisitorResearchFundAction extends Action {
 	

@@ -61,13 +61,13 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 			}
 			
 			synchronized (this) {
-				VisitorBean customer = visitorDAO.read(form.getUserName());
-				if (customer == null) {
+				VisitorBean visitor = visitorDAO.read(form.getUserName());
+				if (visitor == null) {
 					errors.add("Customer does not exist");
 					return Constants.employeeResetCustomerPasswordJsp;
 				}
 				
-				visitorDAO.changePassword(customer.getCustomerId(), form.getNewPassword());
+				visitorDAO.setPassword(visitor.getVisitorId(), form.getNewPassword());
 			}
 			
 			// Success

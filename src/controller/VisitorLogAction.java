@@ -11,11 +11,12 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import Model.VisitorDAO;
+import model.VisitorDAO;
 import databean.VisitorBean;
-import Model.Model;
-import Model.TransactionDAO;
-import Model.VisitorDAO;
+import formbean.LoginForm;
+import model.Model;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 
 public class VisitorLogAction extends Action{
@@ -78,7 +79,7 @@ public class VisitorLogAction extends Action{
 	            return Constants.mainPage;
 	        }
 	        
-	        int visitorId = visitor.getVisitorId();
+	        int visitorId = (int) visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
 	        Date lastTradeDate = transactionDAO.getCustomerLastTradeDate(visitorId);
 	        visitor.setLastTradeDate(lastTradeDate);

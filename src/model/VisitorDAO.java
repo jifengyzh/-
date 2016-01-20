@@ -19,10 +19,10 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		VisitorBean[] VisitorBeans = match();
 		return VisitorBeans;
 	}
-
-	public VisitorBean[] readVisitor(String userName) throws RollbackException{
-		VisitorBean[] customer=match(MatchArg.equals("userName", userName));
-		return customer;
+	
+	public VisitorBean readVisitor(String userName) throws RollbackException{
+		VisitorBean[] visitor=match(MatchArg.equals("userName", userName));
+		return visitor[0];
 	}
 
 
@@ -34,19 +34,18 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 	public void setPassword(int id, String password) throws RollbackException {
         try {
         	Transaction.begin();
-        	VisitorBean Visitor = read(id);
+        	VisitorBean visitor = read(id);
 			
-			if (Visitor == null) {
+			if (visitor == null) {
 				throw new RollbackException("User "+ id +" does not exists");
 			}
 			
-			Visitor.setPassword(password);
+			visitor.setPassword(password);
 			
-			update(Visitor);
+			update(visitor);
 			Transaction.commit();
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
-
 }
