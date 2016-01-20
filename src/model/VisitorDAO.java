@@ -19,12 +19,17 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		VisitorBean[] VisitorBeans = match();
 		return VisitorBeans;
 	}
-	
-	public VisitorBean readVisitor(String userName) throws RollbackException{
-		VisitorBean[] visitor=match(MatchArg.equals("userName", userName));
-		return visitor[0];
-	}
 
+	public VisitorBean readVisitor(String userName) throws RollbackException{
+		VisitorBean[] a = match(MatchArg.equals("userName", userName));
+		VisitorBean visitorBean;
+		if (a.length == 0) {
+			visitorBean = null;
+		} else {
+			visitorBean = a[0];
+		}
+		return visitorBean;
+	}
 
 	public VisitorBean[] readVisitor(int visitorId) throws RollbackException {
 		VisitorBean[] customer = match(MatchArg.equals("visitorId",visitorId));
