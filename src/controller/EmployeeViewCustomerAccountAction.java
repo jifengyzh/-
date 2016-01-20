@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
@@ -55,6 +56,7 @@ public class EmployeeViewCustomerAccountAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
@@ -113,10 +115,13 @@ public class EmployeeViewCustomerAccountAction extends Action {
 					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
 					DecimalFormat formatter2 = new DecimalFormat("#0.00");
 					int fund_id = position[i].getFundId();
+					
 					customerFund[i].setShares(formatter1.format(position[i].getShares()));
 					customerFund[i].setName(fundDAO.getFundName(fund_id));
 					customerFund[i].setSymbol(fundDAO.getFundSymbol(fund_id));
-					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastday"));
+					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate"));
+					customerFund[i].setShares(formatter1.format(price));
+					customerFund[i].setValue(value);
 					
 					
 					fundValue[i] = new FundValueBean();

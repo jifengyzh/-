@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.EmployeeDAO;
+import model.LastDateDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
@@ -23,7 +24,7 @@ public class EmployeeLoginAction extends Action {
 			.getInstance(LoginForm.class);
 
 	private EmployeeDAO employeeDAO;
-
+	private LastDateDAO lastDateDAO;
 	public EmployeeLoginAction(Model model) {
 		employeeDAO = model.getEmployeeDAO();
 	}
@@ -80,6 +81,7 @@ public class EmployeeLoginAction extends Action {
 			session.setAttribute("employeeUserName", employee.getUserName());
 			session.setAttribute("firstname", employee.getFirstName());
 			session.setAttribute("lastname", employee.getLastName());
+			session.setAttribute("lastdate", lastDateDAO.getLastDate());
 
 			// If redirectTo is null, redirect to the "todolist" action
 			return Constants.employeeMainPanelJsp;
