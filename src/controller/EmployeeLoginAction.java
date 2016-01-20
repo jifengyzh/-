@@ -55,25 +55,25 @@ public class EmployeeLoginAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "index.jsp";
+				return Constants.mainPage;
 			}
 
 			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "index.jsp";
+				return Constants.mainPage;
 			}
 
 			EmployeeBean employee = employeeDAO.read(form.getUserName());
 			
 			if (employee == null) {
 	            errors.add("Incorrect/Invalid Employee Username");
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 	        
 	        if (!employee.checkPassword(form.getPassword())) {
 	            errors.add("Incorrect/Invalid Password");
-	            return "index.jsp";
+	            return Constants.mainPage;
 	        }
 
 			// Attach (this copy of) the user bean to the session
