@@ -68,7 +68,7 @@ public class EmployeeViewCustomerAccountAction extends Action {
 
 				// If no customer is selected, show all the customers in the
 				// system.
-				VisitorBean[] customerlist = visitorDAO.getCustomerList();
+				VisitorBean[] customerlist = visitorDAO.getAllCustomers();
 				if (customerlist != null) {
 					request.setAttribute("customerlist", customerlist);
 				} else {
@@ -115,38 +115,19 @@ public class EmployeeViewCustomerAccountAction extends Action {
 					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
 					DecimalFormat formatter2 = new DecimalFormat("#0.00");
 					int fund_id = position[i].getFundId();
+					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate"));
+					double shares = position[i].getShares();
 					
-					customerFund[i].setShares(formatter1.format(position[i].getShares()));
+					customerFund[i].setShares(formatter1.format(shares));
 					customerFund[i].setName(fundDAO.getFundName(fund_id));
 					customerFund[i].setSymbol(fundDAO.getFundSymbol(fund_id));
-					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate"));
 					customerFund[i].setShares(formatter1.format(price));
-					customerFund[i].setValue(value);
-					
-					
-					fundValue[i] = new FundValueBean();
-					fundValue[i].setFundId(position[i].getFundId());
-					double shares = position[i].getShares();
-					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
-					fundValue[i].setShares(formatter1.format(shares));
-					FundBean fundBean = fundDAO.read(temp.getFundName());
-					fundValue[i].setFundName(fundBean.getName());
-					if (fundPriceHistoryDAO.getLastTrading(position[i].getFundId()) != null) {
-						FundPriceHistoryBean history = fundPriceHistoryDAO.getLastTrading(position[i].getFundId());
-						fundValue[i].setLastTradingDate(history.getPrice_date());
-						double price = history.getPrice();
-						f
-						fundValue[i].setLastTradingPrice(formatter.format(price));
-						double value = position[i].getShares() * price;
-						fundValue[i].setValue(formatter.format(value));
-					}
-
+					customerFund[i].setValue(formatter2.format(price * shares));
 				}
-
-				request.setAttribute("fundvalue", fundValue);
+				request.setAttribute("customerfund", customerFund);
 
 			} else {
-				CustomerBean[] customerlist = visitorDAO.getAllCustomers();
+				VisitorBean[] customerlist = visitorDAO.getAllCustomers();
 				if (customerlist != null) {
 					request.setAttribute("customerlist", customerlist);
 				} else {

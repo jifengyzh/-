@@ -48,4 +48,5 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+
 }
