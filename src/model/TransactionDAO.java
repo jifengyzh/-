@@ -76,6 +76,10 @@ public class TransactionDAO extends BaseDAO{
 		
 	}
 	
+	public Date lastTradingDate(int customerId) {
+		//return the last trading date of the assigned customer
+		//please return null if there's not any trading
+	}
 	
 	
 	protected void createTable() throws MyDAOException {
