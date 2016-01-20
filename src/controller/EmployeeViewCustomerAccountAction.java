@@ -8,11 +8,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.CustomerDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
-import model.MyDAOException;
 import model.PositionDAO;
 import model.TransactionDAO;
 import model.TransactionHistoryDAO;
@@ -23,7 +21,6 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
 import databean.CustomerFundBean;
 import databean.FundBean;
 import databean.FundPriceHistoryBean;
@@ -115,9 +112,11 @@ public class EmployeeViewCustomerAccountAction extends Action {
 				for (int i = 0; i < position.length; i++) {
 					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
 					DecimalFormat formatter2 = new DecimalFormat("#0.00");
-					customerFund[i].setFund_id(position[i].getFundId());
+					int fund_id = position[i].getFundId();
 					customerFund[i].setShares(formatter1.format(position[i].getShares()));
-					customerFund[i].setName(fundDAO.read(position[i].getFundId());
+					customerFund[i].setName(fundDAO.getFundName(fund_id));
+					customerFund[i].setSymbol(fundDAO.getFundSymbol(fund_id));
+					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastday"));
 					
 					
 					fundValue[i] = new FundValueBean();

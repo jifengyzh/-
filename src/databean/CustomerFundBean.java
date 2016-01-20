@@ -1,16 +1,16 @@
 package databean;
 
 public class CustomerFundBean {
-	public int fund_id;
 	public String name;
+	public String symbol;
 	public String shares;
 	public String price;
 	public String value;
-	public int getFund_id() {
-		return fund_id;
+	public String getSymbol() {
+		return symbol;
 	}
-	public void setFund_id(int fund_id) {
-		this.fund_id = fund_id;
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 	public String getName() {
 		return name;
