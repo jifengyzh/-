@@ -10,15 +10,15 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import FormBean.VisitorChangePwdForm;
-import Model.VisitorDAO;
+import formbean.VisitorChangePwdForm;
+import model.VisitorDAO;
 import databean.VisitorBean;
-import Model.Model;
+import model.Model;
 
 public class VisitorPwdChangeAction extends Action{
 
 
-
+	private FormBeanFactory<VisitorChangePwdForm> formBeanFactory =
 			FormBeanFactory<FormBean>.getInstance(ChangePasswordForm.class);
 	
 	private VisitorDAO visitorDAO;
@@ -54,14 +54,14 @@ public class VisitorPwdChangeAction extends Action{
 			}
 			
 			synchronized(this) {
-				VisitorBean visitor = VisitorDAO.read((Integer) session.getAttribute("customerId"));
+				VisitorBean visitor = visitorDAO.read((Integer) session.getAttribute("customerId"));
 				
 				if(!visitor.checkPassword(form.getOldPassword())){
 					errors.add("Incorrect Password!! Please re-enter your current password.");
 					return Constants.visitorChangePwdJsp;
 				}
 				
-				VisitorDAO.changePassword(visitor.getCustomerId(), form.getNewPassword());
+				visitorDAO.changePassword(visitor.getCustomerId(), form.getNewPassword());
 				
 				
 			}

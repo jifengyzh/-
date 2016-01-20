@@ -68,12 +68,12 @@ public class VisitorLogAction extends Action{
 	        
 	        VisitorBean visitor = visitorDAO.read(form.getUserName());
 	        
-	        if (customer == null) {
+	        if (visitor == null) {
 	            errors.add("Incorrect/Invalid Customer Username");
 	            return Constants.mainPage;
 	        }
 	        
-	        if (!customer.checkPassword(form.getPassword())) {
+	        if (!visitor.checkPassword(form.getPassword())) {
 	            errors.add("Incorrect/Invalid Password");
 	            return Constants.mainPage;
 	        }
@@ -81,7 +81,7 @@ public class VisitorLogAction extends Action{
 	        int visitorId = visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
 	        Date lastTradeDate = transactionDAO.getCustomerLastTradeDate(visitorId);
-			customer.setLastTradeDate(lastTradeDate);
+	        visitor.setLastTradeDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());
 			

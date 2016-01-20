@@ -2,7 +2,12 @@ package databean;
 
 import java.util.Date;
 
+import org.genericdao.PrimaryKey;
+import org.genericdao.ForeignKey;
+
 public class TransactionBean {
+	@PrimaryKey("visitorId")
+	@Fori
 	private int transactionId;
 	private int customerId;
 	private int fundId;
