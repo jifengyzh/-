@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -21,7 +22,6 @@ import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.TransactionDAO;
 import model.Model;
-import model.MyDAOException;
 
 public class VisitorBuyAction extends Action{
 	
@@ -58,8 +58,8 @@ public class VisitorBuyAction extends Action{
 			FundInfoBean[] fundGeneralList = fundPriceHistoryDAO.getAllFundsGeneralInfo();
 			request.setAttribute("fundGeneralList", fundGeneralList);
 			
-			int customerId = (Integer)session.getAttribute("customerId");
-			VisitorBean visitor = visitorDAO.read(customerId);
+			int visitorId = (Integer)session.getAttribute("customerId");
+			VisitorBean visitor = visitorDAO.read(visitorId);
 			formatter = new DecimalFormat("#,##0.00");
 			String cash = formatter.format(visitor.getCash());
 			request.setAttribute("cash", cash);		
@@ -84,16 +84,16 @@ public class VisitorBuyAction extends Action{
 			double amount = Integer.valueOf(form.getAmount());
 			
 			
-			transactionDAO.buyFund(customerId, fund.getFundId(), amount);
+			transactionDAO.buyFund(visitorId, fund.getFundId(), amount);
 			
 			request.setAttribute("alert", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			
 			return Constants.visitorBuyConfirmJsp;
-		} catch (MyDAOException e) {
-			errors.add(e.getMessage());
-			return Constants.errorJsp;
 		} catch (FormBeanException e) {
+			errors.add(e.toString());
+			return Constants.errorJsp;
+		} catch (RollbackException e) {
 			errors.add(e.toString());
 			return Constants.errorJsp;
 		}
