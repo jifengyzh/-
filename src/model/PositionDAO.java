@@ -1,5 +1,10 @@
 package model;
 
-public class PositionDAO {
+import databean.PositionBean;
 
+public class PositionDAO {
+	
+	public PositionBean[] getPositionList(int customerId) {
+		
+	}
 }
