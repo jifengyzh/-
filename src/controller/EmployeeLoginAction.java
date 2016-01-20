@@ -6,14 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.AdminDAO;
 import model.EmployeeDAO;
 import model.Model;
-import model.MyDAOException;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import databean.EmployeeBean;
 
 import formbean.LoginForm;
@@ -30,7 +30,7 @@ public class EmployeeLoginAction extends Action {
 
 	@Override
 	public String getName() {
-		return "employee-login.do";
+		return Constants.employeeLoginAction;
 	}
 
 	@Override
@@ -39,12 +39,12 @@ public class EmployeeLoginAction extends Action {
 
 		// If employee is already logged in, redirect to employee-mainpanel.jsp
 		if (session.getAttribute("employeeUserName") != null) {
-			return "employee-mainpanel.jsp";
+			return Constants.employeeMainPanelJsp;
 		}
 
 		// If customer is already logged in, redirect to customer-mainpanel.jsp
 		if (session.getAttribute("customerId") != null) {
-			return "customer-mainpanel.jsp";
+			return Constants.visitorViewAccountAction;
 		}
 
 		List<String> errors = new ArrayList<String>();
@@ -54,9 +54,6 @@ public class EmployeeLoginAction extends Action {
 			LoginForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
-			// If no params were passed, return with no errors so that the form
-			// will be
-			// presented (we assume for the first time).
 			if (!form.isPresent()) {
 				return "index.jsp";
 			}
@@ -85,15 +82,14 @@ public class EmployeeLoginAction extends Action {
 			session.setAttribute("lastname", employee.getLastName());
 
 			// If redirectTo is null, redirect to the "todolist" action
-			return "employee-mainpanel.jsp";
+			return Constants.employeeMainPanelJsp;
 
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
-		} catch (MyDAOException e) {
-			errors.add(e.getMessage());
-			return "error.jsp";
-		}
+		} catch (RollbackException e) {
+        	errors.add(e.getMessage());
+        	return "error.jsp";
 	}
 
 }

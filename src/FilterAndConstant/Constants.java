@@ -71,11 +71,14 @@ public class Constants {
 	
 	
 	
-	public static final String adminMainPanel = new String("employee_main_panel.jsp");
+	public static final String employeeMainPanelJsp = new String("employee_main_panel.jsp");
 	public static final String employeeCreateCustomerAccAction = new String("employee_create_customer_account.do");
 	public static final String employeeCreateCustomerAccJsp = new String("employee_create_customer_account.jsp");
 	public static final String employeeCreateAccConfirmJsp = new String("employee_create_account_confirmation.jsp");
 	public static final String employeeCreateEmployeeAccAction = new String("employee_create_employee_account.do");
 	public static final String employeeCreateEmployeeAccJsp = new String("employee_create_employee_account.jsp");
+	public static final String employeeLoginAction = new String("employee_login.do");
+	public static final String employeeChangePasswordAction = new String("employee_change_password.do");
+	public static final String employeeChangePasswordJsp = new String("employee_change_password.jsp");
 	
 }

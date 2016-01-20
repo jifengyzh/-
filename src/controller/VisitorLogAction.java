@@ -50,7 +50,7 @@ public class VisitorLogAction extends Action{
 		}
 		
 		if (session.getAttribute("employeeId") != null) {
-        	return Constants.adminMainPanel;
+        	return Constants.employeeMainPanelJsp;
         }
 		
 		try {
