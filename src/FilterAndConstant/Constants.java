@@ -80,5 +80,6 @@ public class Constants {
 	public static final String employeeLoginAction = new String("employee_login.do");
 	public static final String employeeChangePasswordAction = new String("employee_change_password.do");
 	public static final String employeeChangePasswordJsp = new String("employee_change_password.jsp");
-	
+	public static final String employeeResetCustomerPasswordAction = new String("employee_reset_customer_password.do");
+	public static final String employeeResetCustomerPasswordJsp = new String("employee_reset_customer_password.jsp");
 }
