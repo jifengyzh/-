@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import FilterAndConstant.Constants;
 import databean.CustomerBean;
-
+import databean.VisitorBean;
+import formbean.EmployeeResetCustomerPasswordForm;
 import formbean.ResetCustomerPwdForm;
 
 import model.CustomerDAO;
@@ -18,18 +21,18 @@ import model.MyDAOException;
 import model.VisitorDAO;
 
 public class EmployeeResetCustomerPasswordAction extends Action {
-	private FormBeanFactory<ResetCustomerPwdForm> formBeanFactory = FormBeanFactory
-			.getInstance(ResetCustomerPwdForm.class);
+	private FormBeanFactory<EmployeeResetCustomerPasswordForm> formBeanFactory = FormBeanFactory
+			.getInstance(EmployeeResetCustomerPasswordForm.class);
 
-	private VisitorDAO customerDAO;
+	private VisitorDAO visitorDAO;
 
 	public EmployeeResetCustomerPasswordAction(Model model) {
-		customerDAO = model.getVisitorDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 
 	@Override
 	public String getName() {
-		return "employee-reset-customer-pwd.do";
+		return Constants.employeeResetCustomerPasswordAction;
 	}
 
 	@Override
@@ -41,36 +44,36 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 
 
 		try {
-			ResetCustomerPwdForm form = formBeanFactory.create(request);
+			EmployeeResetCustomerPasswordForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			// If no params were passed, return with no errors so that the form
 			// will be
 			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return "employee-resetcustomerpswd.jsp";
+				return Constants.employeeResetCustomerPasswordJsp;
 			}
 
 			
 			// Check for any validation errors
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "employee-resetcustomerpswd.jsp";
+				return Constants.employeeResetCustomerPasswordJsp;
 			}
 			
 			synchronized (this) {
-				CustomerBean customer = customerDAO.read(form.getUserName());
+				VisitorBean customer = visitorDAO.read(form.getUserName());
 				if (customer == null) {
 					errors.add("Customer does not exist");
-					return "employee-resetcustomerpswd.jsp";
+					return Constants.employeeResetCustomerPasswordJsp;
 				}
 				
-				customerDAO.changePassword(customer.getCustomerId(), form.getNewPassword());
+				visitorDAO.changePassword(customer.getCustomerId(), form.getNewPassword());
 			}
 			
 			// Success
 			request.setAttribute("message", "Customer's password updated Successfully!");
-			return "employee-confirmation.jsp";
-		} catch (MyDAOException e) {
+			return Constants.employeeConfirmJsp;
+		} catch (RollbackException e) {
 			errors.add(e.toString());
 			return "error.jsp";
 		} catch (FormBeanException e) {
