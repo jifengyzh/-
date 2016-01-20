@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>View Customer Account</title>
+  <title>Create Customer Account</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -69,15 +69,14 @@
         <div>
           <ul class="breadcrumb">
             <li><a href="#"> <i class="icon-home"></i>Home</a></li>
-            <li class="active">View Customer Account</li>
+            <li class="active">View History</li>
           </ul>
         </div>
         
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-7">
-              <!--basic info-->
-              <div class="panel panel-default">
+        <div class="row">
+          <div class="col-sm-8">
+            <!--customer's info-->
+            <div class="panel panel-default">
                 <div class="panel-heading">
                   <h3 class="panel-title">Customer's Information</h3>
                 </div>
@@ -90,39 +89,36 @@
                   </p>
                 </div>
               </div>
-
-              <!--fund list-->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Customer's Funds</h3>
-                </div>
-                <div class="panel-body">
-                  <h5 class="text-info">Last Trading Day: </h5><p>2016-01-01</p>
-                  <h5 class="text-info">Cash Balance: </h5><p>$1233.32<p>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Fund No.</th><th>Fund Name</th><th>Shares</th><th>Value</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <!--history list-->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Customer's Transaction History</h3>
               </div>
+              <div class="panel-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Date</th><th>Operation</th><th>Fund Name</th><th>Shares</th><th>Price</th><th>Value</th><th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="success">
+                      <td>2016-01-01</td><td>Buy</td><td>Google</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                    </tr>
+                    <tr class="success">
+                      <td>2016-01-01</td><td>Buy</td><td>Yahoo</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                    </tr>
+                    <tr class="info">
+                      <td>2016-01-02</td><td>Buy</td><td>Amazon</td><td>123</td><td>2</td><td>246</td><td>Pending</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>  
             </div>
+          </div>
 
-            <div class="col-md-5">
-              <!--user list-->
+          <div class="col-sm-4">
+            <!--user list-->
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h3 class="panel-title">Customer List</h3>
@@ -147,11 +143,11 @@
                   </table>
                 </div>
               </div>
-            </div>
           </div>
-        </div>
 
-      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
