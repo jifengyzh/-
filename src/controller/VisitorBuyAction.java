@@ -12,30 +12,32 @@ import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
 import formbean.VisitorBuyFundForm;
-import model.VisitorDAO;;
+import model.VisitorDAO;
 import databean.FundBean;
+import databean.FundInfoBean;
 import databean.VisitorBean;
+import model.VisitorDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.TransactionDAO;
-import model.VisitorDAO;
 import model.Model;
 import model.MyDAOException;
 
 public class VisitorBuyAction extends Action{
 	
-	private FormBeanFactory<VisitorBuyFundForm> formBeanFactory = FormBeanFactory<FormBean>.getInstance(BuyFundForm.class);
+	private FormBeanFactory<VisitorBuyFundForm> formBeanFactory =
+			 FormBeanFactory.getInstance(VisitorBuyFundForm.class);
 	
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
-	DecimalFormat formatter;
+	private DecimalFormat formatter;
 	
 	public VisitorBuyAction(Model model) {
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
-		visitorDAO = model.getvisitorDAO();
+		visitorDAO = model.getVisitorDAO();
 		transactionDAO = model.getTransactionDAO();
 	}
 	
@@ -53,7 +55,7 @@ public class VisitorBuyAction extends Action{
 			String fundName = request.getParameter("getFundName");
 			if (fundName != null) request.setAttribute("getFundName", fundName);
 			
-			FundGeneralInfoBean[] fundGeneralList = fundPriceHistoryDAO.getAllFundsGeneralInfo();
+			FundInfoBean[] fundGeneralList = fundPriceHistoryDAO.getAllFundsGeneralInfo();
 			request.setAttribute("fundGeneralList", fundGeneralList);
 			
 			int customerId = (Integer)session.getAttribute("customerId");
@@ -79,7 +81,8 @@ public class VisitorBuyAction extends Action{
 				return Constants.visitorBuyJsp;
 			}
 			
-			double amount = form.getAmountAsDouble();
+			double amount = Integer.valueOf(form.getAmount());
+			
 			
 			transactionDAO.buyFund(customerId, fund.getFundId(), amount);
 			

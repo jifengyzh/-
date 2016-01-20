@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import databean.FundInfoBean;
+
 public class FundPriceHistoryDAO {
 
 	/**
@@ -11,6 +13,12 @@ public class FundPriceHistoryDAO {
 	 * @return
 	 */
 	public double getFundPrice(int fund_id, Date date) {
+		return fund_id;
+		
+	}
+	
+	public FundInfoBean[] getAllFundsGeneralInfo() {
+		return null;
 		
 	}
 }
