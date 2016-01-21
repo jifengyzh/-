@@ -36,7 +36,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 				throw new RollbackException("Employee "+ userName +" does not exists");
 			}
 			
-			employee.setPassWord(password);
+			employee.setPassword(password);
 			update(employee);
 			Transaction.commit();
 		} finally {

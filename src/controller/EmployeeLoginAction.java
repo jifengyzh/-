@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,11 +46,12 @@ public class EmployeeLoginAction extends Action {
 
 		// If customer is already logged in, redirect to customer-mainpanel.jsp
 		if (session.getAttribute("customerId") != null) {
-			return Constants.visitorViewAccountAction;
+			return Constants.employeeMainPanelJsp;
 		}
 
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		request.setAttribute("success", null);
 
 		try {
 			LoginForm form = formBeanFactory.create(request);
@@ -68,12 +70,12 @@ public class EmployeeLoginAction extends Action {
 			EmployeeBean employee = employeeDAO.read(form.getUserName());
 			
 			if (employee == null) {
-	            errors.add("Incorrect/Invalid Employee Username");
+	            errors.add("No such user.");
 	            return Constants.mainPage;
 	        }
 	        
 	        if (!employee.checkPassword(form.getPassword())) {
-	            errors.add("Incorrect/Invalid Password");
+	            errors.add("Password is incorrect.");
 	            return Constants.mainPage;
 	        }
 
@@ -81,7 +83,11 @@ public class EmployeeLoginAction extends Action {
 			session.setAttribute("employeeUserName", employee.getUserName());
 			session.setAttribute("firstname", employee.getFirstName());
 			session.setAttribute("lastname", employee.getLastName());
-			session.setAttribute("lastdate", lastDateDAO.getLastDate());
+			
+			//Save last trading date in session.
+			Date lastdate = lastDateDAO.getLastDate();
+			if (lastdate == null) session.setAttribute("lastdate", null);
+			else session.setAttribute("lastdate", lastdate);
 
 			// If redirectTo is null, redirect to the "todolist" action
 			return Constants.employeeMainPanelJsp;
