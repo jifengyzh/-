@@ -59,15 +59,15 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		       	visitorDAO.create(customer);
 			}
 			
-			request.setAttribute("alert", form.getUserName() + " successfully create the account");
+			request.setAttribute("success","success");
 			//need to wait for confirmation?
-			return Constants.employeeConfirmJsp;
+			return Constants.employeeCreateCustomerAccJsp;
 		}catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "errors.jsp";
+			return Constants.employeeCreateCustomerAccJsp;
 		}catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "errors.jsp";
+			return Constants.employeeCreateCustomerAccJsp;
 			
 		}
 	}
