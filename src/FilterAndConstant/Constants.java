@@ -86,4 +86,10 @@ public class Constants {
 	public static final String employeeViewCustAccJsp = new String("employee_view_customer_account.jsp");
 	public static final String employeeViewCustTransHistoryAction = new String("employee_view_customer_transaction_history.do");
 	public static final String employeeViewCustTransHistoryJsp = new String("employee_view_customer_transaction_history.jsp");
+	public static final String employeeDepositCheckAction = new String("employee_deposit_check.do");
+	public static final String employeeDepositCheckJsp = new String("employee_deposit_check.jsp");
+	public static final String employeeCreateFundAction = new String("employee_create_fund.do");
+	public static final String employeeCreateFundJsp = new String("employee_create_fund.jsp");
+	public static final String employeeTransitionDayAction = new String("employee_transition_day.do");
+	public static final String employeeTransitionDayJsp = new String("employee_transition_day.jsp");
 }
