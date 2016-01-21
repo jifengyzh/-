@@ -121,7 +121,7 @@ public class EmployeeViewCustomerAccountAction extends Action {
 					customerFund[i].setShares(formatter1.format(shares));
 					customerFund[i].setName(fundDAO.getFundName(fund_id));
 					customerFund[i].setSymbol(fundDAO.getFundSymbol(fund_id));
-					customerFund[i].setShares(formatter1.format(price));
+					customerFund[i].setPrice(formatter1.format(price));
 					customerFund[i].setValue(formatter2.format(price * shares));
 				}
 				request.setAttribute("customerfund", customerFund);
