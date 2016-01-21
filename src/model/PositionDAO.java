@@ -34,7 +34,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	 * @throws RollbackException
 	 */
 	public long getAvailableShares(TransactionBean sellFundTransaction) throws RollbackException {
-		PositionBean[] positionBeans = match(MatchArg.equals("visitorId", sellFundTransaction.getCustomerId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
+		PositionBean[] positionBeans = match(MatchArg.equals("visitorId", sellFundTransaction.getVisitorId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
 		if (positionBeans == null) {
 			return 0;
 		}
@@ -47,7 +47,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	 * @throws RollbackException
 	 */
 	public void updateAvailableShares(TransactionBean sellFundTransaction) throws RollbackException {
-		PositionBean[] positionBeans = match(MatchArg.equals("customerId", sellFundTransaction.getCustomerId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
+		PositionBean[] positionBeans = match(MatchArg.equals("customerId", sellFundTransaction.getVisitorId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
 		long newAvailableShares = positionBeans[0].getAvailableShares() - sellFundTransaction.getAmount();
 		if (newAvailableShares == 0) {
 			delete(sellFundTransaction.getFundId());
@@ -62,11 +62,11 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	 */
 	public void updatePositions(TransactionBean[] tbeans) throws RollbackException {
 		for (TransactionBean bean: tbeans) {
-			PositionBean positionBean = read(bean.getCustomerId());
+			PositionBean positionBean = read(bean.getVisitorId());
 			
 			if (positionBean == null) { 
 				positionBean = new PositionBean();
-				positionBean.setCustomerId(bean.getCustomerId());
+				positionBean.setVisitorId(bean.getVisitorId());
 				positionBean.setFundId(bean.getFundId());
 			}
 			

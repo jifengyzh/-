@@ -10,15 +10,15 @@ package databean;
  *
  */
 public class PositionBean {
-	private int customerId;
+	private int visitorId;
 	private int fundId;
 	private String fundName;
 	private String fundSymbol;
 	private long shares;
 	private long availableShares;
 	
-	public int getCustomerId() {
-		return customerId;
+	public int getVisitorId() {
+		return visitorId;
 	}
 	public int getFundId() {
 		return fundId;
@@ -36,8 +36,8 @@ public class PositionBean {
 		return availableShares;
 	}
 	
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setVisitorId(int customerId) {
+		this.visitorId = customerId;
 	}
 	public void setFundId(int fundId) {
 		this.fundId = fundId;
