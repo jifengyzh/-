@@ -16,14 +16,15 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 		super(EmployeeBean.class, tableName, cp);
 	}
 	
+	
 	public EmployeeBean[] getAllEmployee() throws RollbackException {
 		EmployeeBean[] EmployeeBeans = match();
 		return EmployeeBeans;
 	}
 	
-	public EmployeeBean[] readEmployee(String userName) throws RollbackException {
+	public EmployeeBean readEmployee(String userName) throws RollbackException {
 		EmployeeBean[] employee = match(MatchArg.equals("userName", userName));
-		return employee;
+		return employee[0];
 	}
 	
 	public void setPassword(String userName, String password) throws RollbackException {

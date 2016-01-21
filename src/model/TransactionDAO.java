@@ -47,7 +47,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 	 * @param date Execute
 	 * @throws RollbackException
 	 */
-	public void processBuyFundTransaction(HashMap<Integer, Integer> map, Date date) throws RollbackException {
+	public void processBuyFundTransaction(HashMap<Integer, Long> map, Date date) throws RollbackException {
 		//retrieve all buy orders information 
 		//get the buyFundTransactionBean
 		TransactionBean[] bTransactions = match(MatchArg.equals("transactionType", 1), MatchArg.equals("executeDate", null));
@@ -91,7 +91,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 	}
 	
 	public void processDepositCheckTransaction(Date date) throws RollbackException {
-		TransactionBean[] rcTransactions = match(MatchArg.equals("transactionType", 3), MatchArg.equals("executeDate", null));
+		TransactionBean[] rcTransactions = match(MatchArg.equals("transactionType", 4), MatchArg.equals("executeDate", null));
 		if (rcTransactions == null || rcTransactions.length == 0) {
 			return;
 		}
@@ -102,17 +102,10 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 		}
 	}
 	
-	public Date lastTradingDate(int customerId) {
-		//return the last trading date of the assigned customer
-		Date date = null;
-		return date;
-		//please return null if there's not any trading
+	public TransactionBean[] getLastDayTransaction(Date date) throws RollbackException {
+		TransactionBean[] beans = match(MatchArg.equals("executeDate", date));
+		return beans;
 	}
-	
-	//public TransactionBean[] getLastDayTransaction(int customerId, Date date) throws RollbackException {
-		//TransactionBean[] beans = match(MatchArg.equals("customerId", customerId), MatchArg.equals("executeDate", date));
-	
-	//}
 	
 }
 

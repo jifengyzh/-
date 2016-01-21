@@ -41,13 +41,10 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 		return visitorBean;
 	}
-<<<<<<< HEAD
-	*/
+
 	public void setPassword(int id, String password) throws RollbackException {
-=======
 	
 	public void setPassword(long l, String password) throws RollbackException {
->>>>>>> branch 'master' of https://github.com/honiess/7ksaT.git
         try {
         	Transaction.begin();
         	VisitorBean visitor = read(l);

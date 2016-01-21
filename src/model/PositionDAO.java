@@ -34,7 +34,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	 * @throws RollbackException
 	 */
 	public long getAvailableShares(TransactionBean sellFundTransaction) throws RollbackException {
-		PositionBean[] positionBeans = match(MatchArg.equals("customerId", sellFundTransaction.getCustomerId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
+		PositionBean[] positionBeans = match(MatchArg.equals("visitorId", sellFundTransaction.getCustomerId()), MatchArg.equals("fundId", sellFundTransaction.getFundId()));
 		if (positionBeans == null) {
 			return 0;
 		}
@@ -78,7 +78,9 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 			if (bean.getTransactionType() == 2) {
 				positionBean.setShares(positionBean.getShares() - bean.getShares());
 				update(positionBean);
-			}		
+			}	
+			
+			
 		}
 	}
 	
