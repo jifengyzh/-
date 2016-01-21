@@ -58,6 +58,7 @@ public class VisitorBuyAction extends Action{
 			String fundName = request.getParameter("getFundName");
 			if (fundName != null) request.setAttribute("getFundName", fundName);
 			
+			//get all the funds, then set a list of CustomerFundBean, then store the list into customerFundBeans
 			FundBean[] fundBeans = fundDAO.getAllFunds();
 			CustomerFundBean[] customerFundBeans = new CustomerFundBean[fundBeans.length];
 			for (int i = 0; i < fundBeans.length; i++) {
@@ -97,13 +98,14 @@ public class VisitorBuyAction extends Action{
 			}			
 					
 			//if amount is negative or zero
-			long amount = (long)((Double.valueOf(form.getAmount()))*100);
+			long shares = (long)((Double.valueOf(form.getAmount()))*100);
+			
 			if (amount <= 0 ) {
 				errors.add("Amount you input is not illegal");
 				return Constants.visitorBuyJsp;
 			}
 			
-			//Store the information into transactionBean.
+			//create new transactionBean type = 1 buy action
 			TransactionBean transactionBean = new TransactionBean();
 			transactionBean.setCustomerId(visitorId);
 			transactionBean.setAmount(amount);

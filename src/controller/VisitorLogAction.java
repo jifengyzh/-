@@ -86,9 +86,10 @@ public class VisitorLogAction extends Action{
 	            errors.add("Incorrect/Invalid Password");
 	            return Constants.mainPage;
 	        }
-	        
-	        int visitorId = (int) visitor.getVisitorId();
+	        //Set a visitor's id firstname lastname in session for JSP
+	        int visitorId = (Integer) visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
+	        //Get the specific customer lastTradeDate.
 	        Date lastTradeDate = transactionDAO.lastTradingDate(visitorId);
 	        visitor.setLastTradeDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());

@@ -19,6 +19,7 @@ import model.PositionDAO;
 import model.TransactionDAO;
 import databean.FundBean;
 import databean.PositionBean;
+import databean.TransactionBean;
 
 public class VisitorSellFundAction extends Action{
 	private FormBeanFactory<VisitorSellFundForm> formBeanFactory 
@@ -48,11 +49,10 @@ public class VisitorSellFundAction extends Action{
 		HttpSession session = request.getSession(false);
 		
 		try {
-			String fundName = request.getParameter("FundName");
-			if (fundName != null) request.setAttribute("FundName", fundName);
 			
-			int customerId = (Integer)session.getAttribute("visitorId");
-			PositionBean[] positionList = positionDAO.getPositionList(customerId);
+			int visitorId = (Integer)session.getAttribute("visitorId");
+			
+			PositionBean[] positionList = positionDAO.getPositionList(visitorId);
 			request.setAttribute("positionList", positionList);
 			
 			VisitorSellFundForm form = formBeanFactory.create(request);
@@ -68,8 +68,8 @@ public class VisitorSellFundAction extends Action{
 				return Constants.visitorSellJsp;
 			}
 			
-			String fundNameInput = form.getFundName();
-			FundBean fundBean = fundDAO.read(fundNameInput);
+			String fundName = form.getFundName();
+			FundBean fundBean = fundDAO.read(fundName);
 			
 			if (fundBean == null) {
 				errors.add("No such fund in the inventory!");
@@ -78,10 +78,19 @@ public class VisitorSellFundAction extends Action{
 			
 			long shares = (Long)form.getSharesAsDouble();
 			
-			transactionDAO.sellFund(customerId, fundBean.getFundId(), shares);
+			//create new transactionBean type = 2 sell action
+			TransactionBean transactionBean = new TransactionBean();
+			transactionBean.setCustomerId(visitorId);
+			transactionBean.setFundId(fundBean.getFundId());
+			transactionBean.setAmount(shares);
+			int transactionType = 2;
+			transactionBean.setTransactionType(transactionType);
+			
+			transactionDAO.sellFund(transactionBean);
 			
 			request.setAttribute("alert", "Your request has been pending to be processed");
-			return "visitor_sell_confirmation.jsp";
+			
+			return Constants.visitorBuyConfirmJsp;
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

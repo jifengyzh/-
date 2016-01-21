@@ -12,6 +12,7 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
+import databean.TransactionBean;
 import databean.VisitorBean;
 import formbean.EmployeeDepositCheckForm;
 import model.Model;
@@ -67,7 +68,18 @@ public class VisitorDepositCheckAction extends Action {
 			
 			long amount = Long.valueOf(form.getAmount());
 			
-			transactionDAO.depositCheck(visitorId, amount);
+			if (amount <= 0 ) {
+				errors.add("Amount you input is not illegal");
+				return Constants.visitorDepositeJsp;
+			}
+			
+			//create new transactionBean type = 4 deposite check
+			TransactionBean transactionBean = new TransactionBean();
+			transactionBean.setCustomerId(visitorId);
+			transactionBean.setAmount(amount);
+			int transactionType = 4;
+			transactionBean.setTransactionType(transactionType);
+			transactionDAO.depositCheck(transactionBean);
 			
 			request.setAttribute("alert", "Your deposit request for $ " + 
 										formatter.format(amount) + " has been waited for transaction");

@@ -1,11 +1,14 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import FilterAndConstant.Constants;
+import databean.CustomerFundBean;
+import databean.FundBean;
 import databean.FundInfoBean;
 import databean.FundPriceHistoryBean;
 import model.FundDAO;
@@ -40,14 +43,18 @@ public class VisitorResearchFundAction extends Action {
 			fundId = Integer.parseInt(request.getParameter("fundId"));
 		}
 		
-		FundInfoBean[] fundInfoBeanList = fundPriceHistoryDAO.getAllFundsInfo();
-		request.setAttribute("fundInfoBeanList", fundInfoBeanList);
-		
-		if (fundId != null) {
-			FundPriceHistoryBean[] fundPriceList = fundPriceHistoryDAO.getFundPriceHistory(fundId);
-			request.setAttribute("fundPriceList", fundPriceList);
-			request.setAttribute("currentFundName", request.getParameter("fundName"));
+		//get all the funds, then set a list of CustomerFundBean, then store the list into customerFundBeans
+		FundBean[] fundBeans = fundDAO.getAllFunds();
+		CustomerFundBean[] customerFundBeans = new CustomerFundBean[fundBeans.length];
+		for (int i = 0; i < fundBeans.length; i++) {
+			customerFundBeans[i].setName(fundBeans[i].getName());
+			customerFundBeans[i].setSymbol(fundBeans[i].getSymbol());
+			
+			Long fundPrice = fundPriceHistoryDAO.getFundPrice(fundBeans[i].getFundId(), (Date)session.getAttribute("lastDate"));
+			customerFundBeans[i].setPrice(String.valueOf(fundPrice));
+				
 		}
+		request.setAttribute("customerFundBeans", customerFundBeans);
 		
 		
 		return Constants.visitorResearchFundJsp;

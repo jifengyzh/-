@@ -56,7 +56,7 @@ public class VisitorPwdChangeAction extends Action{
 			}
 			
 			synchronized(this) {
-				VisitorBean visitor = visitorDAO.read((Integer) session.getAttribute("customerId"));
+				VisitorBean visitor = visitorDAO.read((Integer) session.getAttribute("visitorId"));
 				
 				if(!visitor.checkPassword(form.getOldPassword())){
 					errors.add("Incorrect Password!! Please re-enter your current password.");
