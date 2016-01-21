@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -20,7 +21,7 @@ public class VisitorPwdChangeAction extends Action{
 
 
 	private FormBeanFactory<VisitorChangePwdForm> formBeanFactory =
-			FormBeanFactory<FormBean>.getInstance(ChangePasswordForm.class);
+			FormBeanFactory.getInstance(VisitorChangePwdForm.class);
 	
 	private VisitorDAO visitorDAO;
 
@@ -69,10 +70,10 @@ public class VisitorPwdChangeAction extends Action{
 			request.setAttribute("alert", "Password changed!!!!");
 			return Constants.visitorChangePwdConfirmJsp;
 			
-		} catch (MyDAOException e) {
+		} catch (FormBeanException e) {
 			errors.add(e.toString());
 			return "error.jsp";
-		} catch (FormBeanException e) {
+		} catch (RollbackException e) {
 			errors.add(e.toString());
 			return "error.jsp";
 		}

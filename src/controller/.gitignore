@@ -1,3 +1,7 @@
 /EmployeeViewCustomerAccountAction.java
 /VisitorLogAction.java
 /VisitorPwdChangeAction.java
+/VisitorBuyAction.java
+/VisitorResearchFundAction.java
+/VisitorSellFundAction.java
+/VisitorTransactionReviewAction.java
