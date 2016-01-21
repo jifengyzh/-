@@ -13,14 +13,14 @@ import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
 import databean.VisitorBean;
-import formbean.DepositCheckForm;
+import formbean.EmployeeDepositCheckForm;
 import model.Model;
 import model.MyDAOException;
 import model.TransactionDAO;
 import model.VisitorDAO;
 
 public class VisitorDepositCheckAction extends Action {
-	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(DepositCheckForm.class);
+	private FormBeanFactory<EmployeeDepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(EmployeeDepositCheckForm.class);
 
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
@@ -52,7 +52,7 @@ public class VisitorDepositCheckAction extends Action {
 			double balance = visitor.getCash();
 			request.setAttribute("balance", formatter.format(balance));
 			
-			DepositCheckForm form = formBeanFactory.create(request);
+			EmployeeDepositCheckForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
