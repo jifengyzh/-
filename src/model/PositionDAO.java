@@ -55,8 +55,12 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 		update(positionBeans[0]);
 	}
 	
-	
-	public void updatePostions(TransactionBean[] tbeans) throws RollbackException {
+	/**
+	 * update position after execute day
+	 * @param tbeans
+	 * @throws RollbackException
+	 */
+	public void updatePositions(TransactionBean[] tbeans) throws RollbackException {
 		for (TransactionBean bean: tbeans) {
 			PositionBean positionBean = read(bean.getCustomerId());
 			

@@ -107,5 +107,10 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 		return beans;
 	}
 	
+	public TransactionBean[] getTransactionHistory(int visitorId) throws RollbackException {
+		TransactionBean[] beans = match(MatchArg.equals("visitorId", visitorId));
+		return beans;
+	}
+	
 }
 
