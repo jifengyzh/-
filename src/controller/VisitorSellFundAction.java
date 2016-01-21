@@ -68,7 +68,7 @@ public class VisitorSellFundAction extends Action{
 				return Constants.visitorSellJsp;
 			}
 			
-			String fundName = form.getFundName();
+			String fundName = form.getName();
 			FundBean fundBean = fundDAO.read(fundName);
 			
 			if (fundBean == null) {
@@ -76,7 +76,7 @@ public class VisitorSellFundAction extends Action{
 				return Constants.visitorSellJsp;
 			}
 			
-			long shares = (Long)form.getSharesAsDouble();
+			long shares = (Long)form.getShares();
 			
 			//create new transactionBean type = 2 sell action
 			TransactionBean transactionBean = new TransactionBean();
