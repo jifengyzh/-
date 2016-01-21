@@ -39,6 +39,8 @@ public class VisitorBean {
 	public Date getLastTradeDate() {return lastTradeDate;}
 	public long      getAvailableCash()   { return availableCash;   }
 	public int  getSalt()           { return salt;           }
+	public String getHashedPassword() { return hashedPassword; }
+	
 	
 	public int     hashCode()          { return userName.hashCode(); }	
 	
@@ -56,7 +58,7 @@ public class VisitorBean {
 	public void setLastTradeDate(Date d) {  lastTradeDate = d;}
 	public void   setAvailableCash(long l)    { availableCash = l;    }
 	public void setSalt(int x) 				{salt = x;}
-
+	public void setHashedPassword(String s) {hashedPassword = s;}
  	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
 	}
