@@ -1,6 +1,7 @@
 package formbean;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybeans.form.FormBean;
@@ -14,7 +15,7 @@ public class EmployeeTransitionDayForm extends FormBean {
 		return null;
 	}
 
-	public Map<Integer, Long> getNewFundPrice() {
+	public HashMap<Integer, Long> getNewFundPrice() {
 		// TODO Auto-generated method stub
 		return null;
 	}
