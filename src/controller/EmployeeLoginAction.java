@@ -88,16 +88,17 @@ public class EmployeeLoginAction extends Action {
 			Date lastdate = lastDateDAO.getLastDate();
 			if (lastdate == null) session.setAttribute("lastdate", null);
 			else session.setAttribute("lastdate", lastdate);
+			session.setAttribute("success", "success");
 
 			// If redirectTo is null, redirect to the "todolist" action
 			return Constants.employeeMainPanelJsp;
 
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.mainPage;
 		} catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return Constants.mainPage;
 		}
 	}
 }
