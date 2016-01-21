@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -24,11 +25,11 @@ public class EmployeeViewTransactionHistoryAction extends Action {
 	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory.getInstance(CustomerUserNameForm.class);
 	
 	private TransactionHistoryDAO transactionHistoryDAO;
-	private VisitorDAO customerDAO;
+	private VisitorDAO visitorDAO;
 	
 	public EmployeeViewTransactionHistoryAction(Model model) {
 		transactionHistoryDAO = model.getTransactionHistoryDAO();
-		customerDAO = model.getVisitorDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 	
 	public String getName() { return Constants.employeeViewCustomerTransactionHistoryAction; }
@@ -73,14 +74,14 @@ public class EmployeeViewTransactionHistoryAction extends Action {
 			}
 			
 			request.setAttribute("transactionHistory", historyList);
-			return "employee-viewtransaction.jsp";
+			return Constants.employeeViewCustomerAccountJsp;
 			
-		} catch (MyDAOException e) {
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "employee-viewtransaction.jsp";
+			return Constants.employeeViewCustomerAccountJsp;
 		}
 		
 	}
