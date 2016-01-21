@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
@@ -18,14 +20,14 @@ import model.TransactionDAO;
 import model.VisitorDAO;
 
 public class VisitorDepositCheckAction extends Action {
-	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(RequestCheckFormBean.class);
+	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(DepositCheckForm.class);
 
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	
 	public VisitorDepositCheckAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
-		visitorDAO = model.getvisitorDAO();
+		visitorDAO = model.getVisitorDAO();
 	}
 	@Override
 	public String getName() {
@@ -50,7 +52,7 @@ public class VisitorDepositCheckAction extends Action {
 			double balance = visitor.getCash();
 			request.setAttribute("balance", formatter.format(balance));
 			
-			DepositCheckForm form = formBeanFactory.create(reqeust);
+			DepositCheckForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
@@ -63,17 +65,22 @@ public class VisitorDepositCheckAction extends Action {
 				return Constants.visitorDepositeJsp;
 			}
 			
-			double amount = form.getAmountAsDouble();
-			transactionDAO.requestDeposit(visitorId, amount);
+			long amount = Long.valueOf(form.getAmount());
+			
+			transactionDAO.depositCheck(visitorId, amount);
 			
 			request.setAttribute("alert", "Your deposit request for $ " + 
 										formatter.format(amount) + " has been waited for transaction");
 			
 			return Constants.visitorDepositConfirmJsp;
 			
-		} catch (MyDAOException e) {
+		} catch (RollbackException e) {
+			errors.add(e.getMessage());
+			return Constants.errorJsp;
+		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return Constants.errorJsp;
 		}
+		
 	}
 }

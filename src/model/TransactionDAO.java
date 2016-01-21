@@ -76,7 +76,7 @@ public class TransactionDAO extends BaseDAO{
 		
 	}
 	
-	public Date lastTradingDate(int customerId) {
+	public Date getlastTradingDate(int customerId) {
 		//return the last trading date of the assigned customer
 		//please return null if there's not any trading
 	}
@@ -102,4 +102,5 @@ public class TransactionDAO extends BaseDAO{
 			throw new MyDAOException(e);
 		}
 	}
+
 }

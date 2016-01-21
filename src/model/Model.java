@@ -6,6 +6,7 @@ public class Model {
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private TransactionDAO transactionDAO;
+	private PositionDAO positionDAO;
 	
 	
 	public VisitorDAO getVisitorDAO() { return visitorDAO;}
@@ -13,4 +14,6 @@ public class Model {
 	public FundDAO getFundDAO() {return fundDAO;}
 	public FundPriceHistoryDAO getFundPriceHistoryDAO() {return fundPriceHistoryDAO;}
 	public TransactionDAO getTransactionDAO() {return transactionDAO;}
+	public PositionDAO getPositionDAO() {return positionDAO;}
+	
 }

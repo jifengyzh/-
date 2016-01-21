@@ -81,7 +81,7 @@ public class VisitorBuyAction extends Action{
 				return Constants.visitorBuyJsp;
 			}
 			
-			double amount = Integer.valueOf(form.getAmount());
+			double amount = Double.valueOf(form.getAmount());
 			
 			
 			transactionDAO.buyFund(visitorId, fund.getFundId(), amount);
