@@ -9,8 +9,8 @@ public class PositionBean {
 	private int fundId;
 	private String fundName;
 	private String fundSymbol;
-	private double shares;
-	private double availableShares;
+	private long shares;
+	private long availableShares;
 	
 	public int getCustomerId() {
 		return customerId;
@@ -24,10 +24,10 @@ public class PositionBean {
 	public String getFundSymbol() {
 		return fundSymbol;
 	}
-	public double getShares() {
+	public long getShares() {
 		return shares;
 	}
-	public double getAvailableShares() {
+	public long getAvailableShares() {
 		return availableShares;
 	}
 	
@@ -43,10 +43,10 @@ public class PositionBean {
 	public void setFundSymbol(String fundSymbol) {
 		this.fundSymbol = fundSymbol;
 	}
-	public void setShares(double shares) {
+	public void setShares(long shares) {
 		this.shares = shares;
 	}
-	public void setAvailableShares(double availableShares) {
+	public void setAvailableShares(long availableShares) {
 		this.availableShares = availableShares;
 	}
 	

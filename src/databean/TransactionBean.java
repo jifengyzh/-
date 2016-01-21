@@ -3,20 +3,17 @@ package databean;
 import java.util.Date;
 
 import org.genericdao.PrimaryKey;
-import org.genericdao.ForeignKey;
 
+@PrimaryKey("transactionId")
 public class TransactionBean {
-	@PrimaryKey("visitorId")
-	@Fori
 	private int transactionId;
 	private int customerId;
 	private int fundId;
 	private Date executeDate;
-	private double shares;
-	private double sharePrice;
-	private String transactionType;
-	private String transactionStatus;
-	private double amount;
+	private long shares;
+	private long sharePrice;
+	private int transactionType;
+	private long amount;
 	
 	public int getTransactionId() {
 		return transactionId;
@@ -30,19 +27,16 @@ public class TransactionBean {
 	public Date getExecuteDate() {
 		return executeDate;
 	}
-	public double getShares() {
+	public long getShares() {
 		return shares;
 	}
-	public double getSharePrice() {
+	public long getSharePrice() {
 		return sharePrice;
 	}
-	public String getTransactionType() {
+	public int getTransactionType() {
 		return transactionType;
 	}
-	public String getTransactionStatus() {
-		return transactionStatus;
-	}
-	public double getAmount() {
+	public long getAmount() {
 		return amount;
 	}
 	
@@ -58,19 +52,16 @@ public class TransactionBean {
 	public void setExecuteDate(Date executeDate) {
 		this.executeDate = executeDate;
 	}
-	public void setShares(double shares) {
+	public void setShares(long shares) {
 		this.shares = shares;
 	}
-	public void setSharePrice(double sharePrice) {
+	public void setSharePrice(long sharePrice) {
 		this.sharePrice = sharePrice;
 	}
-	public void setTransactionType(String transactionType) {
+	public void setTransactionType(int transactionType) {
 		this.transactionType = transactionType;
 	}
-	public void setTransactionStatus(String transactionStatus) {
-		this.transactionStatus = transactionStatus;
-	}
-	public void setAmount(double amount) {
+	public void setAmount(long amount) {
 		this.amount = amount;
 	}
 }
