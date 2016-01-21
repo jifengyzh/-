@@ -1,5 +1,10 @@
 package databean;
 
+/**
+ * 
+ * @author MikeYang
+ *
+ */
 public class CustomerFundBean {
 	public String name;
 	public String symbol;

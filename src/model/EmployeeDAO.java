@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;

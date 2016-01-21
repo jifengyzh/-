@@ -4,6 +4,11 @@
 
 package databean;
 
+/**
+ * 
+ * @author MikeYang
+ *
+ */
 public class PositionBean {
 	private int customerId;
 	private int fundId;

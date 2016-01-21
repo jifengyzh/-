@@ -1,8 +1,3 @@
-/**
- * @author Team Snipers (Team 1)
- * Jan 27, 2013
- */
-
 package databean;
 
 import java.util.Date;
