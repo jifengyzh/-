@@ -66,10 +66,10 @@ public class EmployeeCreateEmployeeAccAction extends Action {
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return Constants.employeeCreateEmployeeAccJsp;
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return Constants.employeeCreateEmployeeAccJsp;
         }
 	}
 
