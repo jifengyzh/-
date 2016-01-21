@@ -40,23 +40,16 @@ public class VisitorResearchFundAction extends Action {
 			fundId = Integer.parseInt(request.getParameter("fundId"));
 		}
 		
-		try {
-			FundInfoBean[] fundInfoBeanList = fundPriceHistoryDAO.getAllFundsInfo();
-			request.setAttribute("fundInfoBeanList", fundInfoBeanList);
-			
-			if (fundId != null) {
-				FundPriceHistoryBean[] fundPriceList = fundPriceHistoryDAO.getFundPriceHistory(fundId);
-				request.setAttribute("fundPriceList", fundPriceList);
-				request.setAttribute("currentFundName", request.getParameter("fundName"));
-			}
-			
-			
-			return Constants.visitorResearchFundJsp;
-		} catch(MyDAOException e) {
-			errors.add(e.getMessage());
-			return Constants.errorJsp;
-					
+		FundInfoBean[] fundInfoBeanList = fundPriceHistoryDAO.getAllFundsInfo();
+		request.setAttribute("fundInfoBeanList", fundInfoBeanList);
+		
+		if (fundId != null) {
+			FundPriceHistoryBean[] fundPriceList = fundPriceHistoryDAO.getFundPriceHistory(fundId);
+			request.setAttribute("fundPriceList", fundPriceList);
+			request.setAttribute("currentFundName", request.getParameter("fundName"));
 		}
+		
+		
+		return Constants.visitorResearchFundJsp;
 	}
-
 }

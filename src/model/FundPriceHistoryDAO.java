@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 import databean.FundInfoBean;
+import databean.FundPriceHistoryBean;
 
 public class FundPriceHistoryDAO {
 
@@ -16,9 +17,18 @@ public class FundPriceHistoryDAO {
 		return fund_id;
 		
 	}
-	
-	public FundInfoBean[] getAllFundsGeneralInfo() {
+
+
+	public FundInfoBean[] getAllFundsInfo() {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
+
+
+	public FundPriceHistoryBean[] getFundPriceHistory(Integer fundId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

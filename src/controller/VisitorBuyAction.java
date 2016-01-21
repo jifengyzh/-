@@ -55,7 +55,7 @@ public class VisitorBuyAction extends Action{
 			String fundName = request.getParameter("getFundName");
 			if (fundName != null) request.setAttribute("getFundName", fundName);
 			
-			FundInfoBean[] fundGeneralList = fundPriceHistoryDAO.getAllFundsGeneralInfo();
+			FundInfoBean[] fundGeneralList = fundPriceHistoryDAO.getAllFundsInfo();
 			request.setAttribute("fundGeneralList", fundGeneralList);
 			
 			int visitorId = (Integer)session.getAttribute("customerId");

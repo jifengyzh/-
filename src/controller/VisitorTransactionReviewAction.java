@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
+
 import FilterAndConstant.Constants;
 import databean.TransactionHistoryBean;
 import databean.VisitorBean;
@@ -43,7 +45,7 @@ public class VisitorTransactionReviewAction extends Action {
 		
 		request.setAttribute("transactionHistory", historyList);
 		return Constants.visitorViewTransHistoryJsp;
-		} catch (MyDAOException e) {
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return Constants.errorJsp;
 		}

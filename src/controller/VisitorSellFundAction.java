@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -20,7 +21,8 @@ import databean.FundBean;
 import databean.PositionBean;
 
 public class VisitorSellFundAction extends Action{
-	private FormBeanFactory<VisitorSellFundForm> formBeanFactory = FormBeanFactory<FormBean>.getInstance(VisitorSellFundForm.class)
+	private FormBeanFactory<VisitorSellFundForm> formBeanFactory 
+		= FormBeanFactory.getInstance(VisitorSellFundForm.class);
 	
 	private FundDAO fundDAO;
 	private PositionDAO positionDAO;
@@ -50,7 +52,7 @@ public class VisitorSellFundAction extends Action{
 			if (fundName != null) request.setAttribute("FundName", fundName);
 			
 			int customerId = (Integer)session.getAttribute("visitorId");
-			PositionBean[] positionList = positionDAO.getCustomerPortfolio(customerId);
+			PositionBean[] positionList = positionDAO.getPositionList(customerId);
 			request.setAttribute("positionList", positionList);
 			
 			VisitorSellFundForm form = formBeanFactory.create(request);
@@ -74,27 +76,20 @@ public class VisitorSellFundAction extends Action{
 				return Constants.visitorSellJsp;
 			}
 			
-			double shares = form.getSharesAsDouble();
+			long shares = (Long)form.getSharesAsDouble();
 			
 			transactionDAO.sellFund(customerId, fundBean.getFundId(), shares);
 			
 			request.setAttribute("alert", "Your request has been pending to be processed");
 			return "visitor_sell_confirmation.jsp";
 			
-		} catch (MyDAOException e) {
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return Constants.visitorSellJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return Constants.visitorSellJsp;
 		}
-				
-				
-
-		
-		
-		
-		return null;
 	}
 
 }
