@@ -9,7 +9,7 @@ import java.util.Random;
 
 @PrimaryKey("visitorId")
 public class VisitorBean {
-	private long      visitorId;
+	private int      visitorId;
 	private String    userName;
 //	private String    hashedPassword = "*";
 //	private int       salt           = 0;
@@ -28,7 +28,7 @@ public class VisitorBean {
 
 	
 	
-	public long      getVisitorId()      { return visitorId;      }
+	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
 	public String    getPassword()        { return password;        }
 	public String    getFirstName()       { return firstName;       }
@@ -44,7 +44,7 @@ public class VisitorBean {
 	
 	public int     hashCode()          { return userName.hashCode(); }	
 	
-	public void   setVisitorId(long l)       { visitorId = l;       }
+	public void   setVisitorId(int l)       { visitorId = l;       }
 	public void   setUserName(String s)       { userName = s;         }
 	public void   setPassword(String s)       { password = s;         }
 	public void   setFirstName(String s)      { firstName = s;        }
