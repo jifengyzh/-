@@ -10,7 +10,7 @@ public class Model {
 	private LastDateDAO lastDateDAO;
 	
 	public VisitorDAO getVisitorDAO() { return visitorDAO;}
-	public EmployeeDAO getAdminDAO() {return adminDAO;}
+	public EmployeeDAO getEmployeeDAO() {return adminDAO;}
 	public FundDAO getFundDAO() {return fundDAO;}
 	public FundPriceHistoryDAO getFundPriceHistoryDAO() {return fundPriceHistoryDAO;}
 	public TransactionDAO getTransactionDAO() {return transactionDAO;}
