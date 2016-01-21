@@ -61,7 +61,10 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 	}
 	
-	public long getAvailableCah(in)
+	public long getAvailableCash(int visitorId) throws RollbackException {
+		VisitorBean[] vBeans = match(MatchArg.equals("visitorId", visitorId));
+		return vBeans[0].getAvailableCash();
+	}
 	
 	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
 		// Calls GenericDAO's match() method.

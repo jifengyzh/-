@@ -11,8 +11,6 @@ import java.util.Random;
 public class VisitorBean {
 	private int      visitorId;
 	private String    userName;
-//	private String    hashedPassword = "*";
-//	private int       salt           = 0;
 	private String    password;
 	private String    firstName;
 	private String    lastName;
@@ -23,10 +21,7 @@ public class VisitorBean {
 	private String    zip;
 	private long      cash;
 	private Date lastTradeDate;
-//	private long      availableCash;
-	
-
-	
+	private long      availableCash;
 	
 	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
@@ -40,7 +35,7 @@ public class VisitorBean {
 	public String    getZip()             { return zip;             }
 	public long      getCash()            { return cash;            }
 	public Date getLastTradeDate() {return lastTradeDate;}
-//	public long      getAvailableCash()   { return availableCash;   }
+	public long      getAvailableCash()   { return availableCash;   }
 	
 	public int     hashCode()          { return userName.hashCode(); }	
 	
