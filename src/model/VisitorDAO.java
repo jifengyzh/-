@@ -64,7 +64,7 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
-		
+	public boolean hasEnoughMoney(int visitorId, )
 	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
 		// Calls GenericDAO's match() method.
         	try {
