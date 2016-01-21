@@ -14,6 +14,7 @@ import formbean.VisitorChangePwdForm;
 import model.VisitorDAO;
 import databean.VisitorBean;
 import model.Model;
+import model.MyDAOException;
 
 public class VisitorPwdChangeAction extends Action{
 
@@ -61,7 +62,7 @@ public class VisitorPwdChangeAction extends Action{
 					return Constants.visitorChangePwdJsp;
 				}
 				
-				visitorDAO.changePassword(visitor.getCustomerId(), form.getNewPassword());
+				visitorDAO.setPassword(visitor.getVisitorId(), form.getNewPassword());
 				
 				
 			}

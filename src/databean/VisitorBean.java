@@ -4,10 +4,10 @@ import org.genericdao.PrimaryKey;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Random;
 
 @PrimaryKey("visitorId")
-@ForeignKey("")
 public class VisitorBean {
 	private long      visitorId;
 	private String    userName;
@@ -22,9 +22,12 @@ public class VisitorBean {
 	private String    state;
 	private String    zip;
 	private long      cash;
+	private Date lastTradeDate;
 //	private long      availableCash;
 	
 
+	
+	
 	public long      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
 	public String    getPassword()        { return password;        }
@@ -36,6 +39,7 @@ public class VisitorBean {
 	public String    getState()           { return state;           }
 	public String    getZip()             { return zip;             }
 	public long      getCash()            { return cash;            }
+	public Date getLastTradeDate() {return lastTradeDate;}
 //	public long      getAvailableCash()   { return availableCash;   }
 	
 	public int     hashCode()          { return userName.hashCode(); }	
@@ -51,14 +55,13 @@ public class VisitorBean {
 	public void   setState(String s)          { state = s;            }
 	public void   setZip(String s)            { zip = s;              }
 	public void   setCash(long l)             { cash = l;             }
-//	public void   setAvailableCash(long l)    { availableCash = l;    }
-/*	
- * 
- * 	public boolean checkPassword(String password) {
+	public void setLastTradeDate(Date d) {  lastTradeDate = d;}
+	public void   setAvailableCash(long l)    { availableCash = l;    }
+
+ 	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
 	}
 	
- * 
 	private String hash(String clearPassword) {
 		if (salt == 0) return null;
 		MessageDigest md = null;
@@ -87,5 +90,4 @@ public class VisitorBean {
 		Random random = new Random();
 		return random.nextInt(8192)+1;  // salt cannot be zero
 	}
-*/
 }

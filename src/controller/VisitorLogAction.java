@@ -7,27 +7,31 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import Model.VisitorDAO;
+import model.VisitorDAO;
 import databean.VisitorBean;
-import Model.Model;
-import Model.TransactionDAO;
-import Model.VisitorDAO;
+import formbean.LoginForm;
+import model.Model;
+import model.MyDAOException;
+import model.PositionDAO;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 
 public class VisitorLogAction extends Action{
 	private FormBeanFactory<LoginForm> formBeanFactory 
-		= FormBeanFactory<FormBean>.getInstance(LoginForm.class);
+		= FormBeanFactory.getInstance(LoginForm.class);
 	
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	private PositionDAO positionDAO;
 	
 	public VisitorLogAction(Model model) {
-		visitorDAO = model.getCustormerDAO();
+		visitorDAO = model.getVisitorDAO();
 		transactionDAO = model.getTransactionDAO();
 		positionDAO = model.getPositionDAO();
 	}
@@ -54,9 +58,8 @@ public class VisitorLogAction extends Action{
         }
 		
 		try {
-			List<String> errors = new ArrayList<String>();
-	        request.setAttribute("errors",errors);
-	        
+			LoginForm form = formBeanFactory.create(request);
+			
 	        if (!form.isPresent()) {
 	            return Constants.mainPage;
 	        }
@@ -78,9 +81,9 @@ public class VisitorLogAction extends Action{
 	            return Constants.mainPage;
 	        }
 	        
-	        int visitorId = visitor.getVisitorId();
+	        int visitorId = (int) visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
-	        Date lastTradeDate = transactionDAO.getCustomerLastTradeDate(visitorId);
+	        Date lastTradeDate = transactionDAO.getlastTradingDate(visitorId);
 	        visitor.setLastTradeDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());
@@ -88,10 +91,10 @@ public class VisitorLogAction extends Action{
 			return Constants.visitorViewAccountJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "errors.jsp";
-		} catch (MyDAOException e) {
+			return Constants.errorJsp;
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "errors.jsp";
+			return Constants.errorJsp;
 		}
 	}
 

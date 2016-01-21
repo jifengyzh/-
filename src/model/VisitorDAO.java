@@ -20,33 +20,64 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		return VisitorBeans;
 	}
 
-	public VisitorBean[] readVisitor(String userName) throws RollbackException{
-		VisitorBean[] customer=match(MatchArg.equals("userName", userName));
-		return customer;
+	public VisitorBean readVisitor(String userName) throws RollbackException{
+		VisitorBean[] a = match(MatchArg.equals("userName", userName));
+		VisitorBean visitorBean;
+		if (a.length == 0) {
+			visitorBean = null;
+		} else {
+			visitorBean = a[0];
+		}
+		return visitorBean;
 	}
 
-
-	public VisitorBean[] readVisitor(int visitorId) throws RollbackException {
-		VisitorBean[] customer = match(MatchArg.equals("visitorId",visitorId));
-		return customer;
+	public VisitorBean readVisitor(int visitorId) throws RollbackException {
+		VisitorBean[] a = match(MatchArg.equals("visitorId",visitorId));
+		VisitorBean visitorBean;
+		if (a.length == 0) {
+			visitorBean = null;
+		} else {
+			visitorBean = a[0];
+		}
+		return visitorBean;
 	}
 	
 	public void setPassword(int id, String password) throws RollbackException {
         try {
         	Transaction.begin();
-        	VisitorBean Visitor = read(id);
+        	VisitorBean visitor = read(id);
 			
-			if (Visitor == null) {
+			if (visitor == null) {
 				throw new RollbackException("User "+ id +" does not exists");
 			}
 			
-			Visitor.setPassword(password);
+			visitor.setPassword(password);
 			
-			update(Visitor);
+			update(visitor);
 			Transaction.commit();
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
-
+		
+	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
+		// Calls GenericDAO's match() method.
+        	try {
+			Transaction.begin();
+			
+			VisitorBean[] a = match(MatchArg.equals("visitorId", visitorId));
+			VisitorBean visitorBean;
+			if (a.length == 0) {
+				visitorBean = null;
+			} else {
+				visitorBean = a[0];
+				visitorBean.setCash(visitorBean.getCash() + cash);
+				update(visitorBean);
+			}
+    			Transaction.commit();
+    			return visitorBean;
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
+	}
 }

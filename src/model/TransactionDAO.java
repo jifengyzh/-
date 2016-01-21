@@ -40,7 +40,7 @@ public class TransactionDAO extends BaseDAO{
 		return true;
 	}
 	
-	public void buyFund(int customerId, int fundId, long amount) {
+	public void buyFund(int customerId, int fundId, double amount) {
 		// some data will be stored in the transaction table
 		
 		// the balance of customer will be updated
@@ -76,7 +76,7 @@ public class TransactionDAO extends BaseDAO{
 		
 	}
 	
-	public Date lastTradingDate(int customerId) {
+	public Date getlastTradingDate(int customerId) {
 		//return the last trading date of the assigned customer
 		//please return null if there's not any trading
 	}
@@ -102,4 +102,5 @@ public class TransactionDAO extends BaseDAO{
 			throw new MyDAOException(e);
 		}
 	}
+
 }

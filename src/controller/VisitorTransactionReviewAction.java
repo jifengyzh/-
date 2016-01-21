@@ -10,6 +10,7 @@ import FilterAndConstant.Constants;
 import databean.TransactionHistoryBean;
 import databean.VisitorBean;
 import model.Model;
+import model.MyDAOException;
 import model.TransactionHistoryDAO;
 import model.VisitorDAO;
 
