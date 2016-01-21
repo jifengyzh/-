@@ -13,18 +13,16 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import formbean.VisitorBuyFundForm;
-import model.VisitorDAO;
 import databean.CustomerFundBean;
 import databean.FundBean;
-import databean.FundInfoBean;
 import databean.TransactionBean;
 import databean.VisitorBean;
-import model.VisitorDAO;
+import formbean.VisitorBuyFundForm;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
-import model.TransactionDAO;
 import model.Model;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 public class VisitorBuyAction extends Action{
 	
@@ -59,7 +57,7 @@ public class VisitorBuyAction extends Action{
 			if (fundName != null) request.setAttribute("getFundName", fundName);
 			
 			//get all the funds, then set a list of CustomerFundBean, then store the list into customerFundBeans
-			FundBean[] fundBeans = fundDAO.getAllFunds();
+			FundBean[] fundBeans = fundDAO.getAllFund();
 			CustomerFundBean[] customerFundBeans = new CustomerFundBean[fundBeans.length];
 			for (int i = 0; i < fundBeans.length; i++) {
 				customerFundBeans[i].setName(fundBeans[i].getName());
@@ -100,7 +98,7 @@ public class VisitorBuyAction extends Action{
 			//if amount is negative or zero
 			long shares = (long)((Double.valueOf(form.getAmount()))*100);
 			
-			if (amount <= 0 ) {
+			if (shares <= 0 ) {
 				errors.add("Amount you input is not illegal");
 				return Constants.visitorBuyJsp;
 			}
@@ -108,7 +106,7 @@ public class VisitorBuyAction extends Action{
 			//create new transactionBean type = 1 buy action
 			TransactionBean transactionBean = new TransactionBean();
 			transactionBean.setCustomerId(visitorId);
-			transactionBean.setAmount(amount);
+			transactionBean.setAmount(shares);
 			transactionBean.setFundId(fund.getFundId());
 			int transactionType = 1;
 			transactionBean.setTransactionType(transactionType);

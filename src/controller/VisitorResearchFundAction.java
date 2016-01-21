@@ -38,12 +38,8 @@ public class VisitorResearchFundAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession();
-		
-		Integer fundId = 0;
-		if (request.getParameter("fundId") != null) {
-			fundId = Integer.parseInt(request.getParameter("fundId"));
-		}
-		
+				
+		try {
 		//get all the funds, then set a list of CustomerFundBean, then store the list into customerFundBeans
 		FundBean[] fundBeans = fundDAO.getAllFund();
 		CustomerFundBean[] customerFundBeans = new CustomerFundBean[fundBeans.length];
@@ -53,9 +49,12 @@ public class VisitorResearchFundAction extends Action {
 			Long fundPrice = fundPriceHistoryDAO.getFundPrice(fundBeans[i].getFundId(), (Date)session.getAttribute("lastDate"));
 			customerFundBeans[i].setPrice(String.valueOf(fundPrice));
 		}
+		
 		request.setAttribute("customerFundBeans", customerFundBeans);
-		
-		
 		return Constants.visitorResearchFundJsp;
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return Constants.errorJsp;
+		}
 	}
 }
