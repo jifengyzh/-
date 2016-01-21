@@ -59,17 +59,17 @@ public class VisitorBuyAction extends Action{
 			if (fundName != null) request.setAttribute("getFundName", fundName);
 			
 			FundBean[] fundBeans = fundDAO.getAllFunds();
-			CustomerFundBean[] customerFundBean = new CustomerFundBean[fundBeans.length];
+			CustomerFundBean[] customerFundBeans = new CustomerFundBean[fundBeans.length];
 			for (int i = 0; i < fundBeans.length; i++) {
-				customerFundBean[i].setName(fundBeans[i].getName());
-				customerFundBean[i].setSymbol(fundBeans[i].getSymbol());
+				customerFundBeans[i].setName(fundBeans[i].getName());
+				customerFundBeans[i].setSymbol(fundBeans[i].getSymbol());
 				
-				fundPriceHistoryDAO.getFundPrice(fundBeans[i].getFundId(), (Date)session.getAttribute("lastDate"));
+				Long fundPrice = fundPriceHistoryDAO.getFundPrice(fundBeans[i].getFundId(), (Date)session.getAttribute("lastDate"));
 				
-				customerFundBean[i].setPrice(fundBeans[i].getFundId());
+				customerFundBeans[i].setPrice(String.valueOf(fundPrice));
 					
 			}
-			request.setAttribute("fundBeanList", fundBeanList);
+			request.setAttribute("customerFundBeans", customerFundBeans);
 			
 			//Get the cash balance
 			int visitorId = (Integer)session.getAttribute("customerId");
