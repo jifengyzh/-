@@ -20,7 +20,7 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		return VisitorBeans;
 	}
 
-	public VisitorBean readVisitor(String userName) throws RollbackException{
+	public VisitorBean read(String userName) throws RollbackException{
 		VisitorBean[] a = match(MatchArg.equals("userName", userName));
 		VisitorBean visitorBean;
 		if (a.length == 0) {
@@ -30,7 +30,7 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 		return visitorBean;
 	}
-
+	/*
 	public VisitorBean readVisitor(int visitorId) throws RollbackException {
 		VisitorBean[] a = match(MatchArg.equals("visitorId",visitorId));
 		VisitorBean visitorBean;
@@ -41,7 +41,7 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 		return visitorBean;
 	}
-	
+	*/
 	public void setPassword(int id, String password) throws RollbackException {
         try {
         	Transaction.begin();
