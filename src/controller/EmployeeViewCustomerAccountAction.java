@@ -135,16 +135,16 @@ public class EmployeeViewCustomerAccountAction extends Action {
 				}
 			}
 
-			return "employee-viewcustomer.jsp";
+			return Constants.employeeViewCustomerAccountJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "employee-viewcustomer.jsp";
+			return Constants.employeeViewCustomerAccountJsp;
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return "employee-viewcustomer.jsp";
+			return Constants.employeeViewCustomerAccountJsp;
 		}
 
 	}
