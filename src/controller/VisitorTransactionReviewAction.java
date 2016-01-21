@@ -9,19 +9,18 @@ import javax.servlet.http.HttpSession;
 import org.genericdao.RollbackException;
 
 import FilterAndConstant.Constants;
-import databean.TransactionHistoryBean;
+import databean.TransactionBean;
 import databean.VisitorBean;
 import model.Model;
-import model.MyDAOException;
-import model.TransactionHistoryDAO;
+import model.TransactionDAO;
 import model.VisitorDAO;
 
 public class VisitorTransactionReviewAction extends Action {
-	private TransactionHistoryDAO transactionHistoryDAO;
+	private TransactionDAO transactionDAO;
 	private VisitorDAO visitorDAO;
 	
 	public VisitorTransactionReviewAction(Model model) {
-		transactionHistoryDAO = model.getTransactionHistoryDAO();
+		transactionDAO = model.getTransactionDAO();
 		visitorDAO = model.getVisitorDAO();
 	}
 
@@ -40,10 +39,14 @@ public class VisitorTransactionReviewAction extends Action {
 		
 		try {
 		int visitorId = (Integer) session.getAttribute("visitorId");
-		VisitorBean visitor = visitorDAO.read(visitorId);
-		TransactionHistoryBean[] historyList = transactionHistoryDAO.getTransactions(visitor.getVisitorId());
+		TransactionBean[] transactionBeans = transactionDAO.getTransactionHistory(visitorId);
 		
-		request.setAttribute("transactionHistory", historyList);
+		if (transactionBeans == null) {
+			errors.add("No such visitor");
+			return Constants.errorJsp;
+		}
+		
+		request.setAttribute("transactionBeans", transactionBeans);
 		return Constants.visitorViewTransHistoryJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

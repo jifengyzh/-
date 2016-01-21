@@ -7,14 +7,19 @@ public class VisitorSellFundForm extends FormBean{
 	private String name;
 	private long shares;
 
-	public String getFundName() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getName() {
+		return name;
 	}
 
-	public long getSharesAsDouble() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public long getShares() {
+		return shares;
+	}
+
+	public void setShares(long shares) {
+		this.shares = shares;
+	}
 }
