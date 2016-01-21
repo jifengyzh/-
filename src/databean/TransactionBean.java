@@ -7,7 +7,7 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("transactionId")
 public class TransactionBean {
 	private int transactionId;
-	private int customerId;
+	private int visitorId;
 	private int fundId;
 	private Date executeDate;
 	private long shares;
@@ -18,8 +18,8 @@ public class TransactionBean {
 	public int getTransactionId() {
 		return transactionId;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public int getVisitorId() {
+		return visitorId;
 	}
 	public int getFundId() {
 		return fundId;
@@ -43,8 +43,8 @@ public class TransactionBean {
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setVisitorId(int customerId) {
+		this.visitorId = customerId;
 	}
 	public void setFundId(int fundId) {
 		this.fundId = fundId;

@@ -7,6 +7,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databean.TransactionBean;
 import databean.VisitorBean;
 
 public class VisitorDAO extends GenericDAO<VisitorBean>{
@@ -61,11 +62,57 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 	}
 	
+	/**
+	 * when costumer wants to buy fund or request check, get the available cash to check validity
+	 * @param visitorId
+	 * @return
+	 * @throws RollbackException
+	 */
 	public long getAvailableCash(int visitorId) throws RollbackException {
 		VisitorBean[] vBeans = match(MatchArg.equals("visitorId", visitorId));
 		return vBeans[0].getAvailableCash();
 	}
 	
+	/**
+	 * when costumer buys fund or request check, his available cash needs to be updated
+	 * @param transactionBean
+	 * @throws RollbackException 
+	 */
+	public void updateAvailableCash(TransactionBean transactionBean) throws RollbackException {
+		VisitorBean bean = read(transactionBean.getVisitorId());
+		bean.setAvailableCash(bean.getAvailableCash() - transactionBean.getAmount());
+		update(bean);
+	}
+	
+	public void updateVisitor(TransactionBean[] transactionBeans) throws RollbackException {
+		for (TransactionBean bean : transactionBeans) {
+			VisitorBean visitorBean = read(bean.getVisitorId());
+			long cash =visitorBean.getCash();
+			long availableCash = visitorBean.getAvailableCash();
+			long amount = bean.getAmount();
+			//for buy fund transaction cash ++
+			if(bean.getTransactionId() == 1) {
+				visitorBean.setCash(cash - amount );
+			}
+			//for sell fund transaction cash-- available cash --
+			if (bean.getTransactionType() == 2) {
+				visitorBean.setAvailableCash(availableCash - amount);;
+				visitorBean.setCash(cash - amount);
+			}
+			//for request check transaction cash--
+			if (bean.getTransactionId() == 3) {
+				visitorBean.setCash(cash - amount);
+			}
+			//for deposit check transaction cash ++ available cash ++
+			if (bean.getTransactionType() == 4) {
+				visitorBean.setAvailableCash(availableCash + amount);
+				visitorBean.setCash(cash + amount);
+			}
+			
+			update(visitorBean);
+				
+		}
+	}
 	
 	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
 		// Calls GenericDAO's match() method.
