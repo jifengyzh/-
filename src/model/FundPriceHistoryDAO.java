@@ -18,7 +18,6 @@ public class FundPriceHistoryDAO {
 		
 	}
 
-
 	public FundInfoBean[] getAllFundsInfo() {
 		// TODO Auto-generated method stub
 		return null;

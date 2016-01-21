@@ -11,6 +11,7 @@ public class CustomerFundBean {
 	public String shares;
 	public String price;
 	public String value;
+	
 	public String getSymbol() {
 		return symbol;
 	}

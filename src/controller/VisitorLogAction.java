@@ -15,6 +15,7 @@ import FilterAndConstant.Constants;
 import model.VisitorDAO;
 import databean.VisitorBean;
 import formbean.LoginForm;
+import model.LastDateDAO;
 import model.Model;
 import model.MyDAOException;
 import model.PositionDAO;
@@ -29,6 +30,7 @@ public class VisitorLogAction extends Action{
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
 	private PositionDAO positionDAO;
+	private LastDateDAO lastdateDAO;
 	
 	public VisitorLogAction(Model model) {
 		visitorDAO = model.getVisitorDAO();
@@ -46,6 +48,8 @@ public class VisitorLogAction extends Action{
 	public String perform(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		
+		
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
 		
@@ -58,6 +62,8 @@ public class VisitorLogAction extends Action{
         }
 		
 		try {
+			session.setAttribute("lastDate", lastdateDAO.getLastDate());
+			
 			LoginForm form = formBeanFactory.create(request);
 			
 	        if (!form.isPresent()) {
@@ -83,7 +89,7 @@ public class VisitorLogAction extends Action{
 	        
 	        int visitorId = (int) visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
-	        Date lastTradeDate = transactionDAO.getlastTradingDate(visitorId);
+	        Date lastTradeDate = transactionDAO.lastTradingDate(visitorId);
 	        visitor.setLastTradeDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());

@@ -91,7 +91,7 @@ public class VisitorViewAccountAction extends Action {
 				
 				fundValue[i].setFundName(fundBean.getName());
 				
-				if(fundPriceHistoryDAO.lastTradingDate(positionBean.getFundId())!= null){
+				if(fundPriceHistoryDAO.LastTrading(positionBean.getFundId())!= null){
 					FundPriceHistoryBean history = fundPriceHistoryDAO.getLastTrading(positionBean.getFundId());
 					fundValue[i].setLastTradingDate(history.getPrice_date());
 					double price = history.getPrice();
