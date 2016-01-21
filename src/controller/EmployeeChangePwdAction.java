@@ -40,6 +40,7 @@ public class EmployeeChangePwdAction extends Action {
 		// Set up error list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		request.setAttribute("success", null);
 
 		try {
 			EmployeeChangePasswordForm form = formBeanFactory.create(request);

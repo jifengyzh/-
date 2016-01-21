@@ -22,6 +22,8 @@ public class VisitorBean {
 	private long      cash;
 	private Date lastTradeDate;
 	private long      availableCash;
+	private int 		salt = 0;
+	private String  hashedPassword = "*";
 	
 	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
@@ -36,12 +38,13 @@ public class VisitorBean {
 	public long      getCash()            { return cash;            }
 	public Date getLastTradeDate() {return lastTradeDate;}
 	public long      getAvailableCash()   { return availableCash;   }
+	public int  getSalt()           { return salt;           }
 	
 	public int     hashCode()          { return userName.hashCode(); }	
 	
 	public void   setVisitorId(int l)       { visitorId = l;       }
 	public void   setUserName(String s)       { userName = s;         }
-	public void   setPassword(String s)       { password = s;         }
+	public void setPassword(String s)        { salt = newSalt(); hashedPassword = hash(s); }
 	public void   setFirstName(String s)      { firstName = s;        }
 	public void   setLastName(String s)       { lastName = s;         }
 	public void   setAddrLine1(String s)      { addrLine1 = s;        }
@@ -52,6 +55,7 @@ public class VisitorBean {
 	public void   setCash(long l)             { cash = l;             }
 	public void setLastTradeDate(Date d) {  lastTradeDate = d;}
 	public void   setAvailableCash(long l)    { availableCash = l;    }
+	public void setSalt(int x) 				{salt = x;}
 
  	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
