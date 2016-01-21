@@ -30,7 +30,7 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 		return visitorBean;
 	}
-	/*
+	
 	public VisitorBean readVisitor(int visitorId) throws RollbackException {
 		VisitorBean[] a = match(MatchArg.equals("visitorId",visitorId));
 		VisitorBean visitorBean;
