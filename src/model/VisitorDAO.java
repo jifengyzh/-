@@ -42,7 +42,6 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		return visitorBean;
 	}
 
-	public void setPassword(int id, String password) throws RollbackException {
 	
 	public void setPassword(long l, String password) throws RollbackException {
         try {
@@ -61,7 +60,9 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
-	public boolean hasEnoughMoney(int visitorId, )
+	
+	public long getAvailableCah(in)
+	
 	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
 		// Calls GenericDAO's match() method.
         	try {
