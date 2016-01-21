@@ -82,6 +82,7 @@ public class EmployeeTransitionDayAction extends Action {
 	        	DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 	        	Date lastdate = form.getDate();
 	        	session.setAttribute("lastdate", lastdate);
+	        	lastDateDAO.setLastDate(lastdate);
 	        	
 	        	HashMap<Integer, Long> map = form.getNewFundPrice();
 	        	transactionDAO.transitionDay(map, lastdate);

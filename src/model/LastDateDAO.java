@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
