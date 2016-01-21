@@ -52,7 +52,7 @@ public class EmployeeViewCustomerAccountAction extends Action {
 	}
 
 	public String getName() {
-		return Constants.employeeViewCustomerAccountAction;
+		return Constants.employeeViewCustAccAction;
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -76,20 +76,20 @@ public class EmployeeViewCustomerAccountAction extends Action {
 				}
 
 				if (!form.isPresent()) {
-					return Constants.employeeViewCustomerAccountJsp;
+					return Constants.employeeViewCustAccJsp;
 				}
 
 				// If there's error with the given username.
 				// Return to the list page.
 				errors.addAll(form.getValidationErrors());
 				if (errors.size() != 0) {
-					return Constants.employeeViewCustomerAccountJsp;
+					return Constants.employeeViewCustAccJsp;
 				}
 
 				VisitorBean customer = visitorDAO.read(form.getUsername());
 				if (customer == null) {
 					errors.add("User does not exist!");
-					return Constants.employeeViewCustomerAccountJsp;
+					return Constants.employeeViewCustAccJsp;
 				}
 
 				// Show detail info of specified customer
@@ -135,16 +135,16 @@ public class EmployeeViewCustomerAccountAction extends Action {
 				}
 			}
 
-			return Constants.employeeViewCustomerAccountJsp;
+			return Constants.employeeViewCustAccJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return Constants.employeeViewCustomerAccountJsp;
+			return Constants.employeeViewCustAccJsp;
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return Constants.employeeViewCustomerAccountJsp;
+			return Constants.employeeViewCustAccJsp;
 		}
 
 	}

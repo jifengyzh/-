@@ -30,7 +30,7 @@ public class EmployeeChangePwdAction extends Action {
 
 	@Override
 	public String getName() {
-		return Constants.employeeChangePasswordAction;
+		return Constants.employeeChangePwdAction;
 	}
 
 	@Override
@@ -48,13 +48,13 @@ public class EmployeeChangePwdAction extends Action {
 			// will be
 			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return Constants.employeeChangePasswordJsp;
+				return Constants.employeeChangePwdJsp;
 			}
 
 			// Check for any validation errors
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return Constants.employeeChangePasswordJsp;
+				return Constants.employeeChangePwdJsp;
 			}
 			
 			synchronized(this){
@@ -64,7 +64,7 @@ public class EmployeeChangePwdAction extends Action {
 				// check old password
 				if (!employee.checkPassword(form.getOldPassword())) {
 					errors.add("Incorrect Password!! Please re-enter your current password");
-					return Constants.employeeChangePasswordJsp;
+					return Constants.employeeChangePwdJsp;
 				}
 				
 				// change password

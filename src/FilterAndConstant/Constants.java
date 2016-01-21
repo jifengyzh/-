@@ -78,12 +78,12 @@ public class Constants {
 	public static final String employeeCreateEmployeeAccAction = new String("employee_create_employee_account.do");
 	public static final String employeeCreateEmployeeAccJsp = new String("employee_create_employee_account.jsp");
 	public static final String employeeLoginAction = new String("employee_login.do");
-	public static final String employeeChangePasswordAction = new String("employee_change_password.do");
-	public static final String employeeChangePasswordJsp = new String("employee_change_password.jsp");
-	public static final String employeeResetCustomerPasswordAction = new String("employee_reset_customer_password.do");
-	public static final String employeeResetCustomerPasswordJsp = new String("employee_reset_customer_password.jsp");
-	public static final String employeeViewCustomerAccountAction = new String("employee_view_customer_account.do");
-	public static final String employeeViewCustomerAccountJsp = new String("employee_view_customer_account.jsp");
-	public static final String employeeViewCustomerTransactionHistoryAction = new String("employee_view_customer_transaction_history.do");
-	public static final String employeeViewCustomerTransactionHistoryJsp = new String("employee_view_customer_transaction_history.jsp");
+	public static final String employeeChangePwdAction = new String("employee_change_password.do");
+	public static final String employeeChangePwdJsp = new String("employee_change_password.jsp");
+	public static final String employeeResetCustPwdAction = new String("employee_reset_customer_password.do");
+	public static final String employeeResetCustPwdJsp = new String("employee_reset_customer_password.jsp");
+	public static final String employeeViewCustAccAction = new String("employee_view_customer_account.do");
+	public static final String employeeViewCustAccJsp = new String("employee_view_customer_account.jsp");
+	public static final String employeeViewCustTransHistoryAction = new String("employee_view_customer_transaction_history.do");
+	public static final String employeeViewCustTransHistoryJsp = new String("employee_view_customer_transaction_history.jsp");
 }

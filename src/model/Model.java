@@ -2,7 +2,7 @@ package model;
 
 public class Model {
 	private VisitorDAO visitorDAO;
-	private EmployeeDAO adminDAO;
+	private EmployeeDAO employeeDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private TransactionDAO transactionDAO;
@@ -11,7 +11,7 @@ public class Model {
 	
 	
 	public VisitorDAO getVisitorDAO() { return visitorDAO;}
-	public EmployeeDAO getAdminDAO() {return adminDAO;}
+	public EmployeeDAO getEmployeeDAO() {return employeeDAO;}
 	public FundDAO getFundDAO() {return fundDAO;}
 	public FundPriceHistoryDAO getFundPriceHistoryDAO() {return fundPriceHistoryDAO;}
 	public TransactionDAO getTransactionDAO() {return transactionDAO;}

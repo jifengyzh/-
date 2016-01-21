@@ -32,7 +32,7 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 
 	@Override
 	public String getName() {
-		return Constants.employeeResetCustomerPasswordAction;
+		return Constants.employeeResetCustPwdAction;
 	}
 
 	@Override
@@ -50,21 +50,21 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 			// will be
 			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return Constants.employeeResetCustomerPasswordJsp;
+				return Constants.employeeResetCustPwdJsp;
 			}
 
 			
 			// Check for any validation errors
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return Constants.employeeResetCustomerPasswordJsp;
+				return Constants.employeeResetCustPwdJsp;
 			}
 			
 			synchronized (this) {
 				VisitorBean visitor = visitorDAO.read(form.getUserName());
 				if (visitor == null) {
 					errors.add("Customer does not exist");
-					return Constants.employeeResetCustomerPasswordJsp;
+					return Constants.employeeResetCustPwdJsp;
 				}
 				
 				visitorDAO.setPassword(visitor.getVisitorId(), form.getNewPassword());

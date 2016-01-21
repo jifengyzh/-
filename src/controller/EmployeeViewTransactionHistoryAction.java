@@ -32,7 +32,7 @@ public class EmployeeViewTransactionHistoryAction extends Action {
 		visitorDAO = model.getVisitorDAO();
 	}
 	
-	public String getName() { return Constants.employeeViewCustomerTransactionHistoryAction; }
+	public String getName() { return Constants.employeeViewCustTransHistoryAction; }
 	
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
@@ -74,14 +74,14 @@ public class EmployeeViewTransactionHistoryAction extends Action {
 			}
 			
 			request.setAttribute("transactionHistory", historyList);
-			return Constants.employeeViewCustomerAccountJsp;
+			return Constants.employeeViewCustAccJsp;
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return Constants.employeeViewCustomerAccountJsp;
+			return Constants.employeeViewCustAccJsp;
 		}
 		
 	}
