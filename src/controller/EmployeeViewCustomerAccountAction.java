@@ -1,165 +1,119 @@
+/**
+ * @author Arwen
+ */
 package controller;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import model.CustomerDAO;
-import model.FundDAO;
-import model.FundPriceHistoryDAO;
-import model.Model;
-import model.MyDAOException;
-import model.PositionDAO;
-import model.TransactionDAO;
-import model.TransactionHistoryDAO;
-import model.VisitorDAO;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
 import databean.CustomerFundBean;
-import databean.FundBean;
-import databean.FundPriceHistoryBean;
-import databean.FundValueBean;
 import databean.PositionBean;
 import databean.VisitorBean;
 import formbean.CustomerUserNameForm;
+import model.FundDAO;
+import model.FundPriceHistoryDAO;
+import model.Model;
+import model.PositionDAO;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 public class EmployeeViewCustomerAccountAction extends Action {
 	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory
 			.getInstance(CustomerUserNameForm.class);
 
-	private TransactionHistoryDAO transactionHistoryDAO;
 	private VisitorDAO visitorDAO;
 	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
-	private TransactionDAO transactionDAO;
 
 	public EmployeeViewCustomerAccountAction(Model model) {
-		transactionHistoryDAO = model.getTransactionHistoryDAO();
 		visitorDAO = model.getVisitorDAO();
 		positionDAO = model.getPositionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
-		transactionDAO = model.getTransactionDAO();
 
 	}
 
 	public String getName() {
-		return Constants.employeeViewCustomerAccountAction;
+		return Constants.employeeViewCustAccAction;
 	}
 
 	public String perform(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
 		try {
-			if (request.getParameter("username") != null) {
+			VisitorBean[] customerlist = visitorDAO.getAllCustomers();
+			request.setAttribute("customerlist", customerlist);
+			CustomerUserNameForm form = formBeanFactory.create(request);
+			request.setAttribute("form", form);
 
-				CustomerUserNameForm form = formBeanFactory.create(request);
-				request.setAttribute("form", form);
-
-				// If no customer is selected, show all the customers in the
-				// system.
-				VisitorBean[] customerlist = visitorDAO.getCustomerList();
-				if (customerlist != null) {
-					request.setAttribute("customerlist", customerlist);
-				} else {
-					request.setAttribute("customerlist", null);
-				}
-
-				if (!form.isPresent()) {
-					return Constants.employeeViewCustomerAccountJsp;
-				}
-
-				// If there's error with the given username.
-				// Return to the list page.
+			// No button & link is clicked
+			if (request.getParameter("username") == null && !form.isPresent())
+				return Constants.employeeViewCustAccJsp;
+			VisitorBean visitor;
+			// link
+			if (request.getParameter("username") != null)
+				visitor = visitorDAO.read(request.getParameter("username"));
+			// button
+			else {
 				errors.addAll(form.getValidationErrors());
 				if (errors.size() != 0) {
-					return Constants.employeeViewCustomerAccountJsp;
+					return Constants.employeeViewCustAccJsp;
 				}
+				visitor = visitorDAO.read(form.getUsername());
+			}
+			if (visitor == null) {
+				errors.add("User does not exist!");
+				return Constants.employeeViewCustAccJsp;
+			}
+			// display user's account information
+			// Name, Address
+			int visitorId = visitor.getVisitorId();
+			request.setAttribute("customer", visitor);
+			// Cash
+			DecimalFormat formatter = new DecimalFormat("#,##0.00");
+			request.setAttribute("cash", formatter.format(visitor.getCash()));
 
-				VisitorBean customer = visitorDAO.read(form.getUsername());
-				if (customer == null) {
-					errors.add("User does not exist!");
-					return Constants.employeeViewCustomerAccountJsp;
-				}
+			// Fund list and value
+			PositionBean[] position = positionDAO.getPositionList(visitorId);
+			CustomerFundBean[] customerFund = new CustomerFundBean[position.length];
+			for (int i = 0; i < position.length; i++) {
+				DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
+				DecimalFormat formatter2 = new DecimalFormat("#0.00");
+				int fund_id = position[i].getFundId();
+				double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate")) / 100;
+				double shares = position[i].getShares() / 1000;
 
-				// Show detail info of specified customer
-				request.setAttribute("customerlist", null);
-				// Name, Address
-				int customerId = customer.getCustomerId();
-				request.setAttribute("customer", customer);
-				// Cash
-				DecimalFormat formatter = new DecimalFormat("#,##0.00");
-				request.setAttribute("cash", formatter.format(customer.getCash()));
-				// Last trading date
-				Date lastTradingDate = transactionDAO.lastTradingDate(customerId);
-				if (lastTradingDate != null) {
-					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-					request.setAttribute("lastTradingDate", sdf.format(lastTradingDate));
-				} else {
-					request.setAttribute("lastTradingDate", null);
-				}
-				//Fund list and value
-				PositionBean[] position = positionDAO.getPositionList(customerId);
-				CustomerFundBean[] customerFund = new CustomerFundBean[position.length];
-				for (int i = 0; i < position.length; i++) {
-					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
-					DecimalFormat formatter2 = new DecimalFormat("#0.00");
-					customerFund[i].setFund_id(position[i].getFundId());
-					customerFund[i].setShares(formatter1.format(position[i].getShares()));
-					customerFund[i].setName(fundDAO.read(position[i].getFundId());
-					
-					
-					fundValue[i] = new FundValueBean();
-					fundValue[i].setFundId(position[i].getFundId());
-					double shares = position[i].getShares();
-					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
-					fundValue[i].setShares(formatter1.format(shares));
-					FundBean fundBean = fundDAO.read(temp.getFundName());
-					fundValue[i].setFundName(fundBean.getName());
-					if (fundPriceHistoryDAO.getLastTrading(position[i].getFundId()) != null) {
-						FundPriceHistoryBean history = fundPriceHistoryDAO.getLastTrading(position[i].getFundId());
-						fundValue[i].setLastTradingDate(history.getPrice_date());
-						double price = history.getPrice();
-						f
-						fundValue[i].setLastTradingPrice(formatter.format(price));
-						double value = position[i].getShares() * price;
-						fundValue[i].setValue(formatter.format(value));
-					}
-
-				}
-
-				request.setAttribute("fundvalue", fundValue);
-
-			} else {
-				CustomerBean[] customerlist = visitorDAO.getAllCustomers();
-				if (customerlist != null) {
-					request.setAttribute("customerlist", customerlist);
-				} else {
-					request.setAttribute("customerlist", null);
-				}
+				customerFund[i].setShares(formatter1.format(shares));
+				customerFund[i].setName(fundDAO.read(fund_id).getName());
+				customerFund[i].setSymbol(fundDAO.read(fund_id).getSymbol());
+				customerFund[i].setPrice(formatter1.format(price));
+				customerFund[i].setValue(formatter2.format(price * shares));
 			}
 
-			return "employee-viewcustomer.jsp";
+			request.setAttribute("customerfund", customerFund);
+			return Constants.employeeViewCustAccJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.employeeViewCustAccJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "employee-viewcustomer.jsp";
+			return Constants.employeeViewCustAccJsp;
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return "employee-viewcustomer.jsp";
+			return Constants.employeeViewCustAccJsp;
 		}
 
 	}
