@@ -67,7 +67,7 @@ public class EmployeeTransitionDayAction extends Action {
 	            if (!form.isPresent()) return Constants.employeeTransitionDayJsp;
 	            
 	        	DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-	        	Date lastdate = form.getDate();
+	        	Date lastdate = formatter.parse(form.getDate());
 	        	session.setAttribute("lastdate", lastdate);
 	        	lastDateDAO.setLastDate(lastdate);
 	        	
