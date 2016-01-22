@@ -40,7 +40,7 @@ public class EmployeeLoginAction extends Action {
 		HttpSession session = request.getSession();
 
 		// If employee is already logged in, redirect to employee-mainpanel.jsp
-		if (session.getAttribute("employeeUserName") != null) {
+		if (session.getAttribute("employeeUserName") == null) {
 			return Constants.employeeMainPanelJsp;
 		}
 
