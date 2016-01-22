@@ -18,7 +18,7 @@ public class Model {
 	private PositionDAO positionDAO;
 	private LastDateDAO lastDateDAO;
 	
-	public Model(ServletConfig config) throws ServletException, RollbackException {
+	public Model(ServletConfig config) throws Exception {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");

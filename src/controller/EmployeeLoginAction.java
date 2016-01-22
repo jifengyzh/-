@@ -63,6 +63,7 @@ public class EmployeeLoginAction extends Action {
 
 			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
+			
 			if (errors.size() != 0) {
 				return Constants.mainPage;
 			}
