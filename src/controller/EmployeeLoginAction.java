@@ -38,15 +38,15 @@ public class EmployeeLoginAction extends Action {
 	@Override
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-
+		session = request.getSession();
 		// If employee is already logged in, redirect to employee-mainpanel.jsp
-		if (session.getAttribute("employeeUserName") == null) {
+		if (session.getAttribute("employeeUserName") != null) {
 			return Constants.employeeMainPanelJsp;
 		}
 
 		// If customer is already logged in, redirect to customer-mainpanel.jsp
 		if (session.getAttribute("customerId") != null) {
-			return Constants.employeeMainPanelJsp;
+			return Constants.visitorViewAccountJsp;
 		}
 
 		List<String> errors = new ArrayList<String>();

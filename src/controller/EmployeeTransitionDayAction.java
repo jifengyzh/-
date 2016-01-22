@@ -39,8 +39,6 @@ public class EmployeeTransitionDayAction extends Action {
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
 	private LastDateDAO lastDateDAO;
-	private FormBeanFactory<EmployeeTransitionDayForm> formBeanFactory = FormBeanFactory
-			.getInstance(EmployeeTransitionDayForm.class);
 	
 	public EmployeeTransitionDayAction(Model model) {
 		visitorDAO = model.getVisitorDAO();
@@ -60,7 +58,7 @@ public class EmployeeTransitionDayAction extends Action {
         HttpSession session = request.getSession();
         try {
         	synchronized(this) {
-	        	EmployeeTransitionDayForm form = formBeanFactory.create(request);
+	        	EmployeeTransitionDayForm form = new EmployeeTransitionDayForm(request);
 	            request.setAttribute("form", form);
 	            FundBean[] fund = fundDAO.getAllFund();
 	            request.setAttribute("fundList", fund);
