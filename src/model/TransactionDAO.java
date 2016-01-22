@@ -21,11 +21,19 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 		super(TransactionBean.class, tableName, cp);
 	}
 	
-	public void requestCheck(TransactionBean requestCheckBean) throws RollbackException {
+	public void requestCheck(int visitorId, long amount) throws RollbackException {
+		TransactionBean requestCheckBean = new TransactionBean();
+		requestCheckBean.setVisitorId(visitorId);
+		requestCheckBean.setAmount(amount);
+		requestCheckBean.setTransactionType(3);
 		create(requestCheckBean);
 	}
 	
-	public void depositCheck(TransactionBean depositCheckBean) throws RollbackException {
+	public void depositCheck(int visitorId, long amount) throws RollbackException {
+		TransactionBean depositCheckBean = new TransactionBean();
+		depositCheckBean.setVisitorId(visitorId);
+		depositCheckBean.setAmount(amount);
+		depositCheckBean.setTransactionType(4);
 		create(depositCheckBean);
 	}
 	
