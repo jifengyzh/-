@@ -1,12 +1,8 @@
 package formbean;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.mybeans.form.FormBean;
-
-import controller.Map;
 
 public class EmployeeTransitionDayForm extends FormBean {
 	String Date;
