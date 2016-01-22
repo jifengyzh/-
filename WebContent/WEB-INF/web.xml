@@ -8,17 +8,7 @@
     <display-name>Favorite Website List</display-name>
     <description>Configuration file for the Favorites website</description>
     
-    <filter>
-  		<filter-name>SessionCheckFilter</filter-name>
- 		 <filter-class>
-    		filter.SessionCheck
-  		</filter-class>
-	</filter>
-	
-	<filter-mapping>
-      <filter-name>SessionCheckFilter</filter-name>
-      <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
+
     
     <servlet>
         <servlet-name>        cfs-controller                   </servlet-name>
@@ -31,10 +21,6 @@
           <param-name>    jdbcURL                               </param-name> 
 	      <param-value>    jdbc:mysql:///team7      </param-value>
         </init-param>
-        <init-param>
-          <param-name>    csvDir                                   </param-name> 
-	      <param-value>                                                    </param-value>
-        </init-param>
     </servlet>
 
     <servlet-mapping>
@@ -42,10 +28,7 @@
         <url-pattern>                   *.do                             </url-pattern>
     </servlet-mapping>
 	
-    <servlet-mapping>
-        <servlet-name>           cfs-controller             </servlet-name>
-        <url-pattern>                         /start                   </url-pattern>
-    </servlet-mapping>
+
 
 
 </web-app>

@@ -2,6 +2,8 @@ package databean;
 
 import java.util.Date;
 
+import org.genericdao.PrimaryKey;
+@PrimaryKey("name")
 public class LastDateBean {
 	String name;
 	Date date;
