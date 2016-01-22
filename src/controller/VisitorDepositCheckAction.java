@@ -75,7 +75,7 @@ public class VisitorDepositCheckAction extends Action {
 			
 			//create new transactionBean type = 4 deposite check
 			TransactionBean transactionBean = new TransactionBean();
-			transactionBean.setCustomerId(visitorId);
+			transactionBean.setVisitorId(visitorId);
 			transactionBean.setAmount(amount);
 			int transactionType = 4;
 			transactionBean.setTransactionType(transactionType);

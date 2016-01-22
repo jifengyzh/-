@@ -75,7 +75,7 @@ public class VisitorLogAction extends Action{
 	            return Constants.mainPage;
 	        }
 	        
-	        VisitorBean visitor = visitorDAO.read(form.getUsername());
+	        VisitorBean visitor = visitorDAO.read(form.getUserName());
 	        
 	        if (visitor == null) {
 	            errors.add("Incorrect/Invalid Customer Username");

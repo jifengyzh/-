@@ -96,23 +96,33 @@ public class VisitorBuyAction extends Action{
 			}			
 					
 			//if amount is negative or zero
-			long shares = (long)((Double.valueOf(form.getAmount()))*100);
+			long amount = (long)((Double.valueOf(form.getAmount()))*100);
 			
-			if (shares <= 0 ) {
+			if (amount <= 0 ) {
 				errors.add("Amount you input is not illegal");
+				return Constants.visitorBuyJsp;
+			}
+			
+			long currentCash = visitorDAO.getAvailableCash(visitorId);
+			
+			if (currentCash < amount) {
+				errors.add("Not enough cash for this transaction!");
 				return Constants.visitorBuyJsp;
 			}
 			
 			//create new transactionBean type = 1 buy action
 			TransactionBean transactionBean = new TransactionBean();
-			transactionBean.setCustomerId(visitorId);
-			transactionBean.setAmount(shares);
+			transactionBean.setVisitorId(visitorId);
+			transactionBean.setAmount(amount);
 			transactionBean.setFundId(fund.getFundId());
 			int transactionType = 1;
 			transactionBean.setTransactionType(transactionType);
 			
-			transactionDAO.buyFund(transactionBean);
+			transactionDAO.buyFund(transactionBean);			
+			visitorDAO.updateAvailableCash(transactionBean);
+			long cashBalance = visitorDAO.getAvailableCash(visitorId);
 			
+			request.setAttribute("cashBalance", cashBalance);
 			request.setAttribute("alert", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			

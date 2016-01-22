@@ -76,20 +76,29 @@ public class VisitorSellFundAction extends Action{
 				return Constants.visitorSellJsp;
 			}
 			
-			long shares = (Long)form.getShares();
+			long sharesToSell = (Long)form.getShares();
 			
-			//create new transactionBean type = 2 sell action
 			TransactionBean transactionBean = new TransactionBean();
-			transactionBean.setCustomerId(visitorId);
+			transactionBean.setVisitorId(visitorId);
 			transactionBean.setFundId(fundBean.getFundId());
-			transactionBean.setAmount(shares);
+			
+			long currentShares = positionDAO.getAvailableShares(transactionBean);
+			
+			if (currentShares  < sharesToSell) {
+				errors.add("Amount to sell exceeds the limit");
+				return Constants.visitorSellJsp;
+			}
+			//create new transactionBean type = 2 sell action
+			transactionBean.setAmount(sharesToSell);
 			int transactionType = 2;
 			transactionBean.setTransactionType(transactionType);
 			
 			transactionDAO.sellFund(transactionBean);
+			positionDAO.updateAvailableShares(transactionBean);
+			long sharesBalance =positionDAO.getAvailableShares(transactionBean);
 			
+			request.setAttribute("sharesBalance", sharesBalance);
 			request.setAttribute("alert", "Your request has been pending to be processed");
-			
 			return Constants.visitorBuyConfirmJsp;
 			
 		} catch (RollbackException e) {
