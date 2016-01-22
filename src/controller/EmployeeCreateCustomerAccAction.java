@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -34,6 +35,10 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		// TODO Auto-generated method stub
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		request.setAttribute("success", null);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employeeUserName") == null)
+			return Constants.mainPage;
 		
 		try {
 			EmployeeCreateCustomerAccForm form = createAccFormFactory.create(request);
