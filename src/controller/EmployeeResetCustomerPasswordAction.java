@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -41,6 +42,9 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 		// Set up error list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		request.setAttribute("success", null);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employeeUserName") == null) return Constants.mainPage;
 
 
 		try {
@@ -66,19 +70,18 @@ public class EmployeeResetCustomerPasswordAction extends Action {
 					errors.add("Customer does not exist");
 					return Constants.employeeResetCustPwdJsp;
 				}
-				
 				visitorDAO.setPassword(visitor.getVisitorId(), form.getNewPassword());
 			}
 			
 			// Success
-			request.setAttribute("message", "Customer's password updated Successfully!");
-			return Constants.employeeConfirmJsp;
+			request.setAttribute("success","Customer's password has been reset.");
+			return Constants.employeeResetCustPwdJsp;
 		} catch (RollbackException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.employeeResetCustPwdJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.employeeResetCustPwdJsp;
 		}
 	}
 }
