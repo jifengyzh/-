@@ -28,6 +28,7 @@ public class EmployeeLoginAction extends Action {
 	private LastDateDAO lastDateDAO;
 	public EmployeeLoginAction(Model model) {
 		employeeDAO = model.getEmployeeDAO();
+		lastDateDAO = model.getLastDateDAO();
 	}
 
 	@Override

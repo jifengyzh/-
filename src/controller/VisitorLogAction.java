@@ -49,56 +49,56 @@ public class VisitorLogAction extends Action{
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
 		
-		if (session.getAttribute("cusomerId") != null) {
-			return Constants.visitorViewAccountAction;
-		}
+//		if (session.getAttribute("cusomerId") != null) {
+//			return Constants.visitorViewAccountAction;
+//		}
+//		
+//		if (session.getAttribute("employeeId") != null) {
+//        	return Constants.employeeMainPanelJsp;
+//        }
 		
-		if (session.getAttribute("employeeId") != null) {
-        	return Constants.employeeMainPanelJsp;
-        }
-		
-		try {
-			session.setAttribute("lastDate", lastdateDAO.getLastDate());
+//		try {
+//			session.setAttribute("lastDate", lastdateDAO.getLastDate());
+//			
+//			LoginForm form = formBeanFactory.create(request);
+//			
+//	        if (!form.isPresent()) {
+//	            return Constants.mainPage;
+//	        }
+//	        
+//	        errors.addAll(form.getValidationErrors());
+//	        if (errors.size() != 0) {
+//	            return Constants.mainPage;
+//	        }
+//	        
+//	        VisitorBean visitor = visitorDAO.read(form.getUserName());
+//	        
+//	        if (visitor == null) {
+//	            errors.add("Incorrect/Invalid Customer Username");
+//	            return Constants.mainPage;
+//	        }
+//	        
+//	        if (!visitor.checkPassword(form.getPassword())) {
+//	            errors.add("Incorrect/Invalid Password");
+//	            return Constants.mainPage;
+//	        }
+//	        //Set a visitor's id firstname lastname in session for JSP
+//	        int visitorId = (Integer) visitor.getVisitorId();
+//	        session.setAttribute("visitorId", visitorId);
+//	        //Get the specific customer lastTradeDate.
+//	        Date lastTradeDate = visitorDAO.getLastTradingDate(visitorId);
+//	        visitor.setLastTradingDate(lastTradeDate);
+//			session.setAttribute("firstname", visitor.getFirstName());
+//			session.setAttribute("lastname", visitor.getLastName());
 			
-			LoginForm form = formBeanFactory.create(request);
-			
-	        if (!form.isPresent()) {
-	            return Constants.mainPage;
-	        }
-	        
-	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() != 0) {
-	            return Constants.mainPage;
-	        }
-	        
-	        VisitorBean visitor = visitorDAO.read(form.getUserName());
-	        
-	        if (visitor == null) {
-	            errors.add("Incorrect/Invalid Customer Username");
-	            return Constants.mainPage;
-	        }
-	        
-	        if (!visitor.checkPassword(form.getPassword())) {
-	            errors.add("Incorrect/Invalid Password");
-	            return Constants.mainPage;
-	        }
-	        //Set a visitor's id firstname lastname in session for JSP
-	        int visitorId = (Integer) visitor.getVisitorId();
-	        session.setAttribute("visitorId", visitorId);
-	        //Get the specific customer lastTradeDate.
-	        Date lastTradeDate = visitorDAO.getLastTradingDate(visitorId);
-	        visitor.setLastTradingDate(lastTradeDate);
-			session.setAttribute("firstname", visitor.getFirstName());
-			session.setAttribute("lastname", visitor.getLastName());
-			
-			return Constants.visitorViewAccountJsp;
-		} catch (FormBeanException e) {
-			errors.add(e.getMessage());
-			return Constants.visitorViewAccountJsp;
-		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return Constants.visitorViewAccountJsp;
-		}
+			return Constants.employeeMainPanelJsp;
+//		} catch (FormBeanException e) {
+//			errors.add(e.getMessage());
+//			return Constants.visitorViewAccountJsp;
+//		} catch (RollbackException e) {
+//			errors.add(e.getMessage());
+//			return Constants.visitorViewAccountJsp;
+//		}
 	}
 
 }
