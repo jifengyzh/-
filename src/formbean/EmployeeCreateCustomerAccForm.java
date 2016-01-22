@@ -64,19 +64,19 @@ public class EmployeeCreateCustomerAccForm extends FormBean {
 		this.lastName = trimAndConvert(lastName,"<>\"");
 	}
 	public void setAddrLine1(String addrLine1) {
-		this.addrLine1 = trimAndConvert(lastName,"<>\"");
+		this.addrLine1 = trimAndConvert(addrLine1,"<>\"");
 	}
 	public void setAddrLine2(String addrLine2) {
-		this.addrLine2 = trimAndConvert(lastName,"<>\"");
+		this.addrLine2 = trimAndConvert(addrLine2,"<>\"");
 	}
 	public void setCity(String city) {
-		this.city = trimAndConvert(lastName,"<>\"");
+		this.city = trimAndConvert(city,"<>\"");
 	}
 	public void setState(String state) {
-		this.state = trimAndConvert(lastName,"<>\"");
+		this.state = trimAndConvert(state,"<>\"");
 	}
 	public void setZip(String zip) {
-		this.zip = trimAndConvert(lastName,"<>\"");
+		this.zip = trimAndConvert(zip,"<>\"");
 	}	
 	
 	
