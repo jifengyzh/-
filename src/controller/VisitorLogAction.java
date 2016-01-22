@@ -87,7 +87,7 @@ public class VisitorLogAction extends Action{
 	        session.setAttribute("visitorId", visitorId);
 	        //Get the specific customer lastTradeDate.
 	        Date lastTradeDate = visitorDAO.getLastTradingDate(visitorId);
-	        visitor.setLastTradeDate(lastTradeDate);
+	        visitor.setLastTradingDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());
 			

@@ -79,7 +79,7 @@ public class VisitorDepositCheckAction extends Action {
 			//create pending transaction (transaction without execute date)
 			transactionDAO.requestCheck(visitorId, amount);
 			//update available cash of visitor according amount
-			visitorDAO.updateCash(visitorId, amount);
+			visitorDAO.updateAvailableCash(visitorId, amount);
 			
 			long cashBalance = visitorDAO.getAvailableCash(visitorId);
 			

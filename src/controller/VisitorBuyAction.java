@@ -119,7 +119,7 @@ public class VisitorBuyAction extends Action{
 			transactionBean.setTransactionType(transactionType);
 			
 			transactionDAO.buyFund(transactionBean);			
-			visitorDAO.updateCash(visitorId, amount);
+			visitorDAO.updateAvailableCash(visitorId, amount);
 			long cashBalance = visitorDAO.getAvailableCash(visitorId);
 			
 			request.setAttribute("cashBalance", cashBalance);
