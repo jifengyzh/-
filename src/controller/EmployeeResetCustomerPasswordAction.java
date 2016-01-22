@@ -1,3 +1,6 @@
+/**
+ * @author Arwen
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -11,14 +14,9 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
 import databean.VisitorBean;
 import formbean.EmployeeResetCustomerPasswordForm;
-import formbean.ResetCustomerPwdForm;
-
-import model.CustomerDAO;
 import model.Model;
-import model.MyDAOException;
 import model.VisitorDAO;
 
 public class EmployeeResetCustomerPasswordAction extends Action {

@@ -1,7 +1,9 @@
+/**
+ * @author Arwen
+ */
 package controller;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,26 +11,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.FundDAO;
-import model.FundPriceHistoryDAO;
-import model.Model;
-import model.PositionDAO;
-import model.TransactionDAO;
-import model.TransactionHistoryDAO;
-import model.VisitorDAO;
-
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
 import databean.CustomerFundBean;
-import databean.FundBean;
-import databean.FundPriceHistoryBean;
-import databean.FundValueBean;
 import databean.PositionBean;
 import databean.VisitorBean;
 import formbean.CustomerUserNameForm;
+import model.FundDAO;
+import model.FundPriceHistoryDAO;
+import model.Model;
+import model.PositionDAO;
+import model.TransactionDAO;
+import model.VisitorDAO;
 
 public class EmployeeViewCustomerAccountAction extends Action {
 	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory

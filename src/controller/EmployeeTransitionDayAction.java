@@ -5,15 +5,12 @@
 
 package controller;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,24 +19,13 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
 import databean.FundBean;
-import databean.FundGeneralInfoBean;
-import databean.FundPriceHistoryBean;
-import databean.PendingTransactionBean;
-import databean.PositionBean;
 import databean.TransactionBean;
-import formbean.EmployeeCreateFundForm;
-import formbean.EmployeeDepositCheckForm;
 import formbean.EmployeeTransitionDayForm;
-import formbean.TransitionDayForm;
-
-import model.CustomerDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.LastDateDAO;
 import model.Model;
-import model.MyDAOException;
 import model.PositionDAO;
 import model.TransactionDAO;
 import model.VisitorDAO;
