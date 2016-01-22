@@ -65,7 +65,7 @@ public class EmployeeDepositCheckAction extends Action {
 					errors.add("Customer does not exist");
 					return Constants.employeeDepositCheckJsp;
 				}
-				transactionDAO.depositCheck(visitor.getVisitorId(), form.getAmountAsDouble() * 100);
+				transactionDAO.depositCheck(visitor.getVisitorId(),(int) form.getAmountAsDouble() * 100);
 			}
 
 			request.setAttribute("success", "success");
