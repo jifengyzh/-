@@ -83,8 +83,6 @@ public class EmployeeViewCustomerAccountAction extends Action {
 					return Constants.employeeViewCustAccJsp;
 				}
 
-				// Show detail info of specified customer
-				request.setAttribute("customerlist", null);
 				// Name, Address
 				int visitorId = visitor.getVisitorId();
 				request.setAttribute("customer", visitor);
