@@ -71,7 +71,7 @@ public class VisitorViewAccountAction extends Action {
 			return Constants.visitorViewAccountJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorViewAccountJsp;
 		}
 	}
 }

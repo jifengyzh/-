@@ -52,7 +52,7 @@ public class VisitorResearchFundAction extends Action {
 		return Constants.visitorResearchFundJsp;
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorResearchFundJsp;
 		}
 	}
 }

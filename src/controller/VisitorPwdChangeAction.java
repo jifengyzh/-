@@ -67,14 +67,14 @@ public class VisitorPwdChangeAction extends Action{
 				
 			}
 			request.setAttribute("alert", "Password changed!!!!");
-			return Constants.visitorChangePwdConfirmJsp;
+			return Constants.visitorChangePwdJsp;
 			
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.visitorChangePwdJsp;
 		} catch (RollbackException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.visitorChangePwdJsp;
 		}
 	}
 }
