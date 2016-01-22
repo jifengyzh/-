@@ -23,11 +23,9 @@ public class EmployeeCreateFundAction extends Action {
 			.getInstance(EmployeeCreateFundForm.class);
 
 	private FundDAO fundDAO;
-	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public EmployeeCreateFundAction(Model model) {
 		fundDAO = model.getFundDAO();
-		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	public String getName() {
