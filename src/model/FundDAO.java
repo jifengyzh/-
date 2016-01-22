@@ -6,35 +6,33 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
+import org.mybeans.form.FormBean;
 
 import databean.FundBean;
 
 public class FundDAO extends GenericDAO<FundBean>{
 
 	public FundDAO(Class<FundBean> beanClass, String tableName, ConnectionPool connectionPool) throws DAOException {
-		super(beanClass, tableName, connectionPool);
+		super(FundBean.class, tableName, connectionPool);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getFundName(int fund_id) throws RollbackException {
-		FundBean fund;
-		try {
-			fund = read(fund_id);
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
+	public FundBean readFundName(String fundName) throws RollbackException {
+		FundBean[] bean = match(MatchArg.equals("name", fundName));
+		if (bean == null) {
+			return null;
 		}
-		return fund.getName();
+		return bean[0];
 	}
 	
-	public String getFundSymbol(int fund_id) throws RollbackException {
-		FundBean fund;
-		try {
-			fund = read(fund_id);
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
+	public FundBean reanFundSymbol(String symbol) throws RollbackException {
+		FundBean[] beans = match(MatchArg.equals("symbol", symbol));
+		if (beans == null) {
+			return null;
 		}
-		return fund.getSymbol();
+		return beans[0];
 	}
+	
 	
 	public FundBean[] getAllFund() throws RollbackException {
 		FundBean[] allFunds = match();
