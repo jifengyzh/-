@@ -21,13 +21,13 @@ public class VisitorBean {
 	private String    zip;
 	private long      cash;
 	private long      availableCash;
-	private int 		salt = 0;
-	private String  hashedPassword = "*";
+//	private int 		salt = 0;
+//	private String  hashedPassword = "*";
 	private Date lastTradingDate;
 	
 	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
-	public String    getPassword()        { return password;        }
+	public String    getPassWord()        { return password;        }
 	public String    getFirstName()       { return firstName;       }
 	public String    getLastName()        { return lastName;        }
 	public String    getAddrLine1()       { return addrLine1;       }
@@ -37,18 +37,18 @@ public class VisitorBean {
 	public String    getZip()             { return zip;             }
 	public long      getCash()            { return cash;            }
 	public long      getAvailableCash()   { return availableCash;   }
-	public int  getSalt()           { return salt;           }
-	public String getHashedPassword() { return hashedPassword; }
+//	public int  getSalt()           { return salt;           }
+//	public String getHashedPassword() { return hashedPassword; }
 	public Date getLastTradingDate() {
 		return lastTradingDate;
 	}
 	
 	
-	public int     hashCode()          { return userName.hashCode(); }	
+	//public int     hashCode()          { return userName.hashCode(); }	
 	
 	public void   setVisitorId(int l)       { visitorId = l;       }
 	public void   setUserName(String s)       { userName = s;         }
-	public void setPassword(String s)        { salt = newSalt(); hashedPassword = hash(s); }
+	public void setPassWord(String s)        {password = s ;}
 	public void   setFirstName(String s)      { firstName = s;        }
 	public void   setLastName(String s)       { lastName = s;         }
 	public void   setAddrLine1(String s)      { addrLine1 = s;        }
@@ -59,38 +59,38 @@ public class VisitorBean {
 	public void   setCash(long l)             { cash = l;             }
 	public void setLastTradingDate(Date d) {  lastTradingDate = d;}
 	public void   setAvailableCash(long l)    { availableCash = l;    }
-	public void setSalt(int x) 				{salt = x;}
-	public void setHashedPassword(String s) {hashedPassword = s;}
- 	public boolean checkPassword(String password) {
-		return hashedPassword.equals(hash(password));
-	}
+	//public void setSalt(int x) 				{salt = x;}
+	//public void setHashedPassword(String s) {hashedPassword = s;}
+// 	//public boolean checkPassword(String password) {
+//		return hashedPassword.equals(hash(password));
+//	}
 	
-	private String hash(String clearPassword) {
-		if (salt == 0) return null;
-		MessageDigest md = null;
-		try {
-		  md = MessageDigest.getInstance("SHA1");
-		} catch (NoSuchAlgorithmException e) {
-		  throw new AssertionError("Can't find the SHA1 algorithm in the java.security package");
-		}
-		String saltString = String.valueOf(salt);
-		
-		md.update(saltString.getBytes());
-		md.update(clearPassword.getBytes());
-		byte[] digestBytes = md.digest();
-		// Format the digest as a String
-		StringBuffer digestSB = new StringBuffer();
-		for (int i=0; i<digestBytes.length; i++) {
-		  int lowNibble = digestBytes[i] & 0x0f;
-		  int highNibble = (digestBytes[i]>>4) & 0x0f;
-		  digestSB.append(Integer.toHexString(highNibble));
-		  digestSB.append(Integer.toHexString(lowNibble));
-		}
-		String digestStr = digestSB.toString();
-		return digestStr;
-	}
-	private int newSalt() {
-		Random random = new Random();
-		return random.nextInt(8192)+1;  // salt cannot be zero
-	}
+//	private String hash(String clearPassword) {
+//		if (salt == 0) return null;
+//		MessageDigest md = null;
+//		try {
+//		  md = MessageDigest.getInstance("SHA1");
+//		} catch (NoSuchAlgorithmException e) {
+//		  throw new AssertionError("Can't find the SHA1 algorithm in the java.security package");
+//		}
+//		String saltString = String.valueOf(salt);
+//		
+//		md.update(saltString.getBytes());
+//		md.update(clearPassword.getBytes());
+//		byte[] digestBytes = md.digest();
+//		// Format the digest as a String
+//		StringBuffer digestSB = new StringBuffer();
+//		for (int i=0; i<digestBytes.length; i++) {
+//		  int lowNibble = digestBytes[i] & 0x0f;
+//		  int highNibble = (digestBytes[i]>>4) & 0x0f;
+//		  digestSB.append(Integer.toHexString(highNibble));
+//		  digestSB.append(Integer.toHexString(lowNibble));
+//		}
+//		String digestStr = digestSB.toString();
+//		return digestStr;
+//	}
+//	private int newSalt() {
+//		Random random = new Random();
+//		return random.nextInt(8192)+1;  // salt cannot be zero
+//	}
 }

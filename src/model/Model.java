@@ -35,6 +35,7 @@ public class Model {
 			throw new ServletException(e);
 		}
 	}
+	
 	public VisitorDAO getVisitorDAO() { return visitorDAO;}
 	public EmployeeDAO getEmployeeDAO() {return adminDAO;}
 	public FundDAO getFundDAO() {return fundDAO;}

@@ -13,8 +13,8 @@ public class EmployeeBean {
 	private String passWord;
 	private String firstName;
 	private String lastName;
-	private int salt = 0;
-	private String hashedPassword = "*";
+//	private int salt = 0;
+//	private String hashedPassword = "*";
 
 	public String getUserName() {
 		return userName;
@@ -32,26 +32,25 @@ public class EmployeeBean {
 		return lastName;
 	}
 
-	public int getSalt() {
-		return salt;
-	}
+//	public int getSalt() {
+//		return salt;
+//	}
 
 	public void setUserName(String s) {
 		this.userName = s;
 	}
 
-	public void setHashedPassword(String x) {
-		hashedPassword = x;
+//	public void setHashedPassword(String x) {
+//		hashedPassword = x;
+//	}
+
+	public void setPassWord(String s) {
+		passWord = s;
 	}
 
-	public void setPassword(String s) {
-		salt = newSalt();
-		hashedPassword = hash(s);
-	}
-
-	public void setSalt(int x) {
-		salt = x;
-	}
+//	public void setSalt(int x) {
+//		salt = x;
+//	}
 
 	public void setFirstName(String s) {
 		this.firstName = s;
@@ -61,43 +60,43 @@ public class EmployeeBean {
 		this.lastName = s;
 	}
 
-	public boolean checkPassword(String password) {
-		return hashedPassword.equals(hash(password));
-	}
+//	public boolean checkPassword(String password) {
+//		return hashedPassword.equals(hash(password));
+//	}
 
-	private String hash(String clearPassword) {
-		if (salt == 0)
-			return null;
-
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("SHA1");
-		} catch (NoSuchAlgorithmException e) {
-			throw new AssertionError("Can't find the SHA1 algorithm in the java.security package");
-		}
-
-		String saltString = String.valueOf(salt);
-
-		md.update(saltString.getBytes());
-		md.update(clearPassword.getBytes());
-		byte[] digestBytes = md.digest();
-
-		// Format the digest as a String
-		StringBuffer digestSB = new StringBuffer();
-		for (int i = 0; i < digestBytes.length; i++) {
-			int lowNibble = digestBytes[i] & 0x0f;
-			int highNibble = (digestBytes[i] >> 4) & 0x0f;
-			digestSB.append(Integer.toHexString(highNibble));
-			digestSB.append(Integer.toHexString(lowNibble));
-		}
-		String digestStr = digestSB.toString();
-
-		return digestStr;
-	}
-
-	private int newSalt() {
-		Random random = new Random();
-		return random.nextInt(8192) + 1; // salt cannot be zero
-	}
+//	private String hash(String clearPassword) {
+//		if (salt == 0)
+//			return null;
+//
+//		MessageDigest md = null;
+//		try {
+//			md = MessageDigest.getInstance("SHA1");
+//		} catch (NoSuchAlgorithmException e) {
+//			throw new AssertionError("Can't find the SHA1 algorithm in the java.security package");
+//		}
+//
+//		String saltString = String.valueOf(salt);
+//
+//		md.update(saltString.getBytes());
+//		md.update(clearPassword.getBytes());
+//		byte[] digestBytes = md.digest();
+//
+//		// Format the digest as a String
+//		StringBuffer digestSB = new StringBuffer();
+//		for (int i = 0; i < digestBytes.length; i++) {
+//			int lowNibble = digestBytes[i] & 0x0f;
+//			int highNibble = (digestBytes[i] >> 4) & 0x0f;
+//			digestSB.append(Integer.toHexString(highNibble));
+//			digestSB.append(Integer.toHexString(lowNibble));
+//		}
+//		String digestStr = digestSB.toString();
+//
+//		return digestStr;
+//	}
+//
+//	private int newSalt() {
+//		Random random = new Random();
+//		return random.nextInt(8192) + 1; // salt cannot be zero
+//	}
 
 }

@@ -46,23 +46,23 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 	}
 
 	
-	public void setPassword(long l, String password) throws RollbackException {
-        try {
-        	Transaction.begin();
-        	VisitorBean visitor = read(l);
-			
-			if (visitor == null) {
-				throw new RollbackException("User "+ l +" does not exists");
-			}
-			
-			visitor.setPassword(password);
-			
-			update(visitor);
-			Transaction.commit();
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}
-	}
+//	public void setPassword(long l, String password) throws RollbackException {
+//        try {
+//        	Transaction.begin();
+//        	VisitorBean visitor = read(l);
+//			
+//			if (visitor == null) {
+//				throw new RollbackException("User "+ l +" does not exists");
+//			}
+//			
+//			visitor.setPassword(password);
+//			
+//			update(visitor);
+//			Transaction.commit();
+//		} finally {
+//			if (Transaction.isActive()) Transaction.rollback();
+//		}
+//	}
 	
 	/**
 	 * when costumer wants to buy fund or request check, get the available cash to check validity
