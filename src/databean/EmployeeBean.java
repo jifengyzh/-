@@ -59,7 +59,9 @@ public class EmployeeBean {
 	public void setLastName(String s) {
 		this.lastName = s;
 	}
-
+	public boolean checkPassword(String password) {
+		return password.equals(this.passWord);
+	}
 //	public boolean checkPassword(String password) {
 //		return hashedPassword.equals(hash(password));
 //	}

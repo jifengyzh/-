@@ -1,29 +1,21 @@
 package controller;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
-import databean.EmployeeBean;
-import databean.TransactionBean;
 import databean.VisitorBean;
-import formbean.DepositCheckFormBean;
 import formbean.EmployeeDepositCheckForm;
-import model.CustomerDAO;
 import model.Model;
-import model.MyDAOException;
 import model.TransactionDAO;
 import model.VisitorDAO;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class EmployeeDepositCheckAction extends Action {
 

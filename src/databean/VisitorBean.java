@@ -61,6 +61,10 @@ public class VisitorBean {
 	public void   setAvailableCash(long l)    { availableCash = l;    }
 	//public void setSalt(int x) 				{salt = x;}
 	//public void setHashedPassword(String s) {hashedPassword = s;}
+	
+	public boolean checkPassword(String password) {
+		return password.equals(this.password);
+	}
 // 	//public boolean checkPassword(String password) {
 //		return hashedPassword.equals(hash(password));
 //	}
