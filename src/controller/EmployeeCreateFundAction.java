@@ -56,7 +56,7 @@ public class EmployeeCreateFundAction extends Action {
 
 			// Validation Check
 			FundBean fund = fundDAO.read(form.getFundName());
-			FundBean symbol = fundDAO.readSymbol(form.getSymbol());
+			FundBean symbol = fundDAO.reanFundSymbol(form.getSymbol());
 
 			if (fund != null) {
 				errors.add("Existing Fund Name");

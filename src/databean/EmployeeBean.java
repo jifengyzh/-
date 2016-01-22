@@ -10,7 +10,7 @@ import org.genericdao.PrimaryKey;
 public class EmployeeBean {
 
 	private String userName;
-	private String passWord;
+	private String password;
 	private String firstName;
 	private String lastName;
 //	private int salt = 0;
@@ -21,7 +21,7 @@ public class EmployeeBean {
 	}
 
 	public String getPassWord() {
-		return passWord;
+		return password;
 	}
 
 	public String getFirstName() {
@@ -44,8 +44,8 @@ public class EmployeeBean {
 //		hashedPassword = x;
 //	}
 
-	public void setPassWord(String s) {
-		passWord = s;
+	public void setPassword(String s) {
+		password = s;
 	}
 
 //	public void setSalt(int x) {
@@ -60,7 +60,7 @@ public class EmployeeBean {
 		this.lastName = s;
 	}
 	public boolean checkPassword(String password) {
-		return password.equals(this.passWord);
+		return password.equals(this.password);
 	}
 //	public boolean checkPassword(String password) {
 //		return hashedPassword.equals(hash(password));

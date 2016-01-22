@@ -48,7 +48,7 @@ public class VisitorBean {
 	
 	public void   setVisitorId(int l)       { visitorId = l;       }
 	public void   setUserName(String s)       { userName = s;         }
-	public void setPassWord(String s)        {password = s ;}
+	public void setPassword(String s)        {password = s ;}
 	public void   setFirstName(String s)      { firstName = s;        }
 	public void   setLastName(String s)       { lastName = s;         }
 	public void   setAddrLine1(String s)      { addrLine1 = s;        }

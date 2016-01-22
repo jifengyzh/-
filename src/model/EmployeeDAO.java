@@ -31,22 +31,23 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 		EmployeeBean[] employee = match(MatchArg.equals("userName", userName));
 		return employee[0];
 	}
-	
-//	public void setPassword(String userName, String password) throws RollbackException {
-//        try {
-//        	Transaction.begin();
-//        	EmployeeBean employee = read(userName);
-//			
-//			if (employee == null) {
-//				throw new RollbackException("Employee "+ userName +" does not exists");
-//			}
-//			
-//			employee.setPassWord(password);
-//			update(employee);
-//			Transaction.commit();
-//		} finally {
-//			if (Transaction.isActive()) Transaction.rollback();
-//		}
-//	}
+
+
+	public void setPassword(String userName, String password) throws RollbackException {
+        try {
+        	Transaction.begin();
+        	EmployeeBean employee = read(userName);
+			
+			if (employee == null) {
+				throw new RollbackException("Employee "+ userName +" does not exists");
+			}
+			
+			employee.setPassWord(password);
+			update(employee);
+			Transaction.commit();
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
+	}
 	
 }
