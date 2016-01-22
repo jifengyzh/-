@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -35,19 +38,18 @@ public class EmployeeChangePwdAction extends Action {
 
 	@Override
 	public synchronized String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession();
 
-		// Set up error list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		request.setAttribute("success", null);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employeeUserName") == null)
+			return Constants.mainPage;
 
 		try {
 			EmployeeChangePasswordForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			// If no params were passed, return with no errors so that the form
-			// will be
-			// presented (we assume for the first time).
+
 			if (!form.isPresent()) {
 				return Constants.employeeChangePwdJsp;
 			}
@@ -57,30 +59,28 @@ public class EmployeeChangePwdAction extends Action {
 			if (errors.size() != 0) {
 				return Constants.employeeChangePwdJsp;
 			}
-			
-			synchronized(this){
-				EmployeeBean employee = employeeDAO.read((String) session
-						.getAttribute("employeeUserName"));
 
-				// check old password
+			synchronized (this) {
+				EmployeeBean employee = employeeDAO.read((String) session.getAttribute("employeeUserName"));
+
 				if (!employee.checkPassword(form.getOldPassword())) {
 					errors.add("Incorrect Password!! Please re-enter your current password");
 					return Constants.employeeChangePwdJsp;
 				}
-				
+
 				// change password
 				employeeDAO.setPassword(employee.getUserName(), form.getNewPassword());
 			}
 
 			// success
 			request.setAttribute("message", "Password changed successfully!");
-			return Constants.employeeConfirmJsp;
+			return Constants.employeeChangePwdJsp;
 		} catch (RollbackException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.employeeChangePwdJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
-			return "error.jsp";
+			return Constants.employeeChangePwdJsp;
 		}
 	}
 

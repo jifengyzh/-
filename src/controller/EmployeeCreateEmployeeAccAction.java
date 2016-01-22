@@ -61,7 +61,7 @@ public class EmployeeCreateEmployeeAccAction extends Action {
 		       	employee.setLastName(form.getLastName());
 		       	employeeDAO.create(employee);
         
-	        request.setAttribute("success","success")
+	        request.setAttribute("success","success");
 			return Constants.employeeCreateEmployeeAccJsp;
 
         } catch (FormBeanException e) {

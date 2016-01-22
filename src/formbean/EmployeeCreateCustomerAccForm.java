@@ -47,9 +47,6 @@ public class EmployeeCreateCustomerAccForm extends FormBean {
 	public String getZip() {
 		return zip;
 	}
-	public int getZipAsInt() {
-		return Integer.parseInt(zip);
-	}
 	
 	public void setUserName(String userName) {
 		this.userName = trimAndConvert(userName, "<>\"");

@@ -70,7 +70,8 @@ public class EmployeeTransitionDayAction extends Action {
         request.setAttribute("errors",errors);
         request.setAttribute("success", null);
         HttpSession session = request.getSession();
-        
+        if (session.getAttribute("employeeUserName") == null)
+        	return Constants.mainPage;
         try {
         	synchronized(this) {
 	        	EmployeeTransitionDayForm form = formBeanFactory.create(request);
@@ -90,11 +91,11 @@ public class EmployeeTransitionDayAction extends Action {
 	        	TransactionBean[] transaction = transactionDAO.getLastDayTransaction((java.sql.Date)lastdate);
 	        	positionDAO.updatePositions(transaction);
 	        	fundPriceHistoryDAO.updateFundPrice(map,(java.sql.Date)lastdate);
-	        	visitorDAO.processVisitor(transaction);
+	        	visitorDAO.updateVisitor(transaction);
         	}
         	
 	        // Display message
-	        request.setAttribute("success","success");
+	        request.setAttribute("success","Transition day successful!");
 	        return Constants.employeeTransitionDayAction;
         } catch (RollbackException e) {
         	errors.add(e.getMessage());

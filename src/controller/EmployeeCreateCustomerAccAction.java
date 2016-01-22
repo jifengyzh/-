@@ -47,8 +47,10 @@ public class EmployeeCreateCustomerAccAction extends Action{
 			if (!errors.isEmpty()) return Constants.employeeCreateCustomerAccJsp;
 			
 			VisitorBean customer = visitorDAO.read(form.getUserName());
-			if  (customer != null) errors.add("User already exists");
-			return Constants.employeeCreateCustomerAccJsp;
+			if  (customer != null) {
+				errors.add("User already exists");
+				return Constants.employeeCreateCustomerAccJsp;
+			}
 			
 			synchronized(this) {
 				customer = new VisitorBean();
@@ -60,11 +62,11 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		       	customer.setAddrLine2(form.getAddrLine2());
 		       	customer.setCity(form.getCity());
 		       	customer.setState(form.getState());
-		       	customer.setZip(form.getZipAsInt());
+		       	customer.setZip(form.getZip());
 		       	visitorDAO.create(customer);
 			}
 			
-			request.setAttribute("success","success");
+			request.setAttribute("success","Create customer success!");
 			//need to wait for confirmation?
 			return Constants.employeeCreateCustomerAccJsp;
 		}catch (RollbackException e) {
