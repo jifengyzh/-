@@ -25,9 +25,10 @@ import model.VisitorDAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class EmployeeDepositCheckAction extends Action{
+public class EmployeeDepositCheckAction extends Action {
 
-	private FormBeanFactory<EmployeeDepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(EmployeeDepositCheckForm.class);
+	private FormBeanFactory<EmployeeDepositCheckForm> formBeanFactory = FormBeanFactory
+			.getInstance(EmployeeDepositCheckForm.class);
 
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
@@ -51,39 +52,42 @@ public class EmployeeDepositCheckAction extends Action{
 			return Constants.mainPage;
 
 		try {
-            EmployeeDepositCheckForm form = formBeanFactory.create(request);
-            request.setAttribute("form", form);
-            
-            if (!form.isPresent()) {
-	            return Constants.employeeDepositCheckJsp;
-	        }
-	
-            errors.addAll(form.getValidationErrors());
-            if (errors.size() != 0) {
-            	return Constants.employeeDepositCheckJsp;
-            }
-            
-            synchronized (this) {
-            	VisitorBean visitor = visitorDAO.read(form.getUserName());
-                if (visitor == null) {
-                	errors.add("Customer does not exist");
-                	return Constants.employeeDepositCheckJsp;
-                }
-            	transactionDAO.depositCheck(visitor.getVisitorId(), form.getAmountAsDouble() * 100);
-            }
-            
-			request.setAttribute("success", "success");
-            return Constants.employeeDepositCheckJsp;
+			EmployeeDepositCheckForm form = formBeanFactory.create(request);
+			request.setAttribute("form", form);
 
-        } catch (FormBeanException e) {
-        	errors.add(e.getMessage());
+			VisitorBean[] customerlist = visitorDAO.getAllCustomers();
+			request.setAttribute("customerlist", customerlist);
+
+			if (!form.isPresent()) {
+				return Constants.employeeDepositCheckJsp;
+			}
+
+			errors.addAll(form.getValidationErrors());
+			if (errors.size() != 0) {
+				return Constants.employeeDepositCheckJsp;
+			}
+
+			synchronized (this) {
+				VisitorBean visitor = visitorDAO.read(form.getUserName());
+				if (visitor == null) {
+					errors.add("Customer does not exist");
+					return Constants.employeeDepositCheckJsp;
+				}
+				transactionDAO.depositCheck(visitor.getVisitorId(), form.getAmountAsDouble() * 100);
+			}
+
+			request.setAttribute("success", "success");
 			return Constants.employeeDepositCheckJsp;
-        } catch (NumberFormatException e) {
-        	errors.add(e.getMessage());
-        	return Constants.employeeDepositCheckJsp;
-        }  catch (RollbackException e) {
+
+		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return Constants.employeeDepositCheckJsp;
-		}  
+		} catch (NumberFormatException e) {
+			errors.add(e.getMessage());
+			return Constants.employeeDepositCheckJsp;
+		} catch (RollbackException e) {
+			errors.add(e.getMessage());
+			return Constants.employeeDepositCheckJsp;
+		}
 	}
 }

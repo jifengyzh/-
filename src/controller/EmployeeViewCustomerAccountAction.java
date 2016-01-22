@@ -34,7 +34,6 @@ public class EmployeeViewCustomerAccountAction extends Action {
 	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory
 			.getInstance(CustomerUserNameForm.class);
 
-	private TransactionHistoryDAO transactionHistoryDAO;
 	private VisitorDAO visitorDAO;
 	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
@@ -42,7 +41,6 @@ public class EmployeeViewCustomerAccountAction extends Action {
 	private TransactionDAO transactionDAO;
 
 	public EmployeeViewCustomerAccountAction(Model model) {
-		transactionHistoryDAO = model.getTransactionHistoryDAO();
 		visitorDAO = model.getVisitorDAO();
 		positionDAO = model.getPositionDAO();
 		fundDAO = model.getFundDAO();
@@ -61,6 +59,8 @@ public class EmployeeViewCustomerAccountAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+			VisitorBean[] customerlist = visitorDAO.getAllCustomers();
+			request.setAttribute("customerlist", customerlist);
 			if (request.getParameter("username") != null) {
 
 				CustomerUserNameForm form = formBeanFactory.create(request);
@@ -68,12 +68,6 @@ public class EmployeeViewCustomerAccountAction extends Action {
 
 				// If no customer is selected, show all the customers in the
 				// system.
-				VisitorBean[] customerlist = visitorDAO.getAllCustomers();
-				if (customerlist != null) {
-					request.setAttribute("customerlist", customerlist);
-				} else {
-					request.setAttribute("customerlist", null);
-				}
 
 				if (!form.isPresent()) {
 					return Constants.employeeViewCustAccJsp;
@@ -86,8 +80,8 @@ public class EmployeeViewCustomerAccountAction extends Action {
 					return Constants.employeeViewCustAccJsp;
 				}
 
-				VisitorBean customer = visitorDAO.read(form.getUsername());
-				if (customer == null) {
+				VisitorBean visitor = visitorDAO.read(form.getUsername());
+				if (visitor == null) {
 					errors.add("User does not exist!");
 					return Constants.employeeViewCustAccJsp;
 				}
@@ -95,46 +89,32 @@ public class EmployeeViewCustomerAccountAction extends Action {
 				// Show detail info of specified customer
 				request.setAttribute("customerlist", null);
 				// Name, Address
-				int customerId = customer.getCustomerId();
-				request.setAttribute("customer", customer);
+				int visitorId = visitor.getVisitorId();
+				request.setAttribute("customer", visitor);
 				// Cash
 				DecimalFormat formatter = new DecimalFormat("#,##0.00");
-				request.setAttribute("cash", formatter.format(customer.getCash()));
-				// Last trading date
-				Date lastTradingDate = transactionDAO.lastTradingDate(customerId);
-				if (lastTradingDate != null) {
-					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-					request.setAttribute("lastTradingDate", sdf.format(lastTradingDate));
-				} else {
-					request.setAttribute("lastTradingDate", null);
-				}
-				//Fund list and value
-				PositionBean[] position = positionDAO.getPositionList(customerId);
+				request.setAttribute("cash", formatter.format(visitor.getCash()));
+
+				// Fund list and value
+				PositionBean[] position = positionDAO.getPositionList(visitorId);
 				CustomerFundBean[] customerFund = new CustomerFundBean[position.length];
 				for (int i = 0; i < position.length; i++) {
 					DecimalFormat formatter1 = new DecimalFormat("#,##0.000");
 					DecimalFormat formatter2 = new DecimalFormat("#0.00");
 					int fund_id = position[i].getFundId();
-					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate"));
-					double shares = position[i].getShares();
-					
+					double price = fundPriceHistoryDAO.getFundPrice(fund_id, (Date) session.getAttribute("lastdate"))
+							/ 100;
+					double shares = position[i].getShares() / 1000;
+
 					customerFund[i].setShares(formatter1.format(shares));
-					customerFund[i].setName(fundDAO.getFundName(fund_id));
-					customerFund[i].setSymbol(fundDAO.getFundSymbol(fund_id));
+					customerFund[i].setName(fundDAO.read(fund_id).getName());
+					customerFund[i].setSymbol(fundDAO.read(fund_id).getSymbol());
 					customerFund[i].setPrice(formatter1.format(price));
 					customerFund[i].setValue(formatter2.format(price * shares));
 				}
 				request.setAttribute("customerfund", customerFund);
 
-			} else {
-				VisitorBean[] customerlist = visitorDAO.getAllCustomers();
-				if (customerlist != null) {
-					request.setAttribute("customerlist", customerlist);
-				} else {
-					request.setAttribute("customerlist", null);
-				}
 			}
-
 			return Constants.employeeViewCustAccJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
