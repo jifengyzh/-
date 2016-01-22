@@ -18,7 +18,6 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 		employeeBean.setFirstName("admin");
 		employeeBean.setLastName("admin");
 		employeeBean.setUserName("admin");
-		employeeBean.setPassWord("123");
 	}
 	
 	
@@ -32,7 +31,6 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 		return employee[0];
 	}
 
-
 	public void setPassword(String userName, String password) throws RollbackException {
         try {
         	Transaction.begin();
@@ -42,7 +40,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 				throw new RollbackException("Employee "+ userName +" does not exists");
 			}
 			
-			employee.setPassWord(password);
+			employee.setPassword(password);
 			update(employee);
 			Transaction.commit();
 		} finally {
