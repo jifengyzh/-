@@ -43,7 +43,7 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${errors}</p>
+                <p>User name and password do not match</p>
                 <a href="#">Return</a>
               </div>
             </div>
@@ -75,25 +75,25 @@
               <div class="panel-body">
                 <form method="post" action="employee_create_customer_account.do" >
                   <label>User Name</label>
-                  <input type="text" class="form-control" name="userName" /><br>
+                  <input type="text" class="form-control" name="userName" value=${form.userName} /><br>
                   <label>Password</label>
-                  <input type="password" class="form-control" name="password" /><br>
+                  <input type="password" class="form-control" name="password"/><br>
                   <label>Confirm Password</label>
                   <input type="password" class="form-control" name="confirmPassword" /><br>
                   <label>First Name</label>
-                  <input type="text" class="form-control" name="firstName" /><br>
+                  <input type="text" class="form-control" name="firstName" value=${form.firstName} /><br>
                   <label>Last Name</label>
-                  <input type="text" class="form-control" name="lastName" /><br>
+                  <input type="text" class="form-control" name="lastName" value=${form.lastName} /><br>
                   <label>Address Line 1</label>
-                  <input type="text" class="form-control" name="addrLine1" /><br>
+                  <input type="text" class="form-control" name="addrLine1" value=${form.addrLine1} /><br>
                   <label>Address Line 2</label>
-                  <input type="text" class="form-control" name="addrLine2" /><br>
+                  <input type="text" class="form-control" name="addrLine2" value=${form.addrLine2} /><br>
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" /><br>
+                  <input type="text" class="form-control" name="city" value=${form.city} /><br>
                   <label>State</label>
-                  <input type="text" class="form-control" name="state" /><br>
+                  <input type="text" class="form-control" name="state" value=${form.state} /><br>
                   <label>Zip</label>
-                  <input type="text" class="form-control" name="zip" /><br>
+                  <input type="text" class="form-control" name="zip" value=${form.zip} /><br>
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>
