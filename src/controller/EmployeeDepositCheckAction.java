@@ -23,6 +23,7 @@ import model.TransactionDAO;
 import model.VisitorDAO;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class EmployeeDepositCheckAction extends Action{
 
@@ -43,9 +44,11 @@ public class EmployeeDepositCheckAction extends Action{
 
 	@Override
 	public String perform(HttpServletRequest request) {
-
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employeeUserName") == null)
+			return Constants.mainPage;
 
 		try {
             EmployeeDepositCheckForm form = formBeanFactory.create(request);
@@ -66,21 +69,21 @@ public class EmployeeDepositCheckAction extends Action{
                 	errors.add("Customer does not exist");
                 	return Constants.employeeDepositCheckJsp;
                 }
-            	transactionDAO.depositCheck(visitor.getVisitorId(), form.getAmountAsDouble());
+            	transactionDAO.depositCheck(visitor.getVisitorId(), form.getAmountAsDouble() * 100);
             }
             
-			DecimalFormat formatter = new DecimalFormat("#,##0.00");		
-            return Constants.employeeConfirmJsp;
+			request.setAttribute("success", "success");
+            return Constants.employeeDepositCheckJsp;
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.employeeDepositCheckJsp;
         } catch (NumberFormatException e) {
         	errors.add(e.getMessage());
-			return "error.jsp";
+        	return Constants.employeeDepositCheckJsp;
         }  catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.employeeDepositCheckJsp;
 		}  
 	}
 }

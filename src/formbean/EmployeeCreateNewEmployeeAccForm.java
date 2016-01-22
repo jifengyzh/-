@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class EmployeeCreateCustomerAccForm extends FormBean {
+public class EmployeeCreateNewEmployeeAccForm extends FormBean {
   private String userName;
 	private String password;
 	private String confirmPassword;
@@ -48,7 +48,7 @@ public class EmployeeCreateCustomerAccForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 		if (userName == null || userName.length() == 0) errors.add("Username is required");
 		if (password == null || password.length() == 0) errors.add("Password is required");
-	  if (confirmPassword == null || confirmPassword.length() == 0) errors.add("Confirm password is required");  
+	    if (confirmPassword == null || confirmPassword.length() == 0) errors.add("Confirm password is required");  
 		if (firstName == null || firstName.length() == 0) errors.add("First name is required");
         if (lastName == null || lastName.length() == 0) errors.add("Last name is required");
         

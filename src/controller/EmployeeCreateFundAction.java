@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -22,11 +23,9 @@ public class EmployeeCreateFundAction extends Action {
 			.getInstance(EmployeeCreateFundForm.class);
 
 	private FundDAO fundDAO;
-	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public EmployeeCreateFundAction(Model model) {
 		fundDAO = model.getFundDAO();
-		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	public String getName() {
@@ -38,6 +37,9 @@ public class EmployeeCreateFundAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		request.setAttribute("success", null);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employeeUserName") == null)
+			return Constants.mainPage;
 
 		try {
 			EmployeeCreateFundForm form = formBeanFactory.create(request);
