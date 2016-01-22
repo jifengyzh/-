@@ -16,7 +16,7 @@
 
 <body>
   <!-- nav bar-->
-  <jsp:include page="customer-header.jsp" />
+  <jsp:include page="employee-header.jsp" />
 
   <div class="container-fluid">
     <div class="row-fluid">

@@ -16,7 +16,7 @@
 
 <body>
   <!-- nav bar-->
-  <jsp:include page="customer-header.jsp" />
+  <jsp:include page="employee-header.jsp" />
 
   <div class="container-fluid">
     <div class="row-fluid">
@@ -43,7 +43,7 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>User name and password do not match</p>
+                <p>${error}</p>
                 <a href="#">Return</a>
               </div>
             </div>

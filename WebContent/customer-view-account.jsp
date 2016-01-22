@@ -43,7 +43,7 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>User name and password do not match</p>
+                <p>${error}</p>
                 <a href="#">Return</a>
               </div>
             </div>
@@ -58,7 +58,7 @@
                 <h3 class="panel-title">Success!</h3>
               </div>
               <div class="panel-body">
-                <p>You have successfully buy</p>
+                <p>${success}</p>
                 <a href="#">Return</a>
               </div>
             </div>
