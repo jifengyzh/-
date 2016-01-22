@@ -124,5 +124,9 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		}
 	}
 	
+	public Date getLastTradingDate(int visitorId) throws RollbackException {
+		VisitorBean visitor = read(visitorId);
+		return (Date) visitor.getLastTradingDate();
+	}
 	
 }
