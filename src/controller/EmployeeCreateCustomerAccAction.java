@@ -39,6 +39,7 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		
 		try {
 			EmployeeCreateCustomerAccForm form = createAccFormFactory.create(request);
+			request.setAttribute("form", form);
 			if (!form.isPresent()) return Constants.employeeCreateCustomerAccJsp;
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return Constants.employeeCreateCustomerAccJsp;
