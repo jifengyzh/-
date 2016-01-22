@@ -17,10 +17,9 @@ import databean.FundPriceHistoryBean;
 
 public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 
-	public FundPriceHistoryDAO(Class<FundPriceHistoryBean> beanClass, String tableName, ConnectionPool connectionPool)
+	public FundPriceHistoryDAO(ConnectionPool connectionPool, String name)
 			throws DAOException {
-		super(FundPriceHistoryBean.class, tableName, connectionPool);
-		// TODO Auto-generated constructor stub
+		super(FundPriceHistoryBean.class, name, connectionPool);
 	}
 
 

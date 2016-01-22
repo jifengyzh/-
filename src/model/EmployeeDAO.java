@@ -14,6 +14,11 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 	
 	public EmployeeDAO(ConnectionPool cp, String tableName) throws DAOException {
 		super(EmployeeBean.class, tableName, cp);
+		EmployeeBean employeeBean = new EmployeeBean();
+		employeeBean.setFirstName("admin");
+		employeeBean.setLastName("admin");
+		employeeBean.setUserName("admin");
+		employeeBean.setPassword("123");
 	}
 	
 	

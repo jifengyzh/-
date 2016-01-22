@@ -98,7 +98,7 @@ public class VisitorSellFundAction extends Action{
 			
 			request.setAttribute("sharesBalance", sharesBalance);
 			request.setAttribute("alert", "Your request has been pending to be processed");
-			return Constants.visitorBuyConfirmJsp;
+			return Constants.visitorSellJsp;
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

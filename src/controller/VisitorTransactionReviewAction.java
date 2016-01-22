@@ -39,14 +39,14 @@ public class VisitorTransactionReviewAction extends Action {
 		
 		if (transactionBeans == null) {
 			errors.add("No such visitor");
-			return Constants.errorJsp;
+			return Constants.visitorViewTransHistoryJsp;
 		}
 		
 		request.setAttribute("transactionBeans", transactionBeans);
 		return Constants.visitorViewTransHistoryJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorViewTransHistoryJsp;
 		}
 	}
 	

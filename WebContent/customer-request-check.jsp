@@ -1,3 +1,8 @@
+<!--Author: Xiangfei Dong-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,50 +22,13 @@
 
 <body>
   <!-- nav bar-->
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Carnegie Financial Service</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Fund <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Buy Fund</a></li>
-            <li><a href="#">Sell Fund</a></li>
-            <li><a href="#">Request Check</a></li>
-            <li><a href="#">View History</a></li>
-            <li><a href="#">Reserach Fund</a></li>
-          </ul>
-        </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">View Account</a></li>
-            <li><a href="#">Change Password</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
-    </div>
-  </nav>
+  <jsp:include page="customer-header.jsp" />
 
   <div class="container-fluid">
     <div class="row-fluid">
       <!--side bar-->
       <div class="col-sm-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Manage Fund</h3>
-          </div>
-          <div class="panel-body">
-            <a href="#">Buy Fund</a><br><br>
-            <a href="#">Sell Fund</a><br><br>
-            <a href="#">Request Check</a><br><br>
-            <a href="#">View History</a><br><br>
-            <a href="#">Reasearch Fund</a><br><br>
-          </div>
-      </div>
+        <jsp:include page="customer-manage-fund-sidebar.jsp" />
       </div>
 
       <!--content-->
@@ -72,6 +40,36 @@
             <li class="active">Request Check</li>
           </ul>
         </div>
+
+        <!--error panel-->
+        <c:if test="${not empty errors}">
+          <div>
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Warning!</h3>
+              </div>
+              <div class="panel-body">
+                <p>User name and password do not match</p>
+                <a href="#">Return</a>
+              </div>
+            </div>
+          </div>
+        </c:if>
+
+        <!--success panel-->
+        <c:if test="${not empty alert}">
+          <div>
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Success!</h3>
+              </div>
+              <div class="panel-body">
+                <p>${alert}</p>
+              </div>
+            </div>
+          </div>
+        </c:if>
+
         <!--buy fund-->
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -89,8 +87,12 @@
             </form>
           </div>
         </div>
-
       </div>
+    </div>
+  </div>
+
+  <!--footer-->
+  <jsp:include page="footer.jsp" />
 
 </body>
 </html>

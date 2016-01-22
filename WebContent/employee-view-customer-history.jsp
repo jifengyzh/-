@@ -1,3 +1,8 @@
+<!--Author: Xiangfei Dong-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,56 +16,13 @@
 
 <body>
   <!-- nav bar-->
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Carnegie Financial Service</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Employees <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Change My Password</a></li>
-            <li><a href="#">Create Employee Account</a></li>
-          </ul>
-        </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Customers <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Create Customer Account</a></li>
-            <li><a href="#">Reset Customer Password</a></li>
-            <li><a href="#">View Customer Account</a></li>
-            <li><a href="#">View Customer History</a></li>
-            <li><a href="#">Deposit Check</a></li>
-          </ul>
-        </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Fund <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Create Fund</a></li>
-            <li><a href="#">Transition Day</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
-    </div>
-  </nav>
+  <jsp:include page="customer-header.jsp" />
 
   <div class="container-fluid">
     <div class="row-fluid">
       <!--side bar-->
       <div class="col-sm-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Manage Customers</h3>
-          </div>
-          <div class="panel-body">
-            <a href="#">Create Customer Account</a><br><br>
-            <a href="#">Reset Customer Password</a><br><br>
-            <a href="#">View Customer Account</a><br><br>
-            <a href="#">View Customer History</a><br><br>
-            <a href="#">Deposit Check</a><br>
-          </div>
-        </div>
+        <jsp:include page="employee-manage-customers-sidebar.jsp" />
       </div>
 
       <!--content-->
@@ -72,6 +34,36 @@
             <li class="active">View History</li>
           </ul>
         </div>
+
+        <!--error panel-->
+        <c:if test="${not empty errors}">
+          <div>
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Warning!</h3>
+              </div>
+              <div class="panel-body">
+                <p>User name and password do not match</p>
+                <a href="#">Return</a>
+              </div>
+            </div>
+          </div>
+        </c:if>
+
+        <!--success panel-->
+        <c:if test="${not empty success}">
+          <div>
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Success!</h3>
+              </div>
+              <div class="panel-body">
+                <p>You have successfully buy</p>
+                <a href="#">Return</a>
+              </div>
+            </div>
+          </div>
+        </c:if>
         
         <div class="row">
           <div class="col-sm-8">
@@ -144,10 +136,13 @@
                 </div>
               </div>
           </div>
-
-
+        </div>
+      </div>
     </div>
   </div>
+
+  <!--footer-->
+  <jsp:include page="footer.jsp" />
 
 </body>
 </html>

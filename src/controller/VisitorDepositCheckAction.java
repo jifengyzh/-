@@ -91,10 +91,10 @@ public class VisitorDepositCheckAction extends Action {
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorRequestJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorRequestJsp;
 		}
 		
 	}

@@ -12,9 +12,8 @@ import databean.FundBean;
 
 public class FundDAO extends GenericDAO<FundBean>{
 
-	public FundDAO(Class<FundBean> beanClass, String tableName, ConnectionPool connectionPool) throws DAOException {
+	public FundDAO(ConnectionPool connectionPool, String tableName) throws DAOException {
 		super(FundBean.class, tableName, connectionPool);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public FundBean readFundName(String fundName) throws RollbackException {

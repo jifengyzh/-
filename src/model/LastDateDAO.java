@@ -12,9 +12,9 @@ import databean.LastDateBean;
 
 public class LastDateDAO extends GenericDAO<LastDateBean> {
 
-	public LastDateDAO(Class<LastDateBean> beanClass, String tableName, ConnectionPool connectionPool)
+	public LastDateDAO(ConnectionPool connectionPool, String tableName)
 			throws DAOException {
-		super(beanClass, tableName, connectionPool);
+		super(LastDateBean.class, tableName, connectionPool);
 		// TODO Auto-generated constructor stub
 	}
 	public Date getLastDate() throws RollbackException {
