@@ -20,10 +20,10 @@ public class VisitorBean {
 	private String    state;
 	private String    zip;
 	private long      cash;
-	private Date lastTradeDate;
 	private long      availableCash;
 	private int 		salt = 0;
 	private String  hashedPassword = "*";
+	private Date lastTradingDate;
 	
 	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
@@ -36,10 +36,12 @@ public class VisitorBean {
 	public String    getState()           { return state;           }
 	public String    getZip()             { return zip;             }
 	public long      getCash()            { return cash;            }
-	public Date getLastTradeDate() {return lastTradeDate;}
 	public long      getAvailableCash()   { return availableCash;   }
 	public int  getSalt()           { return salt;           }
 	public String getHashedPassword() { return hashedPassword; }
+	public Date getLastTradingDate() {
+		return lastTradingDate;
+	}
 	
 	
 	public int     hashCode()          { return userName.hashCode(); }	
@@ -55,7 +57,7 @@ public class VisitorBean {
 	public void   setState(String s)          { state = s;            }
 	public void   setZip(String s)            { zip = s;              }
 	public void   setCash(long l)             { cash = l;             }
-	public void setLastTradeDate(Date d) {  lastTradeDate = d;}
+	public void setLastTradingDate(Date d) {  lastTradingDate = d;}
 	public void   setAvailableCash(long l)    { availableCash = l;    }
 	public void setSalt(int x) 				{salt = x;}
 	public void setHashedPassword(String s) {hashedPassword = s;}

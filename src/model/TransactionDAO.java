@@ -110,7 +110,20 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 		}
 	}
 	
-	public Date getLastTrading
+//	public Date getLastTradingDay(int visitorId) throws RollbackException {
+//		TransactionBean[] beans = match(MatchArg.equals("visitId", visitorId));
+//		if (beans == null) {
+//			return null;
+//		}
+//		
+//		java.util.Date date = beans[0].getExecuteDate();
+//		for (int i = 1; i < beans.length; i++) {
+//			if (date < beans[i].getExecuteDate()) {
+//				date = beans[i].getExecuteDate();
+//			}
+//		}
+//		return date;
+//	}
 	
 	public TransactionBean[] getLastDayTransaction(Date date) throws RollbackException {
 		TransactionBean[] beans = match(MatchArg.equals("executeDate", date));

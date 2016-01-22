@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
@@ -78,12 +80,19 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 	 * @param transactionBean
 	 * @throws RollbackException 
 	 */
-	public void updateAvailableCash(TransactionBean transactionBean) throws RollbackException {
-		VisitorBean bean = read(transactionBean.getVisitorId());
-		bean.setAvailableCash(bean.getAvailableCash() - transactionBean.getAmount());
+	public void updateAvailableCash(int visitorId, long amount) throws RollbackException {
+		
+		VisitorBean bean = read(visitorId);
+		bean.setAvailableCash(bean.getAvailableCash() - amount);
 		update(bean);
 	}
 	
+	/**
+	 * after employee transitionday, update visitor's balance according to just processed transactions
+	 * @param transactionBeans the transaction been processed in the last trading day
+	 * @param date
+	 * @throws RollbackException
+	 */
 	public void updateVisitor(TransactionBean[] transactionBeans) throws RollbackException {
 		for (TransactionBean bean : transactionBeans) {
 			VisitorBean visitorBean = read(bean.getVisitorId());
@@ -109,29 +118,11 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 				visitorBean.setCash(cash + amount);
 			}
 			
+			visitorBean.setLastTradingDate(bean.getExecuteDate());
 			update(visitorBean);
 				
 		}
 	}
 	
-	public VisitorBean updateCash(int visitorId, long cash) throws RollbackException {
-		// Calls GenericDAO's match() method.
-        	try {
-			Transaction.begin();
-			
-			VisitorBean[] a = match(MatchArg.equals("visitorId", visitorId));
-			VisitorBean visitorBean;
-			if (a.length == 0) {
-				visitorBean = null;
-			} else {
-				visitorBean = a[0];
-				visitorBean.setCash(visitorBean.getCash() + cash);
-				update(visitorBean);
-			}
-    			Transaction.commit();
-    			return visitorBean;
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}
-	}
+	
 }
