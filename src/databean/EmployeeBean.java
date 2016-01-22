@@ -20,7 +20,7 @@ public class EmployeeBean {
 		return userName;
 	}
 
-	public String getPassWord() {
+	public String getPassword() {
 		return password;
 	}
 

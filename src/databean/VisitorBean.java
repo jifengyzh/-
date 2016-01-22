@@ -27,7 +27,7 @@ public class VisitorBean {
 	
 	public int      getVisitorId()      { return visitorId;      }
 	public String    getUserName()        { return userName;        }
-	public String    getPassWord()        { return password;        }
+	public String    getPassword()        { return password;        }
 	public String    getFirstName()       { return firstName;       }
 	public String    getLastName()        { return lastName;        }
 	public String    getAddrLine1()       { return addrLine1;       }
@@ -48,7 +48,7 @@ public class VisitorBean {
 	
 	public void   setVisitorId(int l)       { visitorId = l;       }
 	public void   setUserName(String s)       { userName = s;         }
-	public void setPassword(String s)        {password = s ;}
+	public void 	setPassword(String s)        {password = s ;}
 	public void   setFirstName(String s)      { firstName = s;        }
 	public void   setLastName(String s)       { lastName = s;         }
 	public void   setAddrLine1(String s)      { addrLine1 = s;        }
