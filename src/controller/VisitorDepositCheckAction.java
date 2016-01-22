@@ -12,11 +12,9 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.TransactionBean;
 import databean.VisitorBean;
 import formbean.EmployeeDepositCheckForm;
 import model.Model;
-import model.MyDAOException;
 import model.TransactionDAO;
 import model.VisitorDAO;
 
@@ -33,7 +31,7 @@ public class VisitorDepositCheckAction extends Action {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return Constants.visitorDepositAction;
+		return Constants.visitorRequestAction;
 	}
 
 	@Override
@@ -57,34 +55,39 @@ public class VisitorDepositCheckAction extends Action {
 			request.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
-				return Constants.visitorDepositeJsp;
+				return Constants.visitorRequestJsp;
 			}
 			
 			errors.addAll(form.getValidationErrors());
 			
 			if (errors.size() != 0) {
-				return Constants.visitorDepositeJsp;
+				return Constants.visitorRequestJsp;
 			}
 			
 			long amount = Long.valueOf(form.getAmount());
 			
 			if (amount <= 0 ) {
 				errors.add("Amount you input is not illegal");
-				return Constants.visitorDepositeJsp;
+				return Constants.visitorRequestJsp;
 			}
 			
-			//create new transactionBean type = 4 deposite check
-			TransactionBean transactionBean = new TransactionBean();
-			transactionBean.setVisitorId(visitorId);
-			transactionBean.setAmount(amount);
-			int transactionType = 4;
-			transactionBean.setTransactionType(transactionType);
-			transactionDAO.depositCheck(transactionBean);
+			long currentCash = visitorDAO.getAvailableCash(visitorId);
+			if (amount > currentCash) {
+				errors.add("No enough cash");
+				return Constants.visitorRequestJsp;
+			}
+			//create pending transaction (transaction without execute date)
+			transactionDAO.requestCheck(visitorId, amount);
+			//update available cash of visitor according amount
+			visitorDAO.updateCash(visitorId, amount);
 			
+			long cashBalance = visitorDAO.getAvailableCash(visitorId);
+			
+			request.setAttribute("cashBalance", cashBalance);
 			request.setAttribute("alert", "Your deposit request for $ " + 
 										formatter.format(amount) + " has been waited for transaction");
 			
-			return Constants.visitorDepositConfirmJsp;
+			return Constants.visitorRequestJsp;
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

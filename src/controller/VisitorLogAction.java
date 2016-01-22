@@ -12,12 +12,10 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import model.VisitorDAO;
 import databean.VisitorBean;
 import formbean.LoginForm;
 import model.LastDateDAO;
 import model.Model;
-import model.MyDAOException;
 import model.PositionDAO;
 import model.TransactionDAO;
 import model.VisitorDAO;
@@ -29,13 +27,11 @@ public class VisitorLogAction extends Action{
 	
 	private VisitorDAO visitorDAO;
 	private TransactionDAO transactionDAO;
-	private PositionDAO positionDAO;
 	private LastDateDAO lastdateDAO;
 	
 	public VisitorLogAction(Model model) {
 		visitorDAO = model.getVisitorDAO();
 		transactionDAO = model.getTransactionDAO();
-		positionDAO = model.getPositionDAO();
 	}
 	
 	@Override
@@ -90,7 +86,7 @@ public class VisitorLogAction extends Action{
 	        int visitorId = (Integer) visitor.getVisitorId();
 	        session.setAttribute("visitorId", visitorId);
 	        //Get the specific customer lastTradeDate.
-	        Date lastTradeDate = transactionDAO.lastTradingDate(visitorId);
+	        Date lastTradeDate = visitorDAO.getLastTradingDate(visitorId);
 	        visitor.setLastTradeDate(lastTradeDate);
 			session.setAttribute("firstname", visitor.getFirstName());
 			session.setAttribute("lastname", visitor.getLastName());

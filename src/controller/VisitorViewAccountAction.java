@@ -13,13 +13,11 @@ import org.genericdao.RollbackException;
 import FilterAndConstant.Constants;
 import databean.CustomerFundBean;
 import databean.PositionBean;
-import databean.TransactionBean;
 import databean.VisitorBean;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
 import model.PositionDAO;
-import model.TransactionDAO;
 import model.VisitorDAO;
 
 public class VisitorViewAccountAction extends Action {
@@ -60,7 +58,7 @@ public class VisitorViewAccountAction extends Action {
 				double price = fundPriceHistoryDAO.getFundPrice(positionBeans[i].getFundId(), (Date)session.getAttribute("lastDate"));
 				double shares = positionBeans[i].getAvailableShares() / 1000;
 				
-				customerFundBeans[i].setName(fundDAO.getFundName(positionBeans[i].getFundId()));
+				customerFundBeans[i].setName(fundDAO.read(positionBeans[i].getFundId()).getName());
 				customerFundBeans[i].setShares(formatter1.format(shares));
 				customerFundBeans[i].setPrice(formatter1.format(price));
 				customerFundBeans[i].setValue(formatter2.format(price * shares));

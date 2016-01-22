@@ -10,11 +10,9 @@ import javax.servlet.http.HttpSession;
 import FilterAndConstant.Constants;
 import databean.CustomerFundBean;
 import databean.FundBean;
-import databean.FundPriceHistoryBean;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
-import model.MyDAOException;
 
 public class VisitorResearchFundAction extends Action {
 	

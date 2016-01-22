@@ -10,18 +10,14 @@ import org.genericdao.RollbackException;
 
 import FilterAndConstant.Constants;
 import databean.TransactionBean;
-import databean.VisitorBean;
 import model.Model;
 import model.TransactionDAO;
-import model.VisitorDAO;
 
 public class VisitorTransactionReviewAction extends Action {
 	private TransactionDAO transactionDAO;
-	private VisitorDAO visitorDAO;
 	
 	public VisitorTransactionReviewAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
-		visitorDAO = model.getVisitorDAO();
 	}
 
 	@Override

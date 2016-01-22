@@ -47,9 +47,9 @@ public class Constants {
 	public static final String visitorBuyJsp = new String("visitor_buy_action.jsp");
 	public static final String visitorBuyConfirmJsp = new String("visitor_comfirmation.jsp");
 	
-	public static final String visitorDepositAction = new String("visitor_deposit_check.do");
-	public static final String visitorDepositeJsp = new String("visitor_deposit_check.jsp");
-	public static final String visitorDepositConfirmJsp = new String("visitor_deposit_check_success.jsp");
+	public static final String visitorRequestAction = new String("visitor_deposit_check.do");
+	public static final String visitorRequestJsp = new String("visitor_deposit_check.jsp");
+	public static final String visitorRequestConfirmJsp = new String("visitor_deposit_check_success.jsp");
 	
 	
 	public static final String visitorViewAccountAction = new String("visitor_view_account.do");
