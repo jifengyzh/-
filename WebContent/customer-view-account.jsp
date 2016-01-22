@@ -22,7 +22,7 @@
     <div class="row-fluid">
       <!--side bar-->
       <div class="col-sm-3">
-        <jsp:include page="customer-account-sidebar" />
+        <jsp:include page="customer-account-sidebar.jsp" />
       </div>
 
       <!--content-->

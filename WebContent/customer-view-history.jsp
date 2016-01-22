@@ -102,10 +102,10 @@
                       <td>${transaction.fundId}</td>
                       <td>${transaction.executeDate}</td>
                       <td>
-                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
-                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
-                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
-                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
+                        <c:if test="${transaction.transactionType == 1}">Buy Fund</c:if>
+                        <c:if test="${transaction.transactionType == 2}">Sell Fund</c:if>
+                        <c:if test="${transaction.transactionType == 3}">Request Check</c:if>
+                        <c:if test="${transaction.transactionType == 4}">Deposit Check</c:if>
                       </td>
                       <td>${transaction.shares}</td>
                       <td>${transaction.sharePrice}</td>
@@ -120,10 +120,10 @@
                       <td>${transaction.fundId}</td>
                       <td>-</td>
                       <td>
-                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
-                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
-                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
-                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
+                        <c:if test="${transaction.transactionType == 1}">Buy Fund</c:if>
+                        <c:if test="${transaction.transactionType == 2}">Sell Fund</c:if>
+                        <c:if test="${transaction.transactionType == 3}">Request Check</c:if>
+                        <c:if test="${transaction.transactionType == 4}">Deposit Check</c:if>
                       </td>
                       <td>${transaction.shares}</td>
                       <td>${transaction.sharePrice}</td>
