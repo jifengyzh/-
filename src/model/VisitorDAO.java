@@ -34,16 +34,16 @@ public class VisitorDAO extends GenericDAO<VisitorBean>{
 		return visitorBean;
 	}
 	
-	public VisitorBean readVisitor(int visitorId) throws RollbackException {
-		VisitorBean[] a = match(MatchArg.equals("visitorId",visitorId));
-		VisitorBean visitorBean;
-		if (a.length == 0) {
-			visitorBean = null;
-		} else {
-			visitorBean = a[0];
-		}
-		return visitorBean;
-	}
+//	public VisitorBean readVisitor(int visitorId) throws RollbackException {
+//		VisitorBean[] a = match(MatchArg.equals("visitorId",visitorId));
+//		VisitorBean visitorBean;
+//		if (a.length == 0) {
+//			visitorBean = null;
+//		} else {
+//			visitorBean = a[0];
+//		}
+//		return visitorBean;
+//	}
 
 	
 	public void setPassword(long l, String password) throws RollbackException {
