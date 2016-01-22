@@ -18,11 +18,13 @@ import model.Model;
 public class Controller extends HttpServlet {
 	public void init() throws ServletException {
 		Model model = null;
+		System.out.println("Init begin.");
 		try {
 			model = new Model(getServletConfig());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Init failed!");
 		}
 		Action.add(new VisitorBuyAction(model));
 		Action.add(new VisitorDepositCheckAction(model));
@@ -43,6 +45,7 @@ public class Controller extends HttpServlet {
 		Action.add(new EmployeeTransitionDayAction(model));
 		Action.add(new EmployeeViewCustomerAccountAction(model));
 		Action.add(new EmployeeViewTransactionHistoryAction(model));
+		System.out.println("Init successful!");
 
 	}
 
@@ -70,32 +73,17 @@ public class Controller extends HttpServlet {
 		String urlName = request.getRequestURL().toString();
 		urlName = getURLName(urlName);
 
-		// start
-		if (action.equals("start")) {
-			if (session.getAttribute("visitorId") != null) {
-				return Constants.visitorViewAccountAction;
-			}
-
-			if (session.getAttribute("employeeId") != null) {
-				return Constants.employeeMainPanelJsp;
-			}
-
-			return "index.jsp";
-		}
-
 		if (action.endsWith(".do")) {
 			if (containsAction(action, Constants.visitorActions)) {
 				if (session.getAttribute("customerId") == null) {
 					return Action.perform(Constants.logoutDo, request);
 				}
 			} else if (containsAction(action, Constants.employeeActions)) {
-				if (session.getAttribute("employeeId") == null) {
+				if (session.getAttribute("employeeUserName") == null) {
 					return Action.perform(Constants.logoutDo, request);
 				}
 			}
-
 		}
-
 		// Let the logged in user run his chosen action
 		return Action.perform(action, request);
 	}

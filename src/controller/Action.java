@@ -18,6 +18,7 @@ public abstract class Action {
 				throw new AssertionError("Duplicates action name");
 			}
 			map.put(action.getName(), action);
+			System.out.println(action.getName());
 		}
 	}
 
