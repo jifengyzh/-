@@ -6,6 +6,7 @@
 package controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
@@ -80,10 +82,16 @@ public class EmployeeTransitionDayAction extends Action {
         	
 	        // Display message
 	        request.setAttribute("success","Transition day successful!");
-	        return Constants.employeeTransitionDayAction;
+	        return Constants.employeeTransitionDayJsp;
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return Constants.employeeTransitionDayAction;
-        }
+        	return Constants.employeeTransitionDayJsp;
+        } catch (FormBeanException e) {
+        	errors.add(e.getMessage());
+        	return Constants.employeeTransitionDayJsp;
+        } catch (ParseException e) {
+			errors.add("Date format is not the correct type");
+			return Constants.employeeTransitionDayJsp;
+		}
     }
 }

@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -73,7 +73,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 		}
 	}
 	
-	public void processSellFundTransaction(HashMap<Integer, Integer> map, Date date) throws RollbackException{
+	public void processSellFundTransaction(HashMap<Integer, Long> map, Date date) throws RollbackException{
 		TransactionBean[] sTransactions = match(MatchArg.equals("transactionType", 2), MatchArg.equals("executeDate", null));
 		if (sTransactions == null || sTransactions.length == 0) {
 			return;
@@ -133,6 +133,15 @@ public class TransactionDAO extends GenericDAO<TransactionBean>{
 	public TransactionBean[] getTransactionHistory(int visitorId) throws RollbackException {
 		TransactionBean[] beans = match(MatchArg.equals("visitorId", visitorId));
 		return beans;
+	}
+
+	public void transitionDay(HashMap<Integer, Long> map,Date lastdate) throws RollbackException {
+		// TODO Auto-generated method stub
+		processBuyFundTransaction(map, lastdate);
+		processSellFundTransaction(map, lastdate);
+		processRequestCheckTransaction(lastdate);
+		processDepositCheckTransaction(lastdate);
+		
 	}
 	
 }
