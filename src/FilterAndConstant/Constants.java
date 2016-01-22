@@ -15,8 +15,18 @@ public class Constants {
 			
 	};
 	public static final String[] employeeActions = new String[] {
-			"admin_new_account.do",
-			"logout.do"
+			"employee_create_employee.do",
+			"logout.do",
+			"employee_create_customer_account.do",
+			"employee_login.do",
+			"employee_change_password.do",
+			"employee_reset_customer_password.do",
+			"employee_view_customer_account.do",
+			"employee_view_customer_transaction_history.do",
+			"employee_deposit_check.do",
+			"employee_create_fund.do",
+			"employee_transition_day.do"
+			
 	};
 	
 	public static final String[] visitorJSP  = new String[] {

@@ -55,6 +55,7 @@ public class EmployeeTransitionDayAction extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         request.setAttribute("success", null);
+        HttpSession session = request.getSession();
         try {
         	synchronized(this) {
 	        	EmployeeTransitionDayForm form = formBeanFactory.create(request);
