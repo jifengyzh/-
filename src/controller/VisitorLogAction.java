@@ -94,10 +94,10 @@ public class VisitorLogAction extends Action{
 			return Constants.visitorViewAccountJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorViewAccountJsp;
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return Constants.errorJsp;
+			return Constants.visitorViewAccountJsp;
 		}
 	}
 

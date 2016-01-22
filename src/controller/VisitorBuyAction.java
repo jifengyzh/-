@@ -126,13 +126,13 @@ public class VisitorBuyAction extends Action{
 			request.setAttribute("alert", "Thank you! your request to buy " + form.getFundName() + 
 			"has been queued until transaction day");
 			
-			return Constants.visitorBuyConfirmJsp;
+			return Constants.visitorBuyJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
-			return Constants.errorJsp;
+			return Constants.visitorBuyJsp;
 		} catch (RollbackException e) {
 			errors.add(e.toString());
-			return Constants.errorJsp;
+			return Constants.visitorBuyJsp;
 		}
 	}
 }
