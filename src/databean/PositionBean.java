@@ -4,11 +4,14 @@
 
 package databean;
 
+import org.genericdao.PrimaryKey;
+
 /**
  * 
  * @author MikeYang
  *
  */
+@PrimaryKey("visitorId")
 public class PositionBean {
 	private int visitorId;
 	private int fundId;
