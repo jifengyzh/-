@@ -36,9 +36,6 @@ public class EmployeeCreateCustomerAccAction extends Action{
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		request.setAttribute("success", null);
-		HttpSession session = request.getSession();
-		if (session.getAttribute("employeeUserName") == null)
-			return Constants.mainPage;
 		
 		try {
 			EmployeeCreateCustomerAccForm form = createAccFormFactory.create(request);

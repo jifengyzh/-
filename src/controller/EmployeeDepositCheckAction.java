@@ -40,8 +40,6 @@ public class EmployeeDepositCheckAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession();
-		if (session.getAttribute("employeeUserName") == null)
-			return Constants.mainPage;
 
 		try {
 			EmployeeDepositCheckForm form = formBeanFactory.create(request);
