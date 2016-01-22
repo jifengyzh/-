@@ -39,7 +39,7 @@
             <form role="form" method="POST" action="visitor_login.do" onSubmit="return false;">
               <div class="form-group">
                 <label for="exampleInputEmail1">User Name</label>
-                <input type="text" class="form-control" name="username" />
+                <input type="text" class="form-control" name="userName" />
               </div>
               <div class="form-group"> 
                 <label for="exampleInputPassword1">Password</label>

@@ -41,9 +41,9 @@ public class EmployeeLoginAction extends Action {
 		HttpSession session = request.getSession();
 		session = request.getSession();
 		// If employee is already logged in, redirect to employee-mainpanel.jsp
-		if (session.getAttribute("employeeUserName") != null) {
-			return Constants.employeeMainPanelJsp;
-		}
+//		if (session.getAttribute("employeeUserName") != null) {
+//			return Constants.employeeMainPanelJsp;
+//		}
 
 		// If customer is already logged in, redirect to customer-mainpanel.jsp
 		if (session.getAttribute("customerId") != null) {
