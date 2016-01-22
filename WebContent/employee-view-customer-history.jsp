@@ -88,28 +88,75 @@
               </div>
               <div class="panel-body">
                 <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Date</th><th>Operation</th><th>Fund Name</th><th>Shares</th><th>Price</th><th>Value</th><th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+              <thead>
+                <tr>
+                  <th>Transaction#</th><th>Fund#</th><th>Execute Date</th><th>Operation</th><th>Shares</th><th>Price</th><th>Amount</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach var="transaction" items="${transactions}">
+                  <!--if trasction.executeDate is not equal to null, the trasaction has been processed-->
+                  <c:if test="${not empty transaction.executeDate}">
                     <tr class="success">
-                      <td>2016-01-01</td><td>Buy</td><td>Google</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                      <td>${transaction.transactionId}</td>
+                      <td>${transaction.fundId}</td>
+                      <td>${transaction.executeDate}</td>
+                      <td>
+                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
+                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
+                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
+                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
+                      </td>
+                      <td>${transaction.shares}</td>
+                      <td>${transaction.sharePrice}</td>
+                      <td>${transaction.amount}</td>
+                      <td>Processed</td>
                     </tr>
+                  </c:if>
+                  <!--if trasction.executeDate is equal to null, the trasaction is pending-->
+                  <c:if test="${empty transaction.executeDate}">
                     <tr class="success">
-                      <td>2016-01-01</td><td>Buy</td><td>Yahoo</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                      <td>${transaction.transactionId}</td>
+                      <td>${transaction.fundId}</td>
+                      <td>-</td>
+                      <td>
+                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
+                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
+                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
+                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
+                      </td>
+                      <td>${transaction.shares}</td>
+                      <td>${transaction.sharePrice}</td>
+                      <td>${transaction.amount}</td>
+                      <td>Pending</td>
                     </tr>
-                    <tr class="info">
-                      <td>2016-01-02</td><td>Buy</td><td>Amazon</td><td>123</td><td>2</td><td>246</td><td>Pending</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  </c:if>
+                </c:forEach>
+              </tbody>
+            </table>
               </div>  
             </div>
           </div>
 
           <div class="col-sm-4">
+            <!--input user name-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Input Username</h3>
+                </div>
+                <div class="panel-body">
+                  <form class="form-inline" role="form" method="post" action="employee_view_customer_transaction_history.do">
+                    <div class="form-group"> 
+                      <label for="balance">Username</label>
+                      <input type="text" class="form-control" name="username" /><br><br>
+                    </div>
+                    <div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
             <!--user list-->
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -117,22 +164,19 @@
                 </div>
                 <div class="panel-body">
                   <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th><th>Username</th><th>Name</th><th></th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td><td>cmudxf</td><td>Xiangfei Dong</td><td><a href="#">View</a></td>
-                      </tr>
-                      <tr>
-                        <td>2</td><td>wthouse</td><td>Barack Obama</td><td><a href="#">View</a></td>
-                      </tr>
-                      <tr>
-                        <td>3</td><td>bjxjp</td><td>Jinping Xi</td><td><a href="#">View</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                      <thead>
+                        <tr>
+                          <th>Customer#</th><th>Username</th><th>Name</th><th></th>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="customer" items="${customerlist}">
+                      <td>${customer.visitorId} </td>
+                      <td>${customer.userName}</td>
+                      <td>${customer.firstName} ${customer.lastName}</td>
+                      <td><a href="employee_view_customer_transaction_history.do?username=${customer.userName}"></a>View</td>
+                     </c:forEach>
+                      </tbody>
+                    </table>
                 </div>
               </div>
           </div>

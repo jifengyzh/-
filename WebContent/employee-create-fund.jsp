@@ -73,11 +73,11 @@
                 <h3 class="panel-title">Create Fund</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form method="post" action="employee_create_fund.do" >
                   <label>Fund Name</label>
-                  <input type="text" class="form-control" name="fundname" /><br>
-                  <label>Ticker</label>
-                  <input type="text" class="form-control" name="ticker" /><br>
+                  <input type="text" class="form-control" name="fundName" /><br>
+                  <label>Symbol</label>
+                  <input type="text" class="form-control" name="symbol" /><br>
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>

@@ -68,13 +68,13 @@
                 <h3 class="panel-title">Change My Password</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form method="post" action="employee_change_password.do" >
                   <label>Current Password</label>
-                  <input type="password" class="form-control" name="currentPassword" /><br>
+                  <input type="password" class="form-control" name="oldPassword" /><br>
                   <label>New Password</label>
                   <input type="password" class="form-control" name="newPassword" /><br>
                   <label>Confirm</label>
-                  <input type="password" class="form-control" name="confirmPassword" /><br>
+                  <input type="password" class="form-control" name="confirmedPassword" /><br>
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>

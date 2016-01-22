@@ -71,10 +71,11 @@
             <h3 class="panel-title">Deposit Check</h3>
           </div>
           <div class="panel-body">
-            <h5 class="text-info">Balance: $ 3297.76<br><br></h5>
             <form class="form-inline" role="form" method="post" action="employee_deposit_check.do">
-              <label for="balance">Customer ID</label>
-              <input type="text" class="form-control" name="id" />
+              <h5 class="text-info">Customer Name<p id="customer-name"></p></h5>
+              <h5 class="text-info">Balance: $ <p id="customer-balance"></p></h5>
+              <label for="balance" id="customer-username">User Name</label>
+              <input type="text" class="form-control" name="userName" />
               <label for="balance">Amount $</label>
               <input type="text" class="form-control" name="amount" />
               <button type="submit" class="btn btn-default">Submit</button>
@@ -91,12 +92,26 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th><th>Username</th><th>Name</th><th></th>
+                  <th>Customer#</th><th>User Name</th><th>Name</th><th>Balance</th><th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td><td>cmudxf</td><td>Xiangfei Dong</td><td><a href="#">Deposit</a></td>
+                  <c:forEach var="customer" items="${customerlist}">
+                    <td>${customer.visitorId} </td>
+                    <td>${customer.userName}</td>
+                    <td>${customer.firstName} ${customer.lastName}</td>
+                    <td>${customer.availableCash} </td>
+                    <td><button type="submit" class="btn btn-default" onclick="show()">Deposit</button></td>
+                    <script>
+                      function show()
+                      {
+                          document.getElementById("customer-username").value = ${customer.userName};
+                          document.getElementById("customer-balance").value = ${customer.availableCash};
+                          document.getElementById("customer-name").value = ${customer.firstName} + " " + ${customer.lastName};
+                      }
+                    </script>
+                   </c:forEach>
                 </tr>
               </tbody>
             </table>

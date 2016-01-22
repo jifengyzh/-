@@ -89,17 +89,19 @@
                         <th>Fund ID</th><th>Name</th><th>Symbol</th><th>Closing Price</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <c:forEach var="fund" items="${fundList}">
-                        <input type="hidden" name="fundId" value="${fund.fundId}" />
-                        <tr>
-                          <td>${ fund.fundId }</td>
-                          <td>${ fund.fundName }</td>
-                          <td>${ fund.fundSymbol }</td>
-                          <td><input type="text" name="price" /></td>
-                        </tr>
-                      </c:forEach>
-                    </tbody>
+                    <form method="post" action="employee_transition_day.do" >
+                      <tbody>
+                        <c:forEach var="fund" items="${fundList}">
+                          <input type="hidden" name="fundId" value="${fund.fundId}" />
+                          <tr>
+                            <td>${ fund.fundId }</td>
+                            <td>${ fund.name }</td>
+                            <td>${ fund.symbol }</td>
+                            <td><input type="text" name="price" /></td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </form>
                   </table>
                   <div>
                     <button type="submit" class="btn btn-default">Submit</button>

@@ -73,13 +73,13 @@
                 <h3 class="panel-title">Reset Customer Password</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form method="post" action="employee_reset_customer_password.do" >
                   <label>User Name</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" /><br>
+                  <input type="text" class="form-control" name="userName" /><br>
                   <label>Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" /><br>
+                  <input type="password" class="form-control" name="password" /><br>
                   <label>Confirm Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" /><br>
+                  <input type="password" class="form-control" name="confirmedPassword" /><br>
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>

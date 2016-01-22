@@ -76,9 +76,9 @@
                 <div class="panel-body">
                   <p>
                     <h5 class="text-info">Name: </h5>
-                    <p>   Mike Shamos</p>
+                    <p>&nbsp;&nbsp;${visitor.firstName} ${visitor.lastName}</p>
                     <h5 class="text-info">Address</h5>
-                    <p>   417 South Craig Street<br>    Pittsburgh, PA 15213<br></p>
+                    <p>&nbsp;&nbsp;${visitor.addrLine1}<br>&nbsp;&nbsp;${visitor.addrLine1}<br>&nbsp;&nbsp;${visitor.zip} ${visitor.city}</p>
                   </p>
                 </div>
               </div>
@@ -89,24 +89,23 @@
                   <h3 class="panel-title">Customer's Funds</h3>
                 </div>
                 <div class="panel-body">
-                  <h5 class="text-info">Last Trading Day: </h5><p>2016-01-01</p>
-                  <h5 class="text-info">Cash Balance: </h5><p>$1233.32<p>
+                  <h5 class="text-info">Cash Balance: $</h5><p>${cash}<p>
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Fund No.</th><th>Fund Name</th><th>Shares</th><th>Value</th>
+                        <th>Fund No.</th><th>Fund Name</th><th>Fund Symbol</th><th>Shares</th><th>Available Shares</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
-                      <tr>
-                        <td>GOGL</td><td>Google</td><td>250</td><td>23403</td>
-                      </tr>
+                      <c:forEach var="fund" items="${customerfund}">
+                        <tr>
+                          <td>${fund.fundId} </td>
+                          <td>${fund.fundName}</td>
+                          <td>${fund.fundSymbol} </td>
+                          <td>${fund.shares} </td>
+                          <td>${fund.AvailableShares} </td>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -114,31 +113,46 @@
             </div>
 
             <div class="col-md-5">
-              <!--user list-->
-              <div class="panel panel-default">
+              <!--input user name-->
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Customer List</h3>
+                  <h3 class="panel-title">Input Username</h3>
                 </div>
                 <div class="panel-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th><th>Username</th><th>Name</th><th></th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td><td>cmudxf</td><td>Xiangfei Dong</td><td><a href="#">View</a></td>
-                      </tr>
-                      <tr>
-                        <td>2</td><td>wthouse</td><td>Barack Obama</td><td><a href="#">View</a></td>
-                      </tr>
-                      <tr>
-                        <td>3</td><td>bjxjp</td><td>Jinping Xi</td><td><a href="#">View</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <form class="form-inline" role="form" method="post" action="employee_view_customer_transaction_history.do">
+                    <div class="form-group"> 
+                      <label for="balance">Username</label>
+                      <input type="text" class="form-control" name="username" /><br><br>
+                    </div>
+                    <div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                  </form>
                 </div>
               </div>
+              
+              <!--user list-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Customer List</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Customer#</th><th>Username</th><th>Name</th><th></th>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="customer" items="${customerlist}">
+                      <td>${customer.visitorId} </td>
+                      <td>${customer.userName}</td>
+                      <td>${customer.firstName} ${customer.lastName}</td>
+                      <td><a href="employee_view_customer_account.do?username=${customer.userName}"></a>View</td>
+                     </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
             </div>
           </div>
         </div>

@@ -73,7 +73,7 @@
                 <h3 class="panel-title">Create Customer Account</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form method="post" action="employee_create_customer_account.do" >
                   <label>User Name</label>
                   <input type="text" class="form-control" name="userName" /><br>
                   <label>Password</label>
@@ -81,9 +81,9 @@
                   <label>Confirm Password</label>
                   <input type="password" class="form-control" name="confirmPassword" /><br>
                   <label>First Name</label>
-                  <input type="text" class="form-control" name="firstname" /><br>
+                  <input type="text" class="form-control" name="firstName" /><br>
                   <label>Last Name</label>
-                  <input type="text" class="form-control" name="lastname" /><br>
+                  <input type="text" class="form-control" name="lastName" /><br>
                   <label>Address Line 1</label>
                   <input type="text" class="form-control" name="addrLine1" /><br>
                   <label>Address Line 2</label>
