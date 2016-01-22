@@ -43,7 +43,6 @@ public class EmployeeCreateCustomerAccAction extends Action{
 			if (!form.isPresent()) return Constants.employeeCreateCustomerAccJsp;
 			errors.addAll(form.getValidationErrors());
 			if (!errors.isEmpty()) return Constants.employeeCreateCustomerAccJsp;
-			
 			VisitorBean customer = visitorDAO.read(form.getUserName());
 			if  (customer != null) {
 				errors.add("User already exists");
