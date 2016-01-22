@@ -30,7 +30,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 	
 	public EmployeeBean read(String userName) throws RollbackException {
 		EmployeeBean[] employee = match(MatchArg.equals("userName", userName));
-		if (employee.length == 0) return null;
+		if (employee == null || employee.length == 0) return null;
 		return employee[0];
 	}
 

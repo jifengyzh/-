@@ -9,33 +9,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
+
 import FilterAndConstant.Constants;
 import model.Model;
 
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
 	public void init() throws ServletException {
-        Model model = new Model(getServletConfig());
-
-        Action.add(new VisitorBuyAction(model));
-        Action.add(new VisitorDepositCheckAction(model));
-        Action.add(new VisitorLogAction(model));
-        Action.add(new VisitorPwdChangeAction(model));
-        Action.add(new VisitorResearchFundAction(model));
-        Action.add(new VisitorSellFundAction(model));
-        Action.add(new VisitorTransactionReviewAction(model));
-        Action.add(new VisitorViewAccountAction(model));
-        
-        Action.add(new EmployeeChangePwdAction(model));
-        Action.add(new EmployeeCreateCustomerAccAction(model));
-        Action.add(new EmployeeCreateEmployeeAccAction(model));
-        Action.add(new EmployeeCreateFundAction(model));
-        Action.add(new EmployeeDepositCheckAction(model));
-        Action.add(new EmployeeLoginAction(model));
-        Action.add(new EmployeeResetCustomerPasswordAction(model));
-        Action.add(new EmployeeTransitionDayAction(model));
-        Action.add(new EmployeeViewCustomerAccountAction(model));
-        Action.add(new EmployeeViewTransactionHistoryAction(model));
+        Model model;
+		try {
+			model = new Model(getServletConfig());
+	        Action.add(new VisitorBuyAction(model));
+	        Action.add(new VisitorDepositCheckAction(model));
+	        Action.add(new VisitorLogAction(model));
+	        Action.add(new VisitorPwdChangeAction(model));
+	        Action.add(new VisitorResearchFundAction(model));
+	        Action.add(new VisitorSellFundAction(model));
+	        Action.add(new VisitorTransactionReviewAction(model));
+	        Action.add(new VisitorViewAccountAction(model));
+	        
+	        Action.add(new EmployeeChangePwdAction(model));
+	        Action.add(new EmployeeCreateCustomerAccAction(model));
+	        Action.add(new EmployeeCreateEmployeeAccAction(model));
+	        Action.add(new EmployeeCreateFundAction(model));
+	        Action.add(new EmployeeDepositCheckAction(model));
+	        Action.add(new EmployeeLoginAction(model));
+	        Action.add(new EmployeeResetCustomerPasswordAction(model));
+	        Action.add(new EmployeeTransitionDayAction(model));
+	        Action.add(new EmployeeViewCustomerAccountAction(model));
+	        Action.add(new EmployeeViewTransactionHistoryAction(model));
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
     }
 

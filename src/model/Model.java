@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
+import org.genericdao.RollbackException;
 
 import databean.PositionBean;
 
@@ -17,7 +18,7 @@ public class Model {
 	private PositionDAO positionDAO;
 	private LastDateDAO lastDateDAO;
 	
-	public Model(ServletConfig config) throws ServletException {
+	public Model(ServletConfig config) throws ServletException, RollbackException {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
