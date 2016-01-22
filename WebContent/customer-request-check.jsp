@@ -76,11 +76,11 @@
             <h3 class="panel-title">Request Check</h3>
           </div>
           <div class="panel-body">
-            <h5><br>Balance: $ 3297.76<br><br></h5>
+            <h5><br>Balance: $ <p>${balance}</p><br><br></h5>
             <form class="form-inline" role="form" method="post" action="customer-buyfund.do">
               <div class="form-group"> 
                 <label for="balance">Amount $</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" />
+                <input type="text" class="form-control" name="amount" value=${amount} />
               </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </div>

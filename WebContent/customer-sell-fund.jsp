@@ -82,7 +82,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Fund ID</th><th>Name</th><th>Symbol</th><th>Shares</th><th>Available Shares</th>
+                      <th>Fund ID</th><th>Name</th><th>Symbol</th><th>Shares</th><th>Available Shares</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -93,6 +93,13 @@
                         <td>${fund.fundSymbol} </td>
                         <td>${fund.shares} </td>
                         <td>${fund.AvailableShares} </td>
+                        <td><button type="submit" class="btn btn-default" onclick="show()">Deposit</button></td>
+                        <script>
+                          function show()
+                          {
+                              document.getElementById("fund-name").value = ${fund.fundName};
+                          }
+                        </script>
                       </tr>
                    </c:forEach>
                   </tbody>
@@ -109,8 +116,8 @@
               <div class="panel-body">
                 <form class="form-inline" role="form" method="post" action="visitor_buy_action.do">
                   <div class="form-group"> 
-                    <label for="balance">Fund Symbol</label>
-                    <input type="text" class="form-control" name="fundSymbol" /><br><br>
+                    <label for="balance">Fund Name</label>
+                    <input type="text" class="form-control" id="fund-name" name="name" /><br><br>
                   </div>
                   <div class="form-group"> 
                     <label for="balance">Number of Shares </label>

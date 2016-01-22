@@ -83,11 +83,11 @@
               <div class="panel-body">
                 <form action="visitor_change_pwd.do">
                   <label>Current Password</label>
-                  <input type="password" class="form-control" name="password" /><br>
+                  <input type="password" class="form-control" name="oldPassword" /><br>
                   <label>New Password</label>
                   <input type="password" class="form-control" name="newPassword" /><br>
                   <label>Confirm</label>
-                  <input type="password" class="form-control" name="confirmPassword" /><br>
+                  <input type="password" class="form-control" name="confirmedPassword" /><br>
                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </div>
