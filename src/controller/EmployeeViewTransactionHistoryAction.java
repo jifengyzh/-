@@ -1,3 +1,6 @@
+/**
+ * @author Arwen
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -10,80 +13,68 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import FilterAndConstant.Constants;
-import databean.CustomerBean;
-import databean.TransactionHistoryBean;
+import databean.TransactionBean;
 import databean.VisitorBean;
-import formbean.CustomerIdForm;
 import formbean.CustomerUserNameForm;
-import model.CustomerDAO;
 import model.Model;
-import model.MyDAOException;
-import model.TransactionHistoryDAO;
+import model.TransactionDAO;
 import model.VisitorDAO;
 
 public class EmployeeViewTransactionHistoryAction extends Action {
-	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory.getInstance(CustomerUserNameForm.class);
-	
-	private TransactionHistoryDAO transactionHistoryDAO;
+	private FormBeanFactory<CustomerUserNameForm> formBeanFactory = FormBeanFactory
+			.getInstance(CustomerUserNameForm.class);
+
+	private TransactionDAO transactionDAO;
 	private VisitorDAO visitorDAO;
-	
+
 	public EmployeeViewTransactionHistoryAction(Model model) {
-		transactionHistoryDAO = model.getTransactionHistoryDAO();
+		transactionDAO = model.getTransactionDAO();
 		visitorDAO = model.getVisitorDAO();
 	}
-	
-	public String getName() { return Constants.employeeViewCustTransHistoryAction; }
-	
+
+	public String getName() {
+		return Constants.employeeViewCustTransHistoryAction;
+	}
+
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
 		try {
-			TransactionHistoryBean[] historyList;
-			if (request.getParameter("username") != null) {
-				CustomerUserNameForm form = formBeanFactory.create(request);
-				request.setAttribute("form", form);
-				
-				if (!form.isPresent()) {
-		            return "create-account.jsp";
-		        }
-				
-				errors.addAll(form.getValidationErrors());
-				if (errors.size() != 0) {
-					return "employee-viewtransaction.jsp";
-				}
-				
-				VisitorBean customer = visitorDAO.read(form.getUsername());
-				if (customer == null) {
-					errors.add("User does not exist!");
-					return "employee-viewtransaction.jsp";
-				}
-				
-				historyList = transactionHistoryDAO.getTransactions(customer.getVisitorId());
-				for (int i=0; i<historyList.length; i++) {
-					historyList[i].setUsername(customer.getUserName());
-				}
-			}
-			else {
-				historyList = transactionHistoryDAO.getTransactions();
-				for (int i=0; i<historyList.length; i++) {
-					int uid = historyList[i].getCustomerId();
-					VisitorBean customer = customerDAO.read(uid);
-					historyList[i].setUsername(customer.getUserName());
-				}
-			}
+			VisitorBean[] customerlist = visitorDAO.getAllCustomers();
+			request.setAttribute("customerlist", customerlist);
+			if (request.getParameter("username") == null)
+				return Constants.employeeViewCustAccJsp;
 			
-			request.setAttribute("transactionHistory", historyList);
-			return Constants.employeeViewCustAccJsp;
-			
+			CustomerUserNameForm form = formBeanFactory.create(request);
+			request.setAttribute("form", form);
+
+			if (!form.isPresent()) {
+				return Constants.employeeViewCustTransHistoryJsp;
+			}
+
+			errors.addAll(form.getValidationErrors());
+			if (errors.size() != 0) {
+				return Constants.employeeViewCustTransHistoryJsp;
+			}
+
+			VisitorBean customer = visitorDAO.read(form.getUsername());
+			if (customer == null) {
+				errors.add("User does not exist!");
+				return Constants.employeeViewCustTransHistoryJsp;
+			}
+			TransactionBean[] transactions = transactionDAO.getTransactionHistory(customer.getVisitorId());
+			request.setAttribute("transactions", transactions);
+			return Constants.employeeViewCustTransHistoryJsp;
+
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return Constants.employeeViewCustTransHistoryJsp;
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return Constants.employeeViewCustAccJsp;
 		}
-		
+
 	}
-	
+
 }

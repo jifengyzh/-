@@ -69,7 +69,7 @@ public class EmployeeChangePwdAction extends Action {
 				}
 				
 				// change password
-				employeeDAO.changePassword(employee.getUserName(), form.getNewPassword());
+				employeeDAO.setPassword(employee.getUserName(), form.getNewPassword());
 			}
 
 			// success
