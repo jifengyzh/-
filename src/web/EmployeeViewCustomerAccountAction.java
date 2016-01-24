@@ -1,7 +1,7 @@
 /**
  * @author Arwen
  */
-package controller;
+package web;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package controller;
+package web;
 
 import java.util.ArrayList;
 import java.util.List;

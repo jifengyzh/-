@@ -3,7 +3,7 @@
  * 2016-01-21
  */
 
-package controller;
+package web;
 
 import java.text.DateFormat;
 import java.text.ParseException;
