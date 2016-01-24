@@ -84,9 +84,6 @@ public class EmployeeTransitionDayAction extends Action {
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return Constants.employeeTransitionDayJsp;
-        } catch (FormBeanException e) {
-        	errors.add(e.getMessage());
-        	return Constants.employeeTransitionDayJsp;
         } catch (ParseException e) {
 			errors.add("Date format is not the correct type");
 			return Constants.employeeTransitionDayJsp;

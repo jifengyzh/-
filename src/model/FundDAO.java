@@ -18,15 +18,15 @@ public class FundDAO extends GenericDAO<FundBean>{
 	
 	public FundBean readFundName(String fundName) throws RollbackException {
 		FundBean[] bean = match(MatchArg.equals("name", fundName));
-		if (bean == null) {
+		if (bean == null || bean.length ==0 ) {
 			return null;
 		}
 		return bean[0];
 	}
 	
-	public FundBean reanFundSymbol(String symbol) throws RollbackException {
+	public FundBean readFundSymbol(String symbol) throws RollbackException {
 		FundBean[] beans = match(MatchArg.equals("symbol", symbol));
-		if (beans == null) {
+		if (beans == null || beans.length ==0) {
 			return null;
 		}
 		return beans[0];

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create Customer Account</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+      <link href="css/datepicker.css" rel="stylesheet" />
+      <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+      <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- nav bar-->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Carnegie Financial Service</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Employees <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Change My Password</a></li>
+            <li><a href="#">Create Employee Account</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Customers <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Create Customer Account</a></li>
+            <li><a href="#">Reset Customer Password</a></li>
+            <li><a href="#">View Customer Account</a></li>
+            <li><a href="#">View Customer History</a></li>
+            <li><a href="#">Deposit Check</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Fund <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Create Fund</a></li>
+            <li><a href="#">Transition Day</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Xiangfei Dong</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <!--side bar-->
+      <div class="col-sm-3">     
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Manage Customers</h3>
+          </div>
+          <div class="panel-body">
+            <a href="#">Create Customer Account</a><br><br>
+            <a href="#">Reset Customer Password</a><br><br>
+            <a href="#">View Customer Account</a><br><br>
+            <a href="#">View Customer History</a><br><br>
+            <a href="#">Deposit Check</a><br>
+          </div>
+        </div>
+      </div>
+
+      <!--content-->
+      <div class="col-sm-9">
+        <!--current path-->
+        <div>
+          <ul class="breadcrumb">
+            <li><a href="#"> <i class="icon-home"></i>Home</a></li>
+            <li class="active">View History</li>
+          </ul>
+        </div>
+
+<div>
+    <label style="float: left; margin-right: 10px; padding-top: 5px;">Specify a date:</label>
+    <c:choose>
+      <c:when test="${ empty form.date }">
+        <input type="text"  class="dp span3" name = "specifiedDate"  style="float: left;" />
+      </c:when>
+      <c:otherwise>
+        <input type="text"  class="dp span3" name = "specifiedDate"  style="float: left;" />
+      </c:otherwise>
+    </c:choose>
+  </div>
+
+
+        <!--error panel-->
+        <c:if test="${not empty errors}">
+          <div>
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Warning!</h3>
+              </div>
+              <div class="panel-body">
+                <p>User name and password do not match</p>
+                <a href="#">Return</a>
+              </div>
+          </div>
+        </c:if>
+
+        <!--success panel-->
+        <c:if test="${not empty success}">
+          <div>
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Success!</h3>
+              </div>
+              <div class="panel-body">
+                <p>You have successfully buy</p>
+                <a href="#">Return</a>
+              </div>
+          </div>
+        </c:if>
+        
+        <div class="row">
+          <div class="col-sm-8">
+            <!--customer's info-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Customer's Information</h3>
+                </div>
+                <div class="panel-body">
+                  <p>
+                    <h5 class="text-info">Name: </h5>
+                    <p>   Mike Shamos</p>
+                    <h5 class="text-info">Address</h5>
+                    <p>   417 South Craig Street<br>    Pittsburgh, PA 15213<br></p>
+                  </p>
+                </div>
+              </div>
+            <!--history list-->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Customer's Transaction History</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Date</th><th>Operation</th><th>Fund Name</th><th>Shares</th><th>Price</th><th>Value</th><th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="success">
+                      <td>2016-01-01</td><td>Buy</td><td>Google</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                    </tr>
+                    <tr class="success">
+                      <td>2016-01-01</td><td>Buy</td><td>Yahoo</td><td>123</td><td>2</td><td>246</td><td>Precessed</td>
+                    </tr>
+                    <tr class="info">
+                      <td>2016-01-02</td><td>Buy</td><td>Amazon</td><td>123</td><td>2</td><td>246</td><td>Pending</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>  
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <!--user list-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Customer List</h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th><th>Username</th><th>Name</th><th></th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td><td>cmudxf</td><td>Xiangfei Dong</td><td><a href="#">View</a></td>
+                      </tr>
+                      <tr>
+                        <td>2</td><td>wthouse</td><td>Barack Obama</td><td><a href="#">View</a></td>
+                      </tr>
+                      <tr>
+                        <td>3</td><td>bjxjp</td><td>Jinping Xi</td><td><a href="#">View</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <br><br><br><br><br>
+    <hr>
+    <p class="muted credit" align="center"> 
+      &copy; Carnegie Financial Service 2016 - Team Seven <a href="mailto:xiangfeidong@hotmail.com">Contact</a>
+    </p>
+  </div>
+
+
+</body>
+</html>

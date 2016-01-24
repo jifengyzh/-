@@ -49,10 +49,9 @@ public class EmployeeCreateFundAction extends Action {
 			if (errors.size() != 0) {
 				return Constants.employeeCreateFundJsp;
 			}
-
 			// Validation Check
-			FundBean fund = fundDAO.read(form.getFundName());
-			FundBean symbol = fundDAO.reanFundSymbol(form.getSymbol());
+			FundBean fund = fundDAO.readFundName(form.getFundName());
+			FundBean symbol = fundDAO.readFundSymbol(form.getSymbol());
 
 			if (fund != null) {
 				errors.add("Existing Fund Name");

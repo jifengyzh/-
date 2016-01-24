@@ -51,6 +51,7 @@ public class EmployeeCreateCustomerAccForm extends FormBean {
 	public void setUserName(String userName) {
 		this.userName = trimAndConvert(userName, "<>\"");
 	}
+	
 	public void setPassword(String password) {
 		this.password = trimAndConvert(password.trim(), "<>\"");
 	}

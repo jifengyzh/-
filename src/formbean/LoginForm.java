@@ -30,9 +30,7 @@ public class LoginForm extends FormBean {
 	public void setAction(String s) {
 		button = s;
 	}
-	public boolean isPresent()       { 
-		return button != null; 
-	}
+
 		
 	    public List<String> getValidationErrors() {
 	        List<String> errors = new ArrayList<String>();
@@ -43,9 +41,9 @@ public class LoginForm extends FormBean {
 	        if (password == null || password.length() == 0) {
 	        	errors.add("Password is required"); 
 	        }
-	        if (button == null) {
-	        	errors.add("Button is required");
-	        }
+//	        if (button == null) {
+//	        	errors.add("Button is required");
+//	        }
 
 	        if (errors.size() > 0) {
 	        	return errors;

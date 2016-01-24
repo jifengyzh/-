@@ -38,8 +38,10 @@ public class EmployeeLoginAction extends Action {
 
 	@Override
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session = request.getSession();
+		List<String> errors = new ArrayList<String>();
+		HttpSession session = request.getSession(true);
+		request.setAttribute("errors", errors);
+		
 		// If employee is already logged in, redirect to employee-mainpanel.jsp
 //		if (session.getAttribute("employeeUserName") != null) {
 //			return Constants.employeeMainPanelJsp;
@@ -47,18 +49,18 @@ public class EmployeeLoginAction extends Action {
 
 		// If customer is already logged in, redirect to customer-mainpanel.jsp
 		if (session.getAttribute("customerId") != null) {
+			System.out.println("1");
 			return Constants.visitorViewAccountJsp;
 		}
 
-		List<String> errors = new ArrayList<String>();
-		request.setAttribute("errors", errors);
-		request.setAttribute("success", null);
-
+	
 		try {
 			LoginForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
+				  System.out.println("form is not present");
+		          
 				return Constants.mainPage;
 			}
 
@@ -66,6 +68,8 @@ public class EmployeeLoginAction extends Action {
 			errors.addAll(form.getValidationErrors());
 			
 			if (errors.size() != 0) {
+				  System.out.println("error validation");
+		          
 				return Constants.mainPage;
 			}
 
@@ -73,11 +77,13 @@ public class EmployeeLoginAction extends Action {
 			
 			if (employee == null) {
 	            errors.add("No such user.");
+	            System.out.println("No such customer!!!");
 	            return Constants.mainPage;
 	        }
 	        
 	        if (!employee.checkPassword(form.getPassword())) {
 	            errors.add("Password is incorrect.");
+	            System.out.println("Incorrect password");
 	            return Constants.mainPage;
 	        }
 
@@ -85,7 +91,7 @@ public class EmployeeLoginAction extends Action {
 			session.setAttribute("employeeUserName", employee.getUserName());
 			session.setAttribute("firstname", employee.getFirstName());
 			session.setAttribute("lastname", employee.getLastName());
-			
+			System.out.println("success");
 			//Save last trading date in session.
 			Date lastdate = lastDateDAO.getLastDate();
 			if (lastdate == null) session.setAttribute("lastdate", null);

@@ -13,6 +13,7 @@ import org.genericdao.RollbackException;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import com.sun.xml.internal.ws.policy.sourcemodel.attach.ExternalAttachmentsUnmarshaller;
 
+import databean.FundBean;
 import databean.FundPriceHistoryBean;
 
 public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
@@ -48,5 +49,13 @@ public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 			update(bean);
 		}
 	}
-		
+	
+	public FundPriceHistoryBean[] getAllFundPriceHistory(Date date) throws RollbackException {	
+		FundPriceHistoryBean[] beans = match(MatchArg.equals("priceDate", date));
+		return beans;
+	}
+	
+	public FundPriceHistoryBean[] getOneFundPriceHistory(int fundId) throws RollbackException{
+		return match(MatchArg.equals("fundId", fundId));
+	}
 }
