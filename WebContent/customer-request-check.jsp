@@ -49,8 +49,9 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
+              	<c:forEach var="error" items="${errors}">
+                	<p>${error}</p>
+                </c:forEach>
               </div>
             </div>
           </div>

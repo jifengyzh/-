@@ -22,15 +22,7 @@
     <div class="row-fluid">
       <!--side bar-->
       <div class="col-sm-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Account</h3>
-          </div>
-          <div class="panel-body">
-            <a href="#">View Account</a><br><br>
-            <a href="#">Change Password</a><br>
-          </div>
-      </div>
+        <jsp:include page="customer-account-sidebar.jsp" />
       </div>
 
       <!--content-->
@@ -51,8 +43,9 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
+              	<c:forEach var="error" items="${errors}">
+                	<p>${error}</p>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -67,7 +60,6 @@
               </div>
               <div class="panel-body">
                 <p>${alert}</p>
-                <a href="#">Return</a>
               </div>
             </div>
           </div>

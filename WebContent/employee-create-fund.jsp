@@ -43,8 +43,9 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${errors}</p>
-                <a href="#">Return</a>
+              	<c:forEach var="error" items="${errors}">
+                	<p>${error}</p>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -59,7 +60,6 @@
               </div>
               <div class="panel-body">
                 <p>${success}</p>
-                <a href="#">Return</a>
               </div>
             </div>
           </div>

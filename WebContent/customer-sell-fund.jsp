@@ -1,7 +1,8 @@
 <!--Author: Xiangfei Dong-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="databean.PositionBean" %>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +50,9 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
+              	<c:forEach var="error" items="${errors}">
+                	<p>${error}</p>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -65,7 +67,6 @@
               </div>
               <div class="panel-body">
                 <p>${alert}</p>
-                <a href="#">Return</a>
               </div>
             </div>
           </div>
@@ -82,24 +83,17 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Fund ID</th><th>Name</th><th>Symbol</th><th>Shares</th><th>Available Shares</th><th></th>
+                      <th>Fund Name</th><th>Symbol</th><th>Shares</th><th>Available Shares</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach var="fund" items="${positionList}">
+                    <c:forEach var="fund" items="${customerFundBeans}">
                       <tr>
-                        <td>${fund.fundId} </td>
-                        <td>${fund.fundName}</td>
-                        <td>${fund.fundSymbol} </td>
-                        <td>${fund.shares} </td>
+                        <td>${fund.name}</td>
+                        <td>${fund.symbol} </td>
+                        <td>${fund.shares}</td>
                         <td>${fund.AvailableShares} </td>
-                        <td><button type="submit" class="btn btn-default" onclick="show()">Deposit</button></td>
-                        <script>
-                          function show()
-                          {
-                              document.getElementById("fund-name").value = ${fund.fundName};
-                          }
-                        </script>
+                        <td><button onclick="document.getElementById('fund-name').value = '${fund.fundName}';">Deposit</button></td>
                       </tr>
                    </c:forEach>
                   </tbody>
@@ -117,7 +111,7 @@
                 <form class="form-inline" role="form" method="post" action="visitor_buy_action.do">
                   <div class="form-group"> 
                     <label for="balance">Fund Name</label>
-                    <input type="text" class="form-control" id="fund-name" name="name" /><br><br>
+                    <input type="text" class="form-control" id="fund-name" name="fundName" /><br><br>
                   </div>
                   <div class="form-group"> 
                     <label for="balance">Number of Shares </label>

@@ -34,36 +34,6 @@
             <li class="active">View Account</li>
           </ul>
         </div>
-
-        <!--error panel-->
-        <c:if test="${not empty errors}">
-          <div>
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <h3 class="panel-title">Warning!</h3>
-              </div>
-              <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
-              </div>
-            </div>
-          </div>
-        </c:if>
-
-        <!--success panel-->
-        <c:if test="${not empty success}">
-          <div>
-            <div class="panel panel-success">
-              <div class="panel-heading">
-                <h3 class="panel-title">Success!</h3>
-              </div>
-              <div class="panel-body">
-                <p>${success}</p>
-                <a href="#">Return</a>
-              </div>
-            </div>
-          </div>
-        </c:if>
         
         <!--account info-->
         <div class="container-fluid">
@@ -75,7 +45,7 @@
                 </div>
                 <div class="panel-body">
                   <h5 class="text-info">Last Trading Day: </h5><p>${visitor.lastTradingDate}</p>
-                  <h5 class="text-info">Cash Balance: $</h5><p>${visitor.cash}<p>
+                  <h5 class="text-info">Cash Balance: $</h5><p>${visitor.availableCash}<p>
                   <table class="table">
                     <thead>
                       <tr>
@@ -100,10 +70,10 @@
 
             <div class="col-md-5">
               <div class="panel panel-default">
-                <div class="panel-body">
-                  <button type="button" class="btn btn-primary">Buy Fund</button>
-                  <button type="button" class="btn btn-primary">Sell Fund</button>
-                  <button type="button" class="btn btn-primary">View History</button>
+                <div class="panel-body" align="center">
+                   <a class="btn btn-info" href="visitor_buy_action.do" role="button">Buy Fund</a>
+                   <a class="btn btn-info" href="visitor_sell_fund.do" role="button">Sell Fund</a>
+                   <a class="btn btn-info" href="visitor_deposit_check.do" role="button">Request Check</a>
                 </div>
               </div>
               <div class="panel panel-default">
@@ -111,12 +81,10 @@
                   <h3 class="panel-title">Personal Information</h3>
                 </div>
                 <div class="panel-body">
-                  <p>
                     <h5 class="text-info">Name: </h5>
                     <p>&nbsp;&nbsp;${visitor.firstName} ${visitor.lastName}</p>
                     <h5 class="text-info">Address</h5>
-                    <p>&nbsp;&nbsp;${visitor.addrLine1}<br>&nbsp;&nbsp;${visitor.addrLine1}<br>&nbsp;&nbsp;${visitor.zip} ${visitor.city}</p>
-                  </p>
+                    <p>&nbsp;&nbsp;${visitor.addrLine1}<br>&nbsp;&nbsp;${visitor.addrLine2}<br>&nbsp;&nbsp;${visitor.zip} &nbsp;&nbsp;${visitor.city}</p>
                 </div>
               </div>
             </div>

@@ -36,7 +36,7 @@
         <!--current path-->
         <div>
           <ul class="breadcrumb">
-            <li><a href="#"> <i class="icon-home"></i>Home</a></li>
+            <li><a href="visitor_view_account.do"> <i class="icon-home"></i>Home</a></li>
             <li class="active">Buy Fund</li>
           </ul>
         </div>
@@ -49,8 +49,9 @@
                 <h3 class="panel-title">Warning!</h3>
               </div>
               <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
+              	<c:forEach var="error" items="${errors}">
+                	<p>${error}</p>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -65,7 +66,6 @@
               </div>
               <div class="panel-body">
                 <p>${alert}</p>
-                <a href="#">Return</a>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Fund Name</th><th>Symbol</th><th>Shares</th><th>Price</th><th>Value</th>
+                      <th>Fund Name</th><th>Symbol</th><th>Last Price</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,9 +90,8 @@
                       <tr>
                         <td>${fund.name} </td>
                         <td>${fund.symbol}</td>
-                        <td>${fund.shares} </td>
                         <td>${fund.price} </td>
-                        <td>${fund.value} </td>
+                        <td><button onclick="document.getElementById('fund-name').value = '${fund.name}';">Deposit</button></td>
                       </tr>
                    </c:forEach>
                   </tbody>
@@ -107,11 +106,11 @@
                 <h3 class="panel-title">Buy Fund</h3>
               </div>
               <div class="panel-body">
-                <h5 class="text-info">Balance: $ ${cash}<br><br></h5>
+                <h5 class="text-info">Balance: $ ${cashBalanceDisplay}<br><br></h5>
                 <form class="form-inline" role="form" method="post" action="visitor_buy_action.do">
                   <div class="form-group"> 
                     <label for="balance">Fund Name</label>
-                    <input type="text" class="form-control" name="fundName" /><br><br>
+                    <input type="text" class="form-control" name="fundName" id="fund-name" /><br><br>
                   </div>
                   <div class="form-group"> 
                     <label for="balance">Amount $</label>

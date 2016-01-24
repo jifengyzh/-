@@ -51,35 +51,6 @@
             <li class="active">View History</li>
           </ul>
         </div>
-
-        <!--error panel-->
-        <c:if test="${not empty errors}">
-          <div>
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <h3 class="panel-title">Warning!</h3>
-              </div>
-              <div class="panel-body">
-                <p>${error}</p>
-                <a href="#">Return</a>
-              </div>
-            </div>
-          </div>
-        </c:if>
-
-        <!--success panel-->
-        <c:if test="${not empty success}">
-          <div>
-            <div class="panel panel-success">
-              <div class="panel-heading">
-                <h3 class="panel-title">Success!</h3>
-              </div>
-              <div class="panel-body">
-                <p>You have successfully buy</p>
-                <a href="#">Return</a>
-              </div>
-          </div>
-        </c:if>
         
         <!--buy fund-->
         <div class="panel panel-default">
@@ -102,10 +73,10 @@
                       <td>${transaction.fundId}</td>
                       <td>${transaction.executeDate}</td>
                       <td>
-                        <c:if test="${transaction.transactionType == 1}">Buy Fund</c:if>
-                        <c:if test="${transaction.transactionType == 2}">Sell Fund</c:if>
-                        <c:if test="${transaction.transactionType == 3}">Request Check</c:if>
-                        <c:if test="${transaction.transactionType == 4}">Deposit Check</c:if>
+                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
+                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
+                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
+                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
                       </td>
                       <td>${transaction.shares}</td>
                       <td>${transaction.sharePrice}</td>
@@ -120,10 +91,10 @@
                       <td>${transaction.fundId}</td>
                       <td>-</td>
                       <td>
-                        <c:if test="${transaction.transactionType == 1}">Buy Fund</c:if>
-                        <c:if test="${transaction.transactionType == 2}">Sell Fund</c:if>
-                        <c:if test="${transaction.transactionType == 3}">Request Check</c:if>
-                        <c:if test="${transaction.transactionType == 4}">Deposit Check</c:if>
+                        <c:if test=${transaction.transactionType == 1}>Buy Fund</c:if>
+                        <c:if test=${transaction.transactionType == 2}>Sell Fund</c:if>
+                        <c:if test=${transaction.transactionType == 3}>Request Check</c:if>
+                        <c:if test=${transaction.transactionType == 4}>Deposit Check</c:if>
                       </td>
                       <td>${transaction.shares}</td>
                       <td>${transaction.sharePrice}</td>
