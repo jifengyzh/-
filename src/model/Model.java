@@ -7,6 +7,7 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.RollbackException;
 
+import databean.EmployeeBean;
 import databean.PositionBean;
 
 public class Model {
@@ -32,6 +33,15 @@ public class Model {
 			lastDateDAO = new LastDateDAO(pool, "lastDay");
 			positionDAO = new PositionDAO(PositionBean.class, "position", pool);
 			transactionDAO = new TransactionDAO(pool, "transaction");
+			
+			if (employeeDAO.getAllEmployee().length == 0) {
+				EmployeeBean employeeBean = new EmployeeBean();
+				employeeBean.setFirstName("admin");
+				employeeBean.setLastName("admin");
+				employeeBean.setUserName("admin");
+				employeeBean.setPassword("123");
+				employeeDAO.create(employeeBean);
+			}
 			
 		} catch (DAOException e) {
 			throw new ServletException(e);
